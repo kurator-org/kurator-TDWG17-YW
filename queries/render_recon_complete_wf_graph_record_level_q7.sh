@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+ProvidedDataName=$1
+
+xsb --quietload --noprompt --nofeedback --nobanner << END_XSB_STDIN
+
+set_prolog_flag(unknown, fail).
+
+['$VIEWS_DIR/yw_views'].
+['$FACTS_DIR/reconfacts'].
+['$RULES_DIR/yw_rules'].
+['$RULES_DIR/gv_rules'].
+['$RULES_DIR/yw_graph_rules'].
+['$RULES_DIR/recon_rules'].
+['$RULES_DIR/log_query_rules'].
+['$FACTS_DIR/yw_model_facts'].
+
+[user].
+graph :-
+    yw_workflow_script(W, WorkflowName, _, _),
+	log_record_data_value($ProvidedDataName, _, OccurrenceID, _, TaggedDataRecordValue, _, _, _,_, _, _, _, _),
+	data_record(OccurrenceID, DN, DR),	
+	
+    gv_graph('yw_data_view', WorkflowName, 'TB'),
+
+        gv_cluster('workflow', 'black'),			
+            gv_nodestyle__atomic_unusedstep,
+            gv_nodes__atomic_unusedstep(OccurrenceID, UnusedStepName),
+            gv_nodestyle__atomic_step,
+            gv_nodes__atomic_steps(W),
+            gv_nodestyle__subworkflow,
+            gv_nodes__subworkflows(W),
+            gv_nodestyle__unuseddata,
+			gv_nodes__unuseddata(OccurrenceID, UnusedDataName),
+            gv_nodestyle__datarecord_value,
+            gv_nodes__recon_not_input_not_output_datarecord(OccurrenceID),
+			gv_nodestyle__datafile_value,
+            gv_nodes__input_recon_data(W),
+            gv_node_style__data,
+            gv_nodes__recon_not_input_not_output_data(W),
+            gv_nodestyle__datafile_value,
+            gv_nodes__output_recon_data(W),
+            gv_node_style__param,
+            gv_nodes__params(W),
+        gv_cluster_end,
+
+        gv_cluster('inflows', 'white'),
+            gv_node_style__workflow_port,
+            gv_nodes__inflows(W),
+        gv_cluster_end,
+
+        gv_cluster('outflows', 'white'),
+            gv_node_style__workflow_port,
+            gv_nodes__outflows(W),
+        gv_cluster_end,
+
+        gv_edges__data_to_step(W),
+        gv_edges__step_to_data(W),
+        gv_edges__inflow_to_data(W),
+        gv_edges__data_to_outflow(W),
+
+    gv_graph_end.
+
+end_of_file.
+
+graph.
+
+END_XSB_STDIN

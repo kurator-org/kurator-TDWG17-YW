@@ -1,0 +1,49 @@
+% log queries
+
+% LQ1: Given an occurrenceID, confirm if the record is Marine or not? - lq1(IsMarineValue).
+:- table lq1/2.
+lq1(OccurrenceID, IsMarineValue) :-
+	log_record_tag(_, OccurrenceID, IsMarineValue). 
+
+% LQ2: How many records are Marine (noMarine)? - lq2(MarineCount).
+:- table lq2/1.
+lq2(MarineCount) :-
+	count(log_marine_record_tag(_, _,_), MarineCount).
+ 
+ % LQ3: Which records are Marine? - lq3(RecordID)
+:- table lq3/1.
+lq3(RecordID) :-
+	log_record_marine_match(_, RecordID, 'Matched').
+
+% LQ4: Given an occurrenceID, is a match found (GUID:not null --> Match; GUID:null --> Unable to validate)? What data sources (validation services) were used (GBIFLookup or WoRMSLookup)? - lq4(OccurrenceID, MatchFound, Source_Used).
+:- table lq4/3.
+lq4(OccurrenceID, MatchFound, Source) :-
+	log_record_match_result(OccurrenceID, _, _, _, MatchFound, Source).
+
+% LQ5: How many Marine(noMarine) records found a match? - lq5(MarineMatchCount).
+% log_marine_match(OccurrenceID)
+:- table log_marine_match/1.
+log_marine_match(OccurrenceID) :- 
+	log_record_match_result(OccurrenceID, 'Marine', _, _, MatchFound, _),
+	MatchFound \== null.
+
+:- table lq5/1.
+lq5(MarineMatchCount) :-
+	count(log_marine_match(_), MarineMatchCount).
+
+
+% LQ6: Which records found a match? - lq6(OccurrenceID).
+:- table lq6/1.
+lq6(OccurrenceID) :-
+	log_record_match_result(OccurrenceID, _, _, _, MatchFound, _),
+	MatchFound \== 'null'.
+
+% LQ7: How many records couldn't find a match? - lq7(NoMatchCount)
+% log_record_nomatch(OccurrenceID)
+:- table log_record_nomatch/1.
+log_record_nomatch(OccurrenceID) :- 
+	log_record_match_result(OccurrenceID, _, _, _, MatchFound, _),
+	MatchFound == 'null'.	
+:- table lq7/1.
+lq7(NoMatchCount) :- 
+	count(log_record_nomatch(_), NoMatchCount).

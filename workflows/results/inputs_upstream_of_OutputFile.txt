@@ -1,0 +1,9 @@
+
+
+---------------------------------------------------------------------------------------------------
+Q2_Pro : List the script inputs that are upstream of data product OutputFile.
+
+q2_pro(DataProduct, InputDataName)
+...................................................................................................
+q2_pro('OutputFile','DarwinCoreFile').
+q2_pro('OutputFile','InputFilePath').

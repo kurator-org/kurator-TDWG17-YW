@@ -1,0 +1,9 @@
+
+
+---------------------------------------------------------------------------------------------------
+Q2_Pro : List the script inputs that are upstream of data product MergedStream.
+
+q2_pro(DataProduct, InputDataName)
+...................................................................................................
+q2_pro('MergedStream','DarwinCoreFile').
+q2_pro('MergedStream','InputFilePath').

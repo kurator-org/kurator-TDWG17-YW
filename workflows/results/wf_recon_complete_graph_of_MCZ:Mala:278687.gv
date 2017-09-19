@@ -1,0 +1,94 @@
+
+digraph yw_data_view {
+rankdir=TB
+fontname=Courier; fontsize=18; labelloc=t
+label="BranchingWorkflow"
+subgraph cluster_workflow { label=""; color=black; penwidth=2
+subgraph cluster_workflow_inner { label=""; color=white
+node[shape=box style="filled" fillcolor="#d6d6d7" peripheries=1 fontname=Courier]
+FilterToJustMarine
+WoRMSLookup
+node[shape=box style="filled" fillcolor="#CCFFCC" peripheries=1 fontname=Courier]
+Setup
+FileToDataStream
+EnvironmentTagger
+FilterToJustMarine
+FilterExcludingMarine
+WoRMSLookup
+GBIFLookup
+StreamMerge
+CsvFileWriter
+node[shape=box style="filled" fillcolor="#CCFFCC" peripheries=1 fontname=Courier]
+node[shape=box style="rounded,filled" fillcolor="#d6d6d7" peripheries=1 fontname=Helvetica]
+MarineDataRecord
+WoRMSOutput
+node[shape=box style="rounded,filled" fillcolor="#f8d2db" peripheries=1 fontname="Courier-Bold" fontsize=9]
+DataRecord[shape=record rankdir=LR label="{<f0> DataRecord |<f1>MCZ:Mala:278687\n}"]
+TaggedDataRecord[shape=record rankdir=LR label="{<f0> TaggedDataRecord |<f1>NonMarine\n}"]
+MarineDataRecord[shape=record rankdir=LR label="{<f0> MarineDataRecord |<f1> \n}"]
+notMarineDataRecord[shape=record rankdir=LR label="{<f0> notMarineDataRecord |<f1>Cypraea arabica:(Linnaeus, 1758)\n}"]
+WoRMSOutput[shape=record rankdir=LR label="{<f0> WoRMSOutput |<f1>\n}"]
+GBIFOutput[shape=record rankdir=LR label="{<f0> GBIFOutput |<f1>http://api.gbif.org/v1/species/4360809\n}"]
+node[shape=box style="rounded,filled" fillcolor="#FFE4B5" peripheries=1 fontname="Courier-Bold" fontsize=9]
+DarwinCoreFile[shape=record rankdir=LR label="{<f0> DarwinCoreFile |<f1>packages/kurator_branching/data/kurator_sample_data_v2.txt\n}"]
+node[shape=box style="rounded,filled" fillcolor="#FFFFCC" peripheries=1 fontname=Helvetica]
+Workspace
+OccurrenceFile
+DataRecord
+TaggedDataRecord
+MarineDataRecord
+notMarineDataRecord
+WoRMSOutput
+GBIFOutput
+MergedStream
+node[shape=box style="rounded,filled" fillcolor="#FFE4B5" peripheries=1 fontname="Courier-Bold" fontsize=9]
+LogFile[shape=record rankdir=LR label="{<f0> LogFile |<f1>runlog.log\n}"]
+OutputFile[shape=record rankdir=LR label="{<f0> OutputFile |<f1>workspace_4e5367d1-5718-11e7-a549-acbc3296f741/mergedoutputfile.csv\n}"]
+node[shape=box style="rounded,filled" fillcolor="#FFFFFF" peripheries=1 fontname=Helvetica]
+InputFilePath
+}}
+subgraph cluster_inflows { label=""; color=white; penwidth=2
+subgraph cluster_inflows_inner { label=""; color=white
+node[shape=circle fillcolor="#FFFFFF" peripheries=1 width=0.2]
+DarwinCoreFile_inflow [label=""]
+InputFilePath_inflow [label=""]
+}}
+subgraph cluster_outflows { label=""; color=white; penwidth=2
+subgraph cluster_outflows_inner { label=""; color=white
+node[shape=circle fillcolor="#FFFFFF" peripheries=1 width=0.2]
+LogFile_outflow [label=""]
+OutputFile_outflow [label=""]
+}}
+InputFilePath -> Setup
+DarwinCoreFile -> Setup
+Workspace -> CsvFileWriter
+OccurrenceFile -> FileToDataStream
+DataRecord -> EnvironmentTagger
+TaggedDataRecord -> FilterToJustMarine
+TaggedDataRecord -> FilterExcludingMarine
+MarineDataRecord -> WoRMSLookup
+notMarineDataRecord -> GBIFLookup
+WoRMSOutput -> StreamMerge
+GBIFOutput -> StreamMerge
+MergedStream -> CsvFileWriter
+Setup -> Workspace
+Setup -> OccurrenceFile
+FileToDataStream -> DataRecord
+EnvironmentTagger -> LogFile
+EnvironmentTagger -> TaggedDataRecord
+FilterToJustMarine -> LogFile
+FilterToJustMarine -> MarineDataRecord
+FilterExcludingMarine -> LogFile
+FilterExcludingMarine -> notMarineDataRecord
+WoRMSLookup -> LogFile
+WoRMSLookup -> WoRMSOutput
+GBIFLookup -> LogFile
+GBIFLookup -> GBIFOutput
+StreamMerge -> MergedStream
+CsvFileWriter -> OutputFile
+DarwinCoreFile_inflow -> DarwinCoreFile
+InputFilePath_inflow -> InputFilePath
+LogFile -> LogFile_outflow
+OutputFile -> OutputFile_outflow
+}
+
