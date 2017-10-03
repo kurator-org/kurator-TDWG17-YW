@@ -1,0 +1,174 @@
+####################################################################################
+dwca_branching_taxon_lookup.yaml
+####################################################################################
+This workflow:
+- creates a given directory as a workspace
+- downloads a given Darwin Core Archive from a URL
+- extracts the core file of a Darwin Core Archive to a tab-separated text file
+- streams the core file as records
+- adds a key/value pair isMarine,true to records appearing to contain marine data
+- splits the stream, one branch accepting isMarine=true the other rejecting it.
+- TODO: lookup in WoRMS on one stream, look up in GBIF on the other
+- recombines the streams into a csv file
+- wraps up the workflow
+Example command-line usage:
+kurator -f dwca_branching_taxon_lookup.yaml
+-p workspace=./dwca_geography_assessor_workspace
+-p inputfile=../data/test_branching_wf.txt
+-l DEBUG (optional)
+Requires:
+jython pip install requests
+jython pip install python-dwca-reader
+jython pip install py
+jython pip install unicodecsv
+jython pip install unidecode
+####################################################################################
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+__author__ = "John Wieczorek"
+__author__ = "Paul J. Morris"
+__copyright__ = "Copyright 2017 President and Fellows of Harvard College"
+__version__ = "dwca_braching_taxon_lookup.yaml 2017-05-18T08:14-04:00"
+Definitions of the Workflow and actors
+## The named workflow ###
+Actors invoked in the workflow. Every actor that will be invoked must be on this
+list. Though the order does not matter, it is helpful to keep the list in more
+or less the order in which they'll be invoked, for clarity.
+Each parameter defined here enters the workflow from the command line and is
+delivered in the options dictionary of the specified actor.
+Accept a parameter called workspace from the command line.
+Set the workspace in the options dictionary of MakeWorkspace from the value of
+the workspace parameter given on the command line.
+Set the inputfile in the options dictionary of the Darwinize actor from the
+value of the inputfile parameter given on the command line.
+Accept a parameter called format from the command line.
+Set the format in the options dictionary of Darwinize from the value
+of the format parameter given on the command line.
+Accept a parameter called namespace from the command line.
+Set the namespace in the options dictionary of Darwinize from the value
+of the format parameter given on the command line.
+@BEGIN FileBranchingTaxonLookupWorkflow
+@PARAM InputFilePath
+@IN DarwinCoreFile @URI file:packages/kurator_branching_generic/data/kurator_sample_data_v2.txt
+Inline python actor to make a workspace on the fly to use for writing temporary
+if one is not supplied in the workflow-defined parameters. It creates a unique
+workspace if a workspace location is not explicitly provided, or if the provided
+one does not exist.
+@BEGIN Setup @desc Create a unique workspace and transform the input file to a file\n with chosen format and field names standardized to Darwin Core
+@PARAM InputFilePath
+@IN DarwinCoreFile @URI file:packages/kurator_branching_generic/data/kurator_sample_data_v2.txt
+Inline python code to run.
+The function to run when an on_start message is received. Accepts a dictionary
+of options.
+## Started MakeWorkspace ###'
+Download darwin_cloud.txt file containing field name to Darwin Core lookups.
+The location of the actor source code
+The function to invoke in the module when the actor receives an onData message.
+A list of parameters to get from the options dictionary passed from an
+upstream actor.
+Get the workspace for this actor from the workspace in the options dictionary.
+Get the success state from the options dictionary of the previous step
+Get the message from the options dictionary of the previous step
+A list of parameters to get from the parameters defined at the workflow level or
+to set explicitly from values given in this section.
+Get the file from a specific URL.
+Download to a specific file name in the workspace received from upstream.
+Set the output file to a specific file name.
+Show the name of the upstream actor.
+The "upstream" actor from which to receive a message.
+Transform the input file to a file with the chosen format and as many field names
+standardized to Darwin Core as possible.
+The location of the actor source code
+The function to invoke in the module when the actor receives an onData message.
+A list of parameters to get from the options dictionary passed from an
+upstream actor.
+Get the workspace for this actor from the workspace in the options dictionary.
+Get the dwccloudfile for this actor from the output of the previous actor
+Get the success state from the options dictionary of the previous step
+Get the message from the options dictionary of the previous step
+A list of parameters to get from the parameters defined at the workflow level or
+to set explicitly from values given in this section.
+Set the output file to a specific file name.
+Show the name of the upstream actor.
+The "upstream" actor from which to receive a message.
+@OUT workspace @as Workspace
+@OUT OccurrenceFile @URI file:{workspace}/darwinized_file.txt
+@END Setup
+take the darwinized occurrence file and stream records from it
+@BEGIN FileToDataStream @desc Take the darwinized occurrence file and stream records from it
+@IN OccurrenceFile
+@OUT DataRecord
+@END FileToDataStream
+Tag each record in the stream that appears to be marine with isMarine=true
+@BEGIN EnvironmentTagger @desc Tag each record in the stream that appears to be marine with isMarine=true and nonmarine with isMarine=false
+@IN DataRecord
+@OUT LogFile @URI file:runlog.log
+@LOG {timestamp} [{loglevel}] ACTOR<{actorname}> -> {ActorValue}:isMarine:true={isMarineValue}
+@OUT TaggedDataRecord
+@END EnvironmentTagger
+Pass only records tagged with isMarine=true
+@BEGIN FilterToJustMarine @desc Pass only records tagged with isMarine=true
+@IN TaggedDataRecord
+@OUT LogFile @URI file:runlog.log
+@LOG {timestamp} [{loglevel}] ACTOR<{actorname}> -> [isMarine]=[true]:{matchMarineValue}. Passing occurrenceID={occurrenceID}
+@OUT MarineDataRecord
+@End FilterToJustMarine
+Pass only records not tagged with isMarine=true
+@BEGIN FilterExcludingMarine @desc Pass only records not tagged with isMarine=true
+@IN TaggedDataRecord
+@OUT LogFile @URI file:runlog.log
+@LOG {timestamp} [{loglevel}] ACTOR<{actorname}> -> [isMarine]=[true]:{matchMarineValue}. Passing occurrenceID={occurrenceID}
+@OUT notMarineDataRecord
+@END FilterExcludingMarine
+Lookup GUIDs for names in WoRMS
+@BEGIN WoRMSLookup @desc Lookup GUIDs for names in WoRMS
+@IN MarineDataRecord
+@OUT WoRMS-updatedRecord
+@OUT LogFile @URI file:runlog.log
+@LOG {timestamp} [{loglevel}] ACTOR<{actorname}> -> Looking Up: {scientificName}:{scientificNameAuthorship}
+@LOG {timestamp} [{loglevel}] ACTOR<{actorname}> -> Found GUID: {LookupValue}
+@END WoRMSLookup
+Lookup GUIDs for names in GBIF
+@BEGIN GBIFLookup @desc Lookup GUIDs for names in GBIF
+@IN notMarineDataRecord
+@OUT GBIF-updatedRecord
+@OUT LogFile @URI file:runlog.log
+@LOG {timestamp} [{loglevel}] ACTOR<{actorname}> -> Looking Up: {scientificName}:{scientificNameAuthorship}
+@LOG {timestamp} [{loglevel}] ACTOR<{actorname}> -> Found GUID: {LookupValue}
+@END GBIFLookup
+Merge the streams
+@BEGIN StreamMerge @desc Merge the streams
+@IN GBIF-updatedRecord
+@IN WoRMS-updatedRecord
+@OUT MergedStream
+@END StreamMerge
+@BEGIN CsvFileWriter @desc Write to a csv file and wrapup by finishing the workflow
+@IN Workspace
+@IN MergedStream
+Write to a csv file
+@OUT UpdatedDarwinCoreFile @URI file:{workspace}/mergedoutputfile.csv
+@END CsvFileWriter
+Inline python actor to take care of any unfinished business and finish the workflow.
+Inline python code to run.
+The function to run when an on_data message is received. Accepts a dictionary
+of options.
+## Finished Wrapup ###'
+A list of parameters to get from the options dictionary passed from an
+upstream actor.
+Get the workspace for this actor from the workspace in the options dictionary.
+Full path to the output file.
+Get the success state from the options dictionary of the previous step
+Get the message from the options dictionary of the previous step
+Dictionary of persistent objects created.
+Show the name of the upstream actor.
+The "upstream" actor from which to receive a message.
+@OUT UpdatedDarwinCoreFile
+@OUT LogFile
+@END FileBranchingTaxonLookupWorkflow

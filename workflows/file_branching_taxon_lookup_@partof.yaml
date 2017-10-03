@@ -216,6 +216,7 @@ components:
 # Tag each record in the stream that appears to be marine with isMarine=true      
 # @BEGIN EnvironmentTagger @desc Tag each record in the stream that appears to be marine with isMarine=true and nonmarine with isMarine=false
 # @IN DataRecord
+# @IN occurrenceID @PARTOF DataRecord
 - id: EnvironmentTaggerA
   type: EnvironmentTagger
   properties:
@@ -229,6 +230,8 @@ components:
 # Pass only records tagged with isMarine=true      
 # @BEGIN FilterToJustMarine @desc Pass only records tagged with isMarine=true
 # @IN TaggedDataRecord
+# @IN occurrenceID @PARTOF TaggedDataRecord 
+# @IN matchMarineValue @PARTOF TaggedDataRecord 
 - id: FilterJustMarine
   type: SingleTermStreamFilter
   properties:
@@ -246,6 +249,8 @@ components:
 # Pass only records not tagged with isMarine=true
 # @BEGIN FilterExcludingMarine @desc Pass only records not tagged with isMarine=true
 # @IN TaggedDataRecord
+# @IN occurrenceID @PARTOF TaggedDataRecord 
+# @IN matchMarineValue @PARTOF TaggedDataRecord       
 - id: FilterExcludeMarine      
   type: SingleTermStreamFilter
   properties:
@@ -263,12 +268,15 @@ components:
 # Lookup GUIDs for names in WoRMS
 # @BEGIN WoRMSLookup @desc Lookup GUIDs for names in WoRMS
 # @IN MarineDataRecord
+# @IN scientificName @PARTOF MarineDataRecord @AS MDRscientificName
+# @IN scientificNameAuthorship @PARTOF MarineDataRecord @AS MDRscientificNameAuthorship
 - id: WoRMSLookup
   type: SimpleWoRMSGUIDLookup
   properties:
     listensTo:
       - !ref FilterJustMarine
 # @OUT WoRMS-updatedRecord 
+# @OUT LookupValue @PARTOF WoRMS-updatedRecord @AS WoRMS-GUID
 # @OUT LogFile @URI file:runlog.log
 #    @LOG {timestamp} [{loglevel}] ACTOR<{actorname}> -> Looking Up: {scientificName}:{scientificNameAuthorship}
 #    @LOG {timestamp} [{loglevel}] ACTOR<{actorname}> -> Found GUID: {LookupValue}
@@ -277,12 +285,15 @@ components:
 # Lookup GUIDs for names in GBIF
 # @BEGIN GBIFLookup @desc Lookup GUIDs for names in GBIF
 # @IN notMarineDataRecord
+# @IN scientificName @PARTOF notMarineDataRecord @AS NMDRscientificName
+# @IN scientificNameAuthorship @PARTOF notMarineDataRecord @AS NMDRscientificNameAuthorship
 - id: GBIFLookup
   type: SimpleGBIFGUIDLookup
   properties:
     listensTo:
       - !ref FilterExcludeMarine
 # @OUT GBIF-updatedRecord 
+# @OUT LookupValue @PARTOF GBIF-updatedRecord @AS GBIF-GUID
 # @OUT LogFile @URI file:runlog.log
 #    @LOG {timestamp} [{loglevel}] ACTOR<{actorname}> -> Looking Up: {scientificName}:{scientificNameAuthorship}
 #    @LOG {timestamp} [{loglevel}] ACTOR<{actorname}> -> Found GUID: {LookupValue}
