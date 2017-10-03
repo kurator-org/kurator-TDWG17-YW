@@ -1,9 +1,0 @@
-
-
----------------------------------------------------------------------------------------------------
-Q4_Pro : List the outputs that depend on DataRecord.
-
-q4_pro(UpstreamDataName, OutputDataName)
-...................................................................................................
-q4_pro('DataRecord','OutputFile').
-q4_pro('DataRecord','LogFile').
