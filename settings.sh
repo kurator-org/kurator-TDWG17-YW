@@ -2,7 +2,7 @@
 # define base directories
 export PROJECT_ROOT=.
 export PACKAGES_DIR=${PROJECT_ROOT}/packages
-export BRANCHING_DIR=${PACKAGES_DIR}/kurator_branching_generic
+export BRANCHING_DIR=${PACKAGES_DIR}/kurator_FileBranchingTaxonLookup
 export WORKFLOWS_DIR=${BRANCHING_DIR}/workflows
 export DATA_DIR=${BRANCHING_DIR}/data
 

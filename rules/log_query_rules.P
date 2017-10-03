@@ -142,43 +142,6 @@ log_template_variable_name_value(ResourceID, LogTemplateID, EntryTemplate, LogEn
 	log_template_variable_name(LogTemplateID, _, EntryTemplate, LogVariableID, VariableName, _),
 	log_variable_value(ResourceID, LogEntryID, LogVariableID, LogVariableValue).
 
-% RULE: log_template_variable_partof_data_record_level_name_value(TimeStamp, ResourceID, LogTemplateID, EntryTemplate, LogEntryID, LogVariablePartialDataID,  LogVariablePartialDataName, LogVariablePartialDataValue, PartialDataId, PrimaryDataId, PrimaryDataName).
-:- table log_template_variable_partof_data_record_level_name_value/11.
-log_template_variable_partof_data_record_level_name_value(TimeStamp, ResourceID, LogTemplateID, EntryTemplate, LogEntryID, LogVariablePartialDataID,  LogVariablePartialDataName, LogVariablePartialDataValue, PartialDataId, PrimaryDataId, PrimaryDataName) :-
-	log_template_variable_name_value(ResourceID, LogTemplateID, EntryTemplate, LogEntryID, LogVariablePartialDataID, LogVariablePartialDataName, LogVariablePartialDataValue),
-	yw_partof_data_record_level(PartialDataId, LogVariablePartialDataName, PrimaryDataId,PrimaryDataName),
-	log_template_variable_name_value(ResourceID, LogTemplateID, EntryTemplate, LogEntryID, _,'timestamp',TimeStamp).
-
-% RULE: log_template_variable_partof_data_record_level_name_value_shortversion(TimeStamp, PrimaryDataName, LogVariablePartialDataName, LogVariablePartialDataValue).
-:- table log_template_variable_partof_data_record_level_name_value_shortversion/4.
-log_template_variable_partof_data_record_level_name_value_shortversion(TimeStamp, PrimaryDataName, LogVariablePartialDataName, LogVariablePartialDataValue) :- 
-	log_template_variable_partof_data_record_level_name_value(TimeStamp, _, _, _, _, _, LogVariablePartialDataName, LogVariablePartialDataValue, _, _, PrimaryDataName).
-
-% RULE: log_template_variable_partof_data_record_level_name_value_sortbydate(TimeStamp, PrimaryDataName, LogVariablePartialDataName, LogVariablePartialDataValue).
-:table log_template_variable_partof_data_record_level_name_value_sortbydate/4.
-log_template_variable_partof_data_record_level_name_value_sortbydate(TimeStamp, PrimaryDataName, LogVariablePartialDataName, LogVariablePartialDataValue) :- 
-	
-	log_template_variable_partof_data_record_level_name_value_shortversion(TimeStamp, PrimaryDataName, LogVariablePartialDataName, LogVariablePartialDataValue), nl, fail.
-	log_template_variable_partof_data_record_level_name_value_sortbydate.
-
-% log_marine_record_date(TimeStamp)
-log_marine_record_date(TimeStamp) :-
-  log_marine_record_tag(TimeStamp, _, _).
-
-% log_marine_record_date_sort(SortedTimeStamp)
-log_marine_record_date_sort(SortedTimeStamp) :-  
-  findall(TimeStamp-TimeStamp, log_marine_record_date(TimeStamp), List),
-  keysort(List, Pairs),
-  pairs_values(Pairs, SortedTimeStamp).
-
-% log_marine_record_by_date_new(Pairs, TimeStamp, SortedOccurrenceID)
-log_marine_record_by_date_new(Pairs, TimeStamp, SortedOccurrenceID) :-
-  findall(TimeStamp-Tag-OccurrenceID, log_marine_record_tag(TimeStamp, OccurrenceID, Tag), List),
-  keysort(List, Pairs),
-  pairs_values(Pairs, SortedOccurrenceID).
-
-
-
 % RULE: log_record_tag(TimeStamp, OccurrenceID, Tag)
 :- table log_record_marine_match/3.
 log_record_marine_match(TimeStamp, OccurrenceID, MarineValue) :-
@@ -365,12 +328,12 @@ log_record_match_result(OccurrenceID, 'NonMarine', ScientificName, ScientificNam
 % log_record_data_value(H,A,X,B,Y,C,Z,D,U,E,V,F,W) or 
 % log_record_data_value(OccurrenceID,DataRecord, DataRecordValue, TaggedDataRecord,TaggedDataRecordValue, MScientificNameAuthorship,MScientificNameAuthorshipValue, NMScientificNameAuthorship,NMScientificNameAuthorshipValie, WoRMSOutput,WoRMSOutputValue, GBIFOutput, GBIFOutputValue) 
 :- table log_record_data_value/13.
-log_record_data_value(A, 'DataRecord', X, 'TaggedDataRecord', 'Marine','MarineDataRecord', MScientificNameAuthorship, 'notMarineDataRecord', ' ', 'WoRMSOutput', V, 'GBIFOutput', '')  :-
+log_record_data_value(A, 'DataRecord', X, 'TaggedDataRecord', 'Marine','MarineDataRecord', MScientificNameAuthorship, 'notMarineDataRecord', ' ', 'WoRMSUpdatedRecord', V, 'GBIFUpdatedRecord', '')  :-
 	X = A,
 	log_record_match_result(X, 'Marine', Z, U, V, _),
  	atom_concat(Z,':',K), 
  	atom_concat(K, U, MScientificNameAuthorship).
-log_record_data_value(A, 'DataRecord', X, 'TaggedDataRecord', 'NonMarine','MarineDataRecord', ' ', 'notMarineDataRecord', NMScientificNameAuthorship, 'WoRMSOutput', '', 'GBIFOutput', V)  :-
+log_record_data_value(A, 'DataRecord', X, 'TaggedDataRecord', 'NonMarine','MarineDataRecord', ' ', 'notMarineDataRecord', NMScientificNameAuthorship, 'WoRMSUpdatedRecord', '', 'GBIFUpdatedRecord', V)  :-
 	X = A,
 	log_record_match_result(X, 'NonMarine', Z, U, V, _),
  	atom_concat(Z,':',K), 

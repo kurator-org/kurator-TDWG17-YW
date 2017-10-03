@@ -2,7 +2,7 @@
 
 ProvidedDataName=$1
 
-/usr/local/bin/xsb/xsb-3.7/bin/xsb --quietload --noprompt --nofeedback --nobanner << END_XSB_STDIN
+xsb --quietload --noprompt --nofeedback --nobanner << END_XSB_STDIN
 
 set_prolog_flag(unknown, fail).
 

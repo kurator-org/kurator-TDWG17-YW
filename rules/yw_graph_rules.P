@@ -60,8 +60,8 @@ gv_nodestyle__aggregatedata_twocounts :-
 % explicit empty/unused data candidates: gv_nodes__unuseddata_candidates(UnusedStepName, TaggedDataRecordValue) 
 gv_nodes__unuseddata_candidates('MarineDataRecord', 'NonMarine').
 gv_nodes__unuseddata_candidates('notMarineDataRecord', 'Marine').
-gv_nodes__unuseddata_candidates('WoRMSOutput', 'NonMarine').
-gv_nodes__unuseddata_candidates('GBIFOutput', 'Marine').
+gv_nodes__unuseddata_candidates('WoRMSUpdatedRecord', 'NonMarine').
+gv_nodes__unuseddata_candidates('GBIFUpdatedRecord', 'Marine').
 
 gv_nodes__unuseddata(OccurrenceID, UnusedDataName) :-
 	log_record_data_value(_, _, OccurrenceID, _, TaggedDataRecordValue, _, _, _,_, _, _, _, _),
@@ -520,24 +520,13 @@ gv_nodes__recon_not_input_not_output_data(WorkflowId) :-
 
 % record-/data-level observables 
 % DataName that will be represented at record level: yw_data_record_level(DataName)
-% yw_data_record_level('DataRecord').
-% yw_data_record_level('TaggedDataRecord').
-% yw_data_record_level('MarineDataRecord').
-% yw_data_record_level('notMarineDataRecord').
-% yw_data_record_level('WoRMSOutput').
-% yw_data_record_level('GBIFOutput').
-yw_data_record_level(DataName) :-
-	partof_data(_, PrimaryDataId),
-	yw_data(PrimaryDataId, DataName, _, _).
+yw_data_record_level('DataRecord').
+yw_data_record_level('TaggedDataRecord').
+yw_data_record_level('MarineDataRecord').
+yw_data_record_level('notMarineDataRecord').
+yw_data_record_level('WoRMSUpdatedRecord').
+yw_data_record_level('GBIFUpdatedRecord').
 
-yw_partof_data_record_level(PartialDataId, PartialDataName, PrimaryDataId,PrimaryDataName) :-
-	yw_data_record_level(PrimaryDataName),
-	partof_data(PartialDataId, PrimaryDataId),
-	data(PrimaryDataId, PrimaryDataName, _),
-	%yw_data(PrimaryDataId, PrimaryDataName, _, _),
-	data(PartialDataId, PartialDataName, _).
-	%yw_data(PartialDataId, PartialDataName, _, _).
-	
 
 print_data_record(OccurrenceID, DN) :-
 	 log_record_data_value(_, _, OccurrenceID, _, _, _, _, _,_, _, _, _, _),
@@ -566,8 +555,8 @@ print_aggregatedata_twocounts(DN, MatchCount, NoMatchCount) :-
 % explicit empty/unused data candidates: log_unuseddata_candidates(UnusedStepName, TaggedDataRecordValue) 
 log_unuseddata_candidates('MarineDataRecord', 'NonMarine').
 log_unuseddata_candidates('notMarineDataRecord', 'Marine').
-log_unuseddata_candidates('WoRMSOutput', 'NonMarine').
-log_unuseddata_candidates('GBIFOutput', 'Marine').
+log_unuseddata_candidates('WoRMSUpdatedRecord', 'NonMarine').
+log_unuseddata_candidates('GBIFUpdatedRecord', 'Marine').
 
 log_unuseddata(OccurrenceID, UnusedDataName) :-
 	log_record_data_value(_, _, OccurrenceID, _, TaggedDataRecordValue, _, _, _,_, _, _, _, _),
@@ -581,8 +570,8 @@ aggregatedata_onecount('MarineDataRecord').
 aggregatedata_onecount('notMarineDataRecord').
 
 % aggregatedata_twocounts(AggregateDataNameTwoCounts)
-aggregatedata_twocounts('WoRMSOutput').
-aggregatedata_twocounts('GBIFOutput').
+aggregatedata_twocounts('WoRMSUpdatedRecord').
+aggregatedata_twocounts('GBIFUpdatedRecord').
 
 % aggregatedata_onecount_value(AggregateDataNameOneCount, Count)
 aggregatedata_onecount_value('DataRecord', RecordCount) :-
@@ -598,10 +587,10 @@ aggregatedata_onecount_value('notMarineDataRecord', NonMarineCount) :-
 	aggregatedata_onecount('notMarineDataRecord'),
 	log_nonmarine_record_count(NonMarineCount).
 % aggregatedata_twocounts_value(AggregateDataNameOneCount, MatchCount, NoMatchCount)
-aggregatedata_twocounts_value('WoRMSOutput', MarineMatchCount, MarineNoMatchCount):- 
+aggregatedata_twocounts_value('WoRMSUpdatedRecord', MarineMatchCount, MarineNoMatchCount):- 
 	log_marine_match_count(MarineMatchCount),
 	log_marine_nomatch_count(MarineNoMatchCount).
-aggregatedata_twocounts_value('GBIFOutput', NonMarineMatchCount, NonMarineNoMatchCount) :-
+aggregatedata_twocounts_value('GBIFUpdatedRecord', NonMarineMatchCount, NonMarineNoMatchCount) :-
 	log_nonmarine_match_count(NonMarineMatchCount),
 	log_nonmarine_nomatch_count(NonMarineNoMatchCount).
 

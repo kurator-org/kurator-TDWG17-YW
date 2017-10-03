@@ -29,7 +29,7 @@ Download xsb from https://xsb.sourceforge.net/ and install it.
 
 Copy .sh files and queries into kurator-validation 
 
-    cd kurator-SPNHC17-YW
+    cd kurator-TDWG17-YW
     cp *.sh ../kurator-validation
     cp -R rules/ ../kurator-validation
     cp -R queries/ ../kurator-validation
@@ -48,16 +48,10 @@ Run kurator-validation on the marked up workflow to generate a logfile for analy
 java -jar target/kurator-validation-1.0.1-SNAPSHOT-jar-with-dependencies.jar -f packages/kurator_branching/workflows/file_branching_taxon_lookup.yaml -p inputfile=packages/kurator_branching/data/kurator_sample_data.txt  -l ALL > runlog.log 2>&1
 
 
-Run yesworkflow to generate prospective graphs: 
+Run yesworkflow and the xsb scripts to to generate prospective and hybrid (retrospective) graphs and queries: 
 
      source settings.sh
      sh clean.sh
-     sh make_no@partof.sh
-
-Run yesworkflow and the xsb scripts to generate hybrid (retrospective) graphs and queries: 
-
-     source settings.sh
-     sh clean.sh
-     sh make_@partof.sh
+     sh make.sh
 
 or run the commands in make_*.sh individually (or run clean.sh between multiple runs of make.sh).

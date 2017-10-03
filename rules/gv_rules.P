@@ -48,11 +48,6 @@ gv_record_node_uri_list(DataId) :-
 gv_record_node_data_record(OccurrenceID, DN) :-
     print_data_record(OccurrenceID, DN).
 
-gv_aggregatedata_node_onecount(DN, Count) :-
-	print_aggregatedata_onecount(DN, Count).
-
-gv_aggregatedata_node_twocounts(DN, MatchCount, NoMatchCount) :-
-	print_aggregatedata_twocounts(DN, MatchCount, NoMatchCount).
 
 gv_record_node_close() :-
     write('}"]'), eol.

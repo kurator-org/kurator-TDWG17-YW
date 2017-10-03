@@ -1,0 +1,226 @@
+
+
+%---------------------------------------------------------------------------------------------------
+% FACT: yw_source_file(SourceId, SourceFile).
+%...................................................................................................
+yw_source_file(1,'packages/kurator_FileBranchingTaxonLookup/workflows/file_branching_taxon_lookup.yaml').
+
+
+%---------------------------------------------------------------------------------------------------
+% FACT: yw_workflow_script(WorkflowId, WorkflowName, SourceId, SourceFile).
+%...................................................................................................
+yw_workflow_script(1,'FileBranchingTaxonLookupWorkflow',1,'packages/kurator_FileBranchingTaxonLookup/workflows/file_branching_taxon_lookup.yaml').
+
+
+%---------------------------------------------------------------------------------------------------
+% FACT: yw_program(WorkflowId, ProgramName, WorkflowId, SourceId, BeginLine, EndLine).
+%...................................................................................................
+yw_program(1,'FileBranchingTaxonLookupWorkflow',nil,1,103,354).
+yw_program(2,'Setup',1,1,111,203).
+yw_program(3,'FileToDataStream',1,1,206,214).
+yw_program(4,'EnvironmentTagger',1,1,217,227).
+yw_program(5,'FilterToJustMarine',1,1,230,244).
+yw_program(6,'FilterExcludingMarine',1,1,247,261).
+yw_program(7,'WoRMSLookup',1,1,264,275).
+yw_program(8,'GBIFLookup',1,1,278,289).
+yw_program(9,'StreamMerge',1,1,292,304).
+yw_program(10,'CsvFileWriter',1,1,306,320).
+
+
+%---------------------------------------------------------------------------------------------------
+% FACT: yw_workflow(WorkflowId, WorkflowName, ParentWorkflowId, SourceId, BeginLine, EndLine).
+%...................................................................................................
+yw_workflow(1,'FileBranchingTaxonLookupWorkflow',nil,1,103,354).
+
+
+%---------------------------------------------------------------------------------------------------
+% FACT: yw_workflow_step(StepId, StepName, WorkflowId, SourceId, BeginLine, EndLine).
+%...................................................................................................
+yw_workflow_step(2,'Setup',1,1,111,203).
+yw_workflow_step(3,'FileToDataStream',1,1,206,214).
+yw_workflow_step(4,'EnvironmentTagger',1,1,217,227).
+yw_workflow_step(5,'FilterToJustMarine',1,1,230,244).
+yw_workflow_step(6,'FilterExcludingMarine',1,1,247,261).
+yw_workflow_step(7,'WoRMSLookup',1,1,264,275).
+yw_workflow_step(8,'GBIFLookup',1,1,278,289).
+yw_workflow_step(9,'StreamMerge',1,1,292,304).
+yw_workflow_step(10,'CsvFileWriter',1,1,306,320).
+
+
+%---------------------------------------------------------------------------------------------------
+% FACT: yw_function(FunctionId, FunctionName, ParentWorkflowId, SourceId, BeginLine, EndLine).
+%...................................................................................................
+
+
+%---------------------------------------------------------------------------------------------------
+% FACT: yw_data(DataId, DataName, WorkflowId, WorkflowName).
+%...................................................................................................
+yw_data(1,'InputFilePath',nil,nil).
+yw_data(2,'DarwinCoreFile',nil,nil).
+yw_data(3,'InputFilePath',1,'FileBranchingTaxonLookupWorkflow').
+yw_data(4,'DarwinCoreFile',1,'FileBranchingTaxonLookupWorkflow').
+yw_data(5,'Workspace',1,'FileBranchingTaxonLookupWorkflow').
+yw_data(6,'OccurrenceFile',1,'FileBranchingTaxonLookupWorkflow').
+yw_data(7,'DataRecord',1,'FileBranchingTaxonLookupWorkflow').
+yw_data(8,'LogFile',1,'FileBranchingTaxonLookupWorkflow').
+yw_data(9,'TaggedDataRecord',1,'FileBranchingTaxonLookupWorkflow').
+yw_data(10,'MarineDataRecord',1,'FileBranchingTaxonLookupWorkflow').
+yw_data(11,notMarineDataRecord,1,'FileBranchingTaxonLookupWorkflow').
+yw_data(12,'WoRMSUpdatedRecord',1,'FileBranchingTaxonLookupWorkflow').
+yw_data(13,'GBIFUpdatedRecord',1,'FileBranchingTaxonLookupWorkflow').
+yw_data(14,'MergedStream',1,'FileBranchingTaxonLookupWorkflow').
+yw_data(15,'UpdatedDarwinCoreFile',1,'FileBranchingTaxonLookupWorkflow').
+yw_data(16,'UpdatedDarwinCoreFile',nil,nil).
+yw_data(17,'LogFile',nil,nil).
+
+
+%---------------------------------------------------------------------------------------------------
+% FACT: yw_step_input(ProgramId, ProgramName, PortType, PortId, PortName, DataId, DataName).
+%...................................................................................................
+yw_step_input(1,'FileBranchingTaxonLookupWorkflow',param,1,'InputFilePath',1,'InputFilePath').
+yw_step_input(1,'FileBranchingTaxonLookupWorkflow',in,2,'DarwinCoreFile',2,'DarwinCoreFile').
+yw_step_input(2,'Setup',param,3,'InputFilePath',3,'InputFilePath').
+yw_step_input(2,'Setup',in,4,'DarwinCoreFile',4,'DarwinCoreFile').
+yw_step_input(3,'FileToDataStream',in,7,'OccurrenceFile',6,'OccurrenceFile').
+yw_step_input(4,'EnvironmentTagger',in,9,'DataRecord',7,'DataRecord').
+yw_step_input(5,'FilterToJustMarine',in,12,'TaggedDataRecord',9,'TaggedDataRecord').
+yw_step_input(6,'FilterExcludingMarine',in,15,'TaggedDataRecord',9,'TaggedDataRecord').
+yw_step_input(7,'WoRMSLookup',in,18,'MarineDataRecord',10,'MarineDataRecord').
+yw_step_input(8,'GBIFLookup',in,21,notMarineDataRecord,11,notMarineDataRecord).
+yw_step_input(9,'StreamMerge',in,25,'WoRMSUpdatedRecord',12,'WoRMSUpdatedRecord').
+yw_step_input(9,'StreamMerge',in,24,'GBIFUpdatedRecord',13,'GBIFUpdatedRecord').
+yw_step_input(10,'CsvFileWriter',in,28,'MergedStream',14,'MergedStream').
+yw_step_input(10,'CsvFileWriter',in,27,'Workspace',5,'Workspace').
+
+
+%---------------------------------------------------------------------------------------------------
+% FACT: yw_step_output(ProgramId, ProgramName, PortType, PortId, PortName, DataId, DataName).
+%...................................................................................................
+yw_step_output(1,'FileBranchingTaxonLookupWorkflow',out,30,'UpdatedDarwinCoreFile',16,'UpdatedDarwinCoreFile').
+yw_step_output(1,'FileBranchingTaxonLookupWorkflow',out,31,'LogFile',17,'LogFile').
+yw_step_output(2,'Setup',out,5,workspace,5,'Workspace').
+yw_step_output(2,'Setup',out,6,'OccurrenceFile',6,'OccurrenceFile').
+yw_step_output(3,'FileToDataStream',out,8,'DataRecord',7,'DataRecord').
+yw_step_output(4,'EnvironmentTagger',out,10,'LogFile',8,'LogFile').
+yw_step_output(4,'EnvironmentTagger',out,11,'TaggedDataRecord',9,'TaggedDataRecord').
+yw_step_output(5,'FilterToJustMarine',out,13,'LogFile',8,'LogFile').
+yw_step_output(5,'FilterToJustMarine',out,14,'MarineDataRecord',10,'MarineDataRecord').
+yw_step_output(6,'FilterExcludingMarine',out,16,'LogFile',8,'LogFile').
+yw_step_output(6,'FilterExcludingMarine',out,17,notMarineDataRecord,11,notMarineDataRecord).
+yw_step_output(7,'WoRMSLookup',out,19,'WoRMSUpdatedRecord',12,'WoRMSUpdatedRecord').
+yw_step_output(7,'WoRMSLookup',out,20,'LogFile',8,'LogFile').
+yw_step_output(8,'GBIFLookup',out,22,'GBIFUpdatedRecord',13,'GBIFUpdatedRecord').
+yw_step_output(8,'GBIFLookup',out,23,'LogFile',8,'LogFile').
+yw_step_output(9,'StreamMerge',out,26,'MergedStream',14,'MergedStream').
+yw_step_output(10,'CsvFileWriter',out,29,'UpdatedDarwinCoreFile',15,'UpdatedDarwinCoreFile').
+
+
+%---------------------------------------------------------------------------------------------------
+% FACT: yw_inflow(WorkflowId, WorkflowName, DataId, DataName, ProgramId, ProgramName).
+%...................................................................................................
+yw_inflow(1,'FileBranchingTaxonLookupWorkflow',3,'InputFilePath',2,'Setup').
+yw_inflow(1,'FileBranchingTaxonLookupWorkflow',4,'DarwinCoreFile',2,'Setup').
+
+
+%---------------------------------------------------------------------------------------------------
+% FACT: yw_flow(SourceProgramId, SourceProgramName, SourcePortId, SourcePortName, DataId, DataName, SinkPortId, SinkPortName, SinkProgramId, SinkProgramName).
+%...................................................................................................
+yw_flow(2,'Setup',5,workspace,5,'Workspace',27,'Workspace',10,'CsvFileWriter').
+yw_flow(2,'Setup',6,'OccurrenceFile',6,'OccurrenceFile',7,'OccurrenceFile',3,'FileToDataStream').
+yw_flow(3,'FileToDataStream',8,'DataRecord',7,'DataRecord',9,'DataRecord',4,'EnvironmentTagger').
+yw_flow(4,'EnvironmentTagger',11,'TaggedDataRecord',9,'TaggedDataRecord',15,'TaggedDataRecord',6,'FilterExcludingMarine').
+yw_flow(4,'EnvironmentTagger',11,'TaggedDataRecord',9,'TaggedDataRecord',12,'TaggedDataRecord',5,'FilterToJustMarine').
+yw_flow(5,'FilterToJustMarine',14,'MarineDataRecord',10,'MarineDataRecord',18,'MarineDataRecord',7,'WoRMSLookup').
+yw_flow(6,'FilterExcludingMarine',17,notMarineDataRecord,11,notMarineDataRecord,21,notMarineDataRecord,8,'GBIFLookup').
+yw_flow(7,'WoRMSLookup',19,'WoRMSUpdatedRecord',12,'WoRMSUpdatedRecord',25,'WoRMSUpdatedRecord',9,'StreamMerge').
+yw_flow(8,'GBIFLookup',22,'GBIFUpdatedRecord',13,'GBIFUpdatedRecord',24,'GBIFUpdatedRecord',9,'StreamMerge').
+yw_flow(9,'StreamMerge',26,'MergedStream',14,'MergedStream',28,'MergedStream',10,'CsvFileWriter').
+
+
+%---------------------------------------------------------------------------------------------------
+% FACT: yw_outflow(StepId, StepName, StepOutDataId, StepOutDataName, WorkflowId, WorkflowName, WorkflowOutDataId, WorkflowOutDataName).
+%...................................................................................................
+yw_outflow(10,'CsvFileWriter',15,'UpdatedDarwinCoreFile',1,'FileBranchingTaxonLookupWorkflow',16,'UpdatedDarwinCoreFile').
+yw_outflow(4,'EnvironmentTagger',8,'LogFile',1,'FileBranchingTaxonLookupWorkflow',17,'LogFile').
+yw_outflow(5,'FilterToJustMarine',8,'LogFile',1,'FileBranchingTaxonLookupWorkflow',17,'LogFile').
+yw_outflow(6,'FilterExcludingMarine',8,'LogFile',1,'FileBranchingTaxonLookupWorkflow',17,'LogFile').
+yw_outflow(7,'WoRMSLookup',8,'LogFile',1,'FileBranchingTaxonLookupWorkflow',17,'LogFile').
+yw_outflow(8,'GBIFLookup',8,'LogFile',1,'FileBranchingTaxonLookupWorkflow',17,'LogFile').
+
+
+%---------------------------------------------------------------------------------------------------
+% FACT: yw_qualified_name(EntityType, Id, QualifiedName).
+%...................................................................................................
+yw_qualified_name(program,1,'FileBranchingTaxonLookupWorkflow').
+yw_qualified_name(program,2,'FileBranchingTaxonLookupWorkflow/Setup').
+yw_qualified_name(program,3,'FileBranchingTaxonLookupWorkflow/FileToDataStream').
+yw_qualified_name(program,4,'FileBranchingTaxonLookupWorkflow/EnvironmentTagger').
+yw_qualified_name(program,5,'FileBranchingTaxonLookupWorkflow/FilterToJustMarine').
+yw_qualified_name(program,6,'FileBranchingTaxonLookupWorkflow/FilterExcludingMarine').
+yw_qualified_name(program,7,'FileBranchingTaxonLookupWorkflow/WoRMSLookup').
+yw_qualified_name(program,8,'FileBranchingTaxonLookupWorkflow/GBIFLookup').
+yw_qualified_name(program,9,'FileBranchingTaxonLookupWorkflow/StreamMerge').
+yw_qualified_name(program,10,'FileBranchingTaxonLookupWorkflow/CsvFileWriter').
+yw_qualified_name(port,1,'FileBranchingTaxonLookupWorkflow<-InputFilePath').
+yw_qualified_name(port,2,'FileBranchingTaxonLookupWorkflow<-DarwinCoreFile').
+yw_qualified_name(port,30,'FileBranchingTaxonLookupWorkflow->UpdatedDarwinCoreFile').
+yw_qualified_name(port,31,'FileBranchingTaxonLookupWorkflow->LogFile').
+yw_qualified_name(port,3,'FileBranchingTaxonLookupWorkflow/Setup<-InputFilePath').
+yw_qualified_name(port,4,'FileBranchingTaxonLookupWorkflow/Setup<-DarwinCoreFile').
+yw_qualified_name(port,5,'FileBranchingTaxonLookupWorkflow/Setup->workspace').
+yw_qualified_name(port,6,'FileBranchingTaxonLookupWorkflow/Setup->OccurrenceFile').
+yw_qualified_name(port,7,'FileBranchingTaxonLookupWorkflow/FileToDataStream<-OccurrenceFile').
+yw_qualified_name(port,8,'FileBranchingTaxonLookupWorkflow/FileToDataStream->DataRecord').
+yw_qualified_name(port,9,'FileBranchingTaxonLookupWorkflow/EnvironmentTagger<-DataRecord').
+yw_qualified_name(port,10,'FileBranchingTaxonLookupWorkflow/EnvironmentTagger->LogFile').
+yw_qualified_name(port,11,'FileBranchingTaxonLookupWorkflow/EnvironmentTagger->TaggedDataRecord').
+yw_qualified_name(port,12,'FileBranchingTaxonLookupWorkflow/FilterToJustMarine<-TaggedDataRecord').
+yw_qualified_name(port,13,'FileBranchingTaxonLookupWorkflow/FilterToJustMarine->LogFile').
+yw_qualified_name(port,14,'FileBranchingTaxonLookupWorkflow/FilterToJustMarine->MarineDataRecord').
+yw_qualified_name(port,15,'FileBranchingTaxonLookupWorkflow/FilterExcludingMarine<-TaggedDataRecord').
+yw_qualified_name(port,16,'FileBranchingTaxonLookupWorkflow/FilterExcludingMarine->LogFile').
+yw_qualified_name(port,17,'FileBranchingTaxonLookupWorkflow/FilterExcludingMarine->notMarineDataRecord').
+yw_qualified_name(port,18,'FileBranchingTaxonLookupWorkflow/WoRMSLookup<-MarineDataRecord').
+yw_qualified_name(port,19,'FileBranchingTaxonLookupWorkflow/WoRMSLookup->WoRMSUpdatedRecord').
+yw_qualified_name(port,20,'FileBranchingTaxonLookupWorkflow/WoRMSLookup->LogFile').
+yw_qualified_name(port,21,'FileBranchingTaxonLookupWorkflow/GBIFLookup<-notMarineDataRecord').
+yw_qualified_name(port,22,'FileBranchingTaxonLookupWorkflow/GBIFLookup->GBIFUpdatedRecord').
+yw_qualified_name(port,23,'FileBranchingTaxonLookupWorkflow/GBIFLookup->LogFile').
+yw_qualified_name(port,24,'FileBranchingTaxonLookupWorkflow/StreamMerge<-GBIFUpdatedRecord').
+yw_qualified_name(port,25,'FileBranchingTaxonLookupWorkflow/StreamMerge<-WoRMSUpdatedRecord').
+yw_qualified_name(port,26,'FileBranchingTaxonLookupWorkflow/StreamMerge->MergedStream').
+yw_qualified_name(port,27,'FileBranchingTaxonLookupWorkflow/CsvFileWriter<-Workspace').
+yw_qualified_name(port,28,'FileBranchingTaxonLookupWorkflow/CsvFileWriter<-MergedStream').
+yw_qualified_name(port,29,'FileBranchingTaxonLookupWorkflow/CsvFileWriter->UpdatedDarwinCoreFile').
+yw_qualified_name(data,1,'InputFilePath').
+yw_qualified_name(data,2,'DarwinCoreFile').
+yw_qualified_name(data,16,'UpdatedDarwinCoreFile').
+yw_qualified_name(data,17,'LogFile').
+yw_qualified_name(data,3,'FileBranchingTaxonLookupWorkflow.InputFilePath').
+yw_qualified_name(data,4,'FileBranchingTaxonLookupWorkflow.DarwinCoreFile').
+yw_qualified_name(data,5,'FileBranchingTaxonLookupWorkflow.Workspace').
+yw_qualified_name(data,6,'FileBranchingTaxonLookupWorkflow.OccurrenceFile').
+yw_qualified_name(data,7,'FileBranchingTaxonLookupWorkflow.DataRecord').
+yw_qualified_name(data,8,'FileBranchingTaxonLookupWorkflow.LogFile').
+yw_qualified_name(data,9,'FileBranchingTaxonLookupWorkflow.TaggedDataRecord').
+yw_qualified_name(data,10,'FileBranchingTaxonLookupWorkflow.MarineDataRecord').
+yw_qualified_name(data,11,'FileBranchingTaxonLookupWorkflow.notMarineDataRecord').
+yw_qualified_name(data,12,'FileBranchingTaxonLookupWorkflow.WoRMSUpdatedRecord').
+yw_qualified_name(data,13,'FileBranchingTaxonLookupWorkflow.GBIFUpdatedRecord').
+yw_qualified_name(data,14,'FileBranchingTaxonLookupWorkflow.MergedStream').
+yw_qualified_name(data,15,'FileBranchingTaxonLookupWorkflow.UpdatedDarwinCoreFile').
+
+
+%---------------------------------------------------------------------------------------------------
+% FACT: yw_description(EntityType, Id, Name, Description)).
+%...................................................................................................
+yw_description(program,2,'Setup','Create a unique workspace and transform the input file to a file
+ with chosen format and field names standardized to Darwin Core').
+yw_description(program,3,'FileToDataStream','Take the darwinized occurrence file and stream records from it').
+yw_description(program,4,'EnvironmentTagger','Tag each record in the stream that appears to be marine with isMarine=true and nonmarine with isMarine=false').
+yw_description(program,5,'FilterToJustMarine','Pass only records tagged with isMarine=true').
+yw_description(program,6,'FilterExcludingMarine','Pass only records not tagged with isMarine=true').
+yw_description(program,7,'WoRMSLookup','Lookup GUIDs for names in WoRMS').
+yw_description(program,8,'GBIFLookup','Lookup GUIDs for names in GBIF').
+yw_description(program,9,'StreamMerge','Merge the streams').
+yw_description(program,10,'CsvFileWriter','Write to a csv file and wrapup by finishing the workflow').
