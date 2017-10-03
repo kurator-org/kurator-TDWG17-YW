@@ -23,11 +23,11 @@ node[shape=box style="rounded,filled" fillcolor="#d6d6d7" peripheries=1 fontname
 notMarineDataRecord
 GBIFUpdatedRecord
 node[shape=box style="rounded,filled" fillcolor="#f8d2db" peripheries=1 fontname="Courier-Bold" fontsize=9]
-DataRecord[shape=record rankdir=LR label="{<f0> DataRecord |<f1>MCZ:Mala:120797\n}"]
+DataRecord[shape=record rankdir=LR label="{<f0> DataRecord |<f1>MCZ:Mala:303063\n}"]
 TaggedDataRecord[shape=record rankdir=LR label="{<f0> TaggedDataRecord |<f1>Marine\n}"]
-MarineDataRecord[shape=record rankdir=LR label="{<f0> MarineDataRecord |<f1>Teredora malleolus:Turton, 1822\n}"]
+MarineDataRecord[shape=record rankdir=LR label="{<f0> MarineDataRecord |<f1>Cypraea argus:Linnaeus, 1758\n}"]
 notMarineDataRecord[shape=record rankdir=LR label="{<f0> notMarineDataRecord |<f1> \n}"]
-WoRMSUpdatedRecord[shape=record rankdir=LR label="{<f0> WoRMSUpdatedRecord |<f1>null\n}"]
+WoRMSUpdatedRecord[shape=record rankdir=LR label="{<f0> WoRMSUpdatedRecord |<f1>urn:lsid:marinespecies.org:taxname:216786\n}"]
 GBIFUpdatedRecord[shape=record rankdir=LR label="{<f0> GBIFUpdatedRecord |<f1>\n}"]
 node[shape=box style="rounded,filled" fillcolor="#FFE4B5" peripheries=1 fontname="Courier-Bold" fontsize=9]
 DarwinCoreArchive[shape=record rankdir=LR label="{<f0> DarwinCoreArchive |<f1>packages/kurator_FileBranchingTaxonLookup/data/kurator_sample_data_v2.txt\n}"]

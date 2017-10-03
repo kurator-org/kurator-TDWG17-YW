@@ -1,14 +1,14 @@
 % FACT: program(program_id, program_name, qualified_program_name, begin_annotation_id, end_annotation_id).
-program(1, 'FileBranchingTaxonLookupWorkflow', 'FileBranchingTaxonLookupWorkflow', 1, 77).
-program(2, 'Setup', 'FileBranchingTaxonLookupWorkflow/Setup', 5, 14).
-program(3, 'FileToDataStream', 'FileBranchingTaxonLookupWorkflow/FileToDataStream', 15, 19).
-program(4, 'EnvironmentTagger', 'FileBranchingTaxonLookupWorkflow/EnvironmentTagger', 20, 27).
-program(5, 'FilterToJustMarine', 'FileBranchingTaxonLookupWorkflow/FilterToJustMarine', 28, 35).
-program(6, 'FilterExcludingMarine', 'FileBranchingTaxonLookupWorkflow/FilterExcludingMarine', 36, 43).
-program(7, 'WoRMSLookup', 'FileBranchingTaxonLookupWorkflow/WoRMSLookup', 44, 52).
-program(8, 'GBIFLookup', 'FileBranchingTaxonLookupWorkflow/GBIFLookup', 53, 61).
-program(9, 'StreamMerge', 'FileBranchingTaxonLookupWorkflow/StreamMerge', 62, 67).
-program(10, 'CsvFileWriter', 'FileBranchingTaxonLookupWorkflow/CsvFileWriter', 68, 74).
+program(1, 'DwCA_Taxon_Lookup', 'DwCA_Taxon_Lookup', 1, 74).
+program(2, 'Setup', 'DwCA_Taxon_Lookup/Setup', 3, 11).
+program(3, 'FileToDataStream', 'DwCA_Taxon_Lookup/FileToDataStream', 12, 16).
+program(4, 'EnvironmentTagger', 'DwCA_Taxon_Lookup/EnvironmentTagger', 17, 24).
+program(5, 'FilterToJustMarine', 'DwCA_Taxon_Lookup/FilterToJustMarine', 25, 32).
+program(6, 'FilterToNonMarine', 'DwCA_Taxon_Lookup/FilterToNonMarine', 33, 40).
+program(7, 'WoRMSLookup', 'DwCA_Taxon_Lookup/WoRMSLookup', 41, 49).
+program(8, 'GBIFLookup', 'DwCA_Taxon_Lookup/GBIFLookup', 50, 58).
+program(9, 'StreamMerge', 'DwCA_Taxon_Lookup/StreamMerge', 59, 64).
+program(10, 'CsvFileWriter', 'DwCA_Taxon_Lookup/CsvFileWriter', 65, 71).
 
 % FACT: workflow(program_id).
 workflow(1).
@@ -27,180 +27,167 @@ has_subprogram(1, 9).
 has_subprogram(1, 10).
 
 % FACT: port(port_id, port_type, port_name, qualified_port_name, port_annotation_id, data_id).
-port(1, 'PARAM', 'InputFilePath', 'FileBranchingTaxonLookupWorkflow<-InputFilePath', 2, 1).
-port(2, 'IN', 'DarwinCoreFile', 'FileBranchingTaxonLookupWorkflow<-DarwinCoreFile', 3, 2).
-port(30, 'OUT', 'UpdatedDarwinCoreFile', 'FileBranchingTaxonLookupWorkflow->UpdatedDarwinCoreFile', 75, 16).
-port(31, 'OUT', 'LogFile', 'FileBranchingTaxonLookupWorkflow->LogFile', 76, 17).
-port(3, 'PARAM', 'InputFilePath', 'FileBranchingTaxonLookupWorkflow/Setup<-InputFilePath', 7, 3).
-port(4, 'IN', 'DarwinCoreFile', 'FileBranchingTaxonLookupWorkflow/Setup<-DarwinCoreFile', 8, 4).
-port(5, 'OUT', 'workspace', 'FileBranchingTaxonLookupWorkflow/Setup->workspace', 10, 5).
-port(6, 'OUT', 'OccurrenceFile', 'FileBranchingTaxonLookupWorkflow/Setup->OccurrenceFile', 12, 6).
-port(7, 'IN', 'OccurrenceFile', 'FileBranchingTaxonLookupWorkflow/FileToDataStream<-OccurrenceFile', 17, 6).
-port(8, 'OUT', 'DataRecord', 'FileBranchingTaxonLookupWorkflow/FileToDataStream->DataRecord', 18, 7).
-port(9, 'IN', 'DataRecord', 'FileBranchingTaxonLookupWorkflow/EnvironmentTagger<-DataRecord', 22, 7).
-port(10, 'OUT', 'LogFile', 'FileBranchingTaxonLookupWorkflow/EnvironmentTagger->LogFile', 23, 8).
-port(11, 'OUT', 'TaggedDataRecord', 'FileBranchingTaxonLookupWorkflow/EnvironmentTagger->TaggedDataRecord', 26, 9).
-port(12, 'IN', 'TaggedDataRecord', 'FileBranchingTaxonLookupWorkflow/FilterToJustMarine<-TaggedDataRecord', 30, 9).
-port(13, 'OUT', 'LogFile', 'FileBranchingTaxonLookupWorkflow/FilterToJustMarine->LogFile', 31, 8).
-port(14, 'OUT', 'MarineDataRecord', 'FileBranchingTaxonLookupWorkflow/FilterToJustMarine->MarineDataRecord', 34, 10).
-port(15, 'IN', 'TaggedDataRecord', 'FileBranchingTaxonLookupWorkflow/FilterExcludingMarine<-TaggedDataRecord', 38, 9).
-port(16, 'OUT', 'LogFile', 'FileBranchingTaxonLookupWorkflow/FilterExcludingMarine->LogFile', 39, 8).
-port(17, 'OUT', 'notMarineDataRecord', 'FileBranchingTaxonLookupWorkflow/FilterExcludingMarine->notMarineDataRecord', 42, 11).
-port(18, 'IN', 'MarineDataRecord', 'FileBranchingTaxonLookupWorkflow/WoRMSLookup<-MarineDataRecord', 46, 10).
-port(19, 'OUT', 'WoRMSUpdatedRecord', 'FileBranchingTaxonLookupWorkflow/WoRMSLookup->WoRMSUpdatedRecord', 47, 12).
-port(20, 'OUT', 'LogFile', 'FileBranchingTaxonLookupWorkflow/WoRMSLookup->LogFile', 48, 8).
-port(21, 'IN', 'notMarineDataRecord', 'FileBranchingTaxonLookupWorkflow/GBIFLookup<-notMarineDataRecord', 55, 11).
-port(22, 'OUT', 'GBIFUpdatedRecord', 'FileBranchingTaxonLookupWorkflow/GBIFLookup->GBIFUpdatedRecord', 56, 13).
-port(23, 'OUT', 'LogFile', 'FileBranchingTaxonLookupWorkflow/GBIFLookup->LogFile', 57, 8).
-port(24, 'IN', 'GBIFUpdatedRecord', 'FileBranchingTaxonLookupWorkflow/StreamMerge<-GBIFUpdatedRecord', 64, 13).
-port(25, 'IN', 'WoRMSUpdatedRecord', 'FileBranchingTaxonLookupWorkflow/StreamMerge<-WoRMSUpdatedRecord', 65, 12).
-port(26, 'OUT', 'MergedStream', 'FileBranchingTaxonLookupWorkflow/StreamMerge->MergedStream', 66, 14).
-port(27, 'IN', 'Workspace', 'FileBranchingTaxonLookupWorkflow/CsvFileWriter<-Workspace', 70, 5).
-port(28, 'IN', 'MergedStream', 'FileBranchingTaxonLookupWorkflow/CsvFileWriter<-MergedStream', 71, 14).
-port(29, 'OUT', 'UpdatedDarwinCoreFile', 'FileBranchingTaxonLookupWorkflow/CsvFileWriter->UpdatedDarwinCoreFile', 72, 15).
+port(1, 'IN', 'DarwinCoreArchive', 'DwCA_Taxon_Lookup<-DarwinCoreArchive', 2, 1).
+port(28, 'OUT', 'UpdatedOccurrenceFile', 'DwCA_Taxon_Lookup->UpdatedOccurrenceFile', 72, 14).
+port(29, 'OUT', 'LogFile', 'DwCA_Taxon_Lookup->LogFile', 73, 15).
+port(2, 'IN', 'DarwinCoreArchive', 'DwCA_Taxon_Lookup/Setup<-DarwinCoreArchive', 5, 2).
+port(3, 'OUT', 'workspace', 'DwCA_Taxon_Lookup/Setup->workspace', 7, 3).
+port(4, 'OUT', 'OccurrenceFile', 'DwCA_Taxon_Lookup/Setup->OccurrenceFile', 9, 4).
+port(5, 'IN', 'OccurrenceFile', 'DwCA_Taxon_Lookup/FileToDataStream<-OccurrenceFile', 14, 4).
+port(6, 'OUT', 'DataRecord', 'DwCA_Taxon_Lookup/FileToDataStream->DataRecord', 15, 5).
+port(7, 'IN', 'DataRecord', 'DwCA_Taxon_Lookup/EnvironmentTagger<-DataRecord', 19, 5).
+port(8, 'OUT', 'LogFile', 'DwCA_Taxon_Lookup/EnvironmentTagger->LogFile', 20, 6).
+port(9, 'OUT', 'TaggedDataRecord', 'DwCA_Taxon_Lookup/EnvironmentTagger->TaggedDataRecord', 23, 7).
+port(10, 'IN', 'TaggedDataRecord', 'DwCA_Taxon_Lookup/FilterToJustMarine<-TaggedDataRecord', 27, 7).
+port(11, 'OUT', 'LogFile', 'DwCA_Taxon_Lookup/FilterToJustMarine->LogFile', 28, 6).
+port(12, 'OUT', 'MarineDataRecord', 'DwCA_Taxon_Lookup/FilterToJustMarine->MarineDataRecord', 31, 8).
+port(13, 'IN', 'TaggedDataRecord', 'DwCA_Taxon_Lookup/FilterToNonMarine<-TaggedDataRecord', 35, 7).
+port(14, 'OUT', 'LogFile', 'DwCA_Taxon_Lookup/FilterToNonMarine->LogFile', 36, 6).
+port(15, 'OUT', 'notMarineDataRecord', 'DwCA_Taxon_Lookup/FilterToNonMarine->notMarineDataRecord', 39, 9).
+port(16, 'IN', 'MarineDataRecord', 'DwCA_Taxon_Lookup/WoRMSLookup<-MarineDataRecord', 43, 8).
+port(17, 'OUT', 'WoRMSUpdatedRecord', 'DwCA_Taxon_Lookup/WoRMSLookup->WoRMSUpdatedRecord', 44, 10).
+port(18, 'OUT', 'LogFile', 'DwCA_Taxon_Lookup/WoRMSLookup->LogFile', 45, 6).
+port(19, 'IN', 'notMarineDataRecord', 'DwCA_Taxon_Lookup/GBIFLookup<-notMarineDataRecord', 52, 9).
+port(20, 'OUT', 'GBIFUpdatedRecord', 'DwCA_Taxon_Lookup/GBIFLookup->GBIFUpdatedRecord', 53, 11).
+port(21, 'OUT', 'LogFile', 'DwCA_Taxon_Lookup/GBIFLookup->LogFile', 54, 6).
+port(22, 'IN', 'GBIFUpdatedRecord', 'DwCA_Taxon_Lookup/StreamMerge<-GBIFUpdatedRecord', 61, 11).
+port(23, 'IN', 'WoRMSUpdatedRecord', 'DwCA_Taxon_Lookup/StreamMerge<-WoRMSUpdatedRecord', 62, 10).
+port(24, 'OUT', 'MergedStream', 'DwCA_Taxon_Lookup/StreamMerge->MergedStream', 63, 12).
+port(25, 'IN', 'Workspace', 'DwCA_Taxon_Lookup/CsvFileWriter<-Workspace', 67, 3).
+port(26, 'IN', 'MergedStream', 'DwCA_Taxon_Lookup/CsvFileWriter<-MergedStream', 68, 12).
+port(27, 'OUT', 'UpdatedOccurrenceFile', 'DwCA_Taxon_Lookup/CsvFileWriter->UpdatedOccurrenceFile', 69, 13).
 
 % FACT: port_alias(port_id, alias).
-port_alias(5, 'Workspace').
+port_alias(3, 'Workspace').
 
 % FACT: port_uri_template(port_id, uri).
-port_uri_template(2, 'file:packages/kurator_branching_generic/data/kurator_sample_data_v2.txt').
-port_uri_template(4, 'file:packages/kurator_branching_generic/data/kurator_sample_data_v2.txt').
-port_uri_template(6, 'file:{workspace}/darwinized_file.txt').
-port_uri_template(10, 'file:runlog.log').
-port_uri_template(13, 'file:runlog.log').
-port_uri_template(16, 'file:runlog.log').
-port_uri_template(20, 'file:runlog.log').
-port_uri_template(23, 'file:runlog.log').
-port_uri_template(29, 'file:{workspace}/mergedoutputfile.csv').
+port_uri_template(2, 'file:packages/kurator_FileBranchingTaxonLookup/data/kurator_sample_data_v2.txt').
+port_uri_template(4, 'file:{workspace}/darwinized_file.txt').
+port_uri_template(8, 'file:runlog.log').
+port_uri_template(11, 'file:runlog.log').
+port_uri_template(14, 'file:runlog.log').
+port_uri_template(18, 'file:runlog.log').
+port_uri_template(21, 'file:runlog.log').
+port_uri_template(27, 'file:{workspace}/mergedoutputfile.csv').
 
 % FACT: has_in_port(block_id, port_id).
 has_in_port(1, 1).
-has_in_port(1, 2).
-has_in_port(2, 3).
-has_in_port(2, 4).
-has_in_port(3, 7).
-has_in_port(4, 9).
-has_in_port(5, 12).
-has_in_port(6, 15).
-has_in_port(7, 18).
-has_in_port(8, 21).
-has_in_port(9, 24).
-has_in_port(9, 25).
-has_in_port(10, 27).
-has_in_port(10, 28).
+has_in_port(2, 2).
+has_in_port(3, 5).
+has_in_port(4, 7).
+has_in_port(5, 10).
+has_in_port(6, 13).
+has_in_port(7, 16).
+has_in_port(8, 19).
+has_in_port(9, 22).
+has_in_port(9, 23).
+has_in_port(10, 25).
+has_in_port(10, 26).
 
 % FACT: has_out_port(block_id, port_id).
-has_out_port(1, 30).
-has_out_port(1, 31).
-has_out_port(2, 5).
-has_out_port(2, 6).
-has_out_port(3, 8).
-has_out_port(4, 10).
-has_out_port(4, 11).
-has_out_port(5, 13).
-has_out_port(5, 14).
-has_out_port(6, 16).
-has_out_port(6, 17).
-has_out_port(7, 19).
-has_out_port(7, 20).
-has_out_port(8, 22).
-has_out_port(8, 23).
-has_out_port(9, 26).
-has_out_port(10, 29).
+has_out_port(1, 28).
+has_out_port(1, 29).
+has_out_port(2, 3).
+has_out_port(2, 4).
+has_out_port(3, 6).
+has_out_port(4, 8).
+has_out_port(4, 9).
+has_out_port(5, 11).
+has_out_port(5, 12).
+has_out_port(6, 14).
+has_out_port(6, 15).
+has_out_port(7, 17).
+has_out_port(7, 18).
+has_out_port(8, 20).
+has_out_port(8, 21).
+has_out_port(9, 24).
+has_out_port(10, 27).
 
 % FACT: data(data_id, data_name, qualified_data_name).
-data(1, 'InputFilePath', 'InputFilePath').
-data(2, 'DarwinCoreFile', 'DarwinCoreFile').
-data(16, 'UpdatedDarwinCoreFile', 'UpdatedDarwinCoreFile').
-data(17, 'LogFile', 'LogFile').
-data(3, 'InputFilePath', 'FileBranchingTaxonLookupWorkflow.InputFilePath').
-data(4, 'DarwinCoreFile', 'FileBranchingTaxonLookupWorkflow.DarwinCoreFile').
-data(5, 'Workspace', 'FileBranchingTaxonLookupWorkflow.Workspace').
-data(6, 'OccurrenceFile', 'FileBranchingTaxonLookupWorkflow.OccurrenceFile').
-data(7, 'DataRecord', 'FileBranchingTaxonLookupWorkflow.DataRecord').
-data(8, 'LogFile', 'FileBranchingTaxonLookupWorkflow.LogFile').
-data(9, 'TaggedDataRecord', 'FileBranchingTaxonLookupWorkflow.TaggedDataRecord').
-data(10, 'MarineDataRecord', 'FileBranchingTaxonLookupWorkflow.MarineDataRecord').
-data(11, 'notMarineDataRecord', 'FileBranchingTaxonLookupWorkflow.notMarineDataRecord').
-data(12, 'WoRMSUpdatedRecord', 'FileBranchingTaxonLookupWorkflow.WoRMSUpdatedRecord').
-data(13, 'GBIFUpdatedRecord', 'FileBranchingTaxonLookupWorkflow.GBIFUpdatedRecord').
-data(14, 'MergedStream', 'FileBranchingTaxonLookupWorkflow.MergedStream').
-data(15, 'UpdatedDarwinCoreFile', 'FileBranchingTaxonLookupWorkflow.UpdatedDarwinCoreFile').
+data(1, 'DarwinCoreArchive', 'DarwinCoreArchive').
+data(14, 'UpdatedOccurrenceFile', 'UpdatedOccurrenceFile').
+data(15, 'LogFile', 'LogFile').
+data(2, 'DarwinCoreArchive', 'DwCA_Taxon_Lookup.DarwinCoreArchive').
+data(3, 'Workspace', 'DwCA_Taxon_Lookup.Workspace').
+data(4, 'OccurrenceFile', 'DwCA_Taxon_Lookup.OccurrenceFile').
+data(5, 'DataRecord', 'DwCA_Taxon_Lookup.DataRecord').
+data(6, 'LogFile', 'DwCA_Taxon_Lookup.LogFile').
+data(7, 'TaggedDataRecord', 'DwCA_Taxon_Lookup.TaggedDataRecord').
+data(8, 'MarineDataRecord', 'DwCA_Taxon_Lookup.MarineDataRecord').
+data(9, 'notMarineDataRecord', 'DwCA_Taxon_Lookup.notMarineDataRecord').
+data(10, 'WoRMSUpdatedRecord', 'DwCA_Taxon_Lookup.WoRMSUpdatedRecord').
+data(11, 'GBIFUpdatedRecord', 'DwCA_Taxon_Lookup.GBIFUpdatedRecord').
+data(12, 'MergedStream', 'DwCA_Taxon_Lookup.MergedStream').
+data(13, 'UpdatedOccurrenceFile', 'DwCA_Taxon_Lookup.UpdatedOccurrenceFile').
 
 % FACT: channel(channel_id, data_id).
-channel(1, 3).
+channel(1, 2).
 channel(2, 4).
-channel(3, 6).
+channel(3, 5).
 channel(4, 7).
-channel(5, 9).
-channel(6, 9).
-channel(7, 10).
+channel(5, 7).
+channel(6, 8).
+channel(7, 9).
 channel(8, 11).
-channel(9, 13).
-channel(10, 12).
-channel(11, 5).
+channel(9, 10).
+channel(10, 3).
+channel(11, 12).
 channel(12, 14).
-channel(13, 16).
-channel(14, 17).
-channel(15, 1).
-channel(16, 2).
-channel(17, 15).
-channel(18, 8).
+channel(13, 15).
+channel(14, 1).
+channel(15, 13).
+channel(16, 6).
 
 % FACT: port_connects_to_channel(port_id, channel_id).
-port_connects_to_channel(3, 1).
+port_connects_to_channel(2, 1).
 port_connects_to_channel(4, 2).
+port_connects_to_channel(5, 2).
 port_connects_to_channel(6, 3).
 port_connects_to_channel(7, 3).
-port_connects_to_channel(8, 4).
 port_connects_to_channel(9, 4).
-port_connects_to_channel(11, 5).
-port_connects_to_channel(12, 5).
-port_connects_to_channel(11, 6).
-port_connects_to_channel(15, 6).
-port_connects_to_channel(14, 7).
-port_connects_to_channel(18, 7).
-port_connects_to_channel(17, 8).
-port_connects_to_channel(21, 8).
-port_connects_to_channel(22, 9).
-port_connects_to_channel(24, 9).
-port_connects_to_channel(19, 10).
+port_connects_to_channel(10, 4).
+port_connects_to_channel(9, 5).
+port_connects_to_channel(13, 5).
+port_connects_to_channel(12, 6).
+port_connects_to_channel(16, 6).
+port_connects_to_channel(15, 7).
+port_connects_to_channel(19, 7).
+port_connects_to_channel(20, 8).
+port_connects_to_channel(22, 8).
+port_connects_to_channel(17, 9).
+port_connects_to_channel(23, 9).
+port_connects_to_channel(3, 10).
 port_connects_to_channel(25, 10).
-port_connects_to_channel(5, 11).
-port_connects_to_channel(27, 11).
-port_connects_to_channel(26, 12).
-port_connects_to_channel(28, 12).
-port_connects_to_channel(29, 13).
-port_connects_to_channel(23, 14).
-port_connects_to_channel(3, 15).
-port_connects_to_channel(4, 16).
-port_connects_to_channel(29, 17).
-port_connects_to_channel(23, 18).
+port_connects_to_channel(24, 11).
+port_connects_to_channel(26, 11).
+port_connects_to_channel(27, 12).
+port_connects_to_channel(21, 13).
+port_connects_to_channel(2, 14).
+port_connects_to_channel(27, 15).
+port_connects_to_channel(21, 16).
 
 % FACT: inflow_connects_to_channel(port_id, channel_id).
 inflow_connects_to_channel(1, 1).
-inflow_connects_to_channel(2, 2).
-inflow_connects_to_channel(1, 15).
-inflow_connects_to_channel(2, 16).
+inflow_connects_to_channel(1, 14).
 
 % FACT: outflow_connects_to_channel(port_id, channel_id).
-outflow_connects_to_channel(30, 13).
-outflow_connects_to_channel(31, 14).
-outflow_connects_to_channel(30, 17).
-outflow_connects_to_channel(31, 18).
+outflow_connects_to_channel(28, 12).
+outflow_connects_to_channel(29, 13).
+outflow_connects_to_channel(28, 15).
+outflow_connects_to_channel(29, 16).
 
 % FACT: uri_variable(uri_variable_id, variable_name, port_id).
-uri_variable(1, 'workspace', 6).
-uri_variable(2, 'workspace', 29).
+uri_variable(1, 'workspace', 4).
+uri_variable(2, 'workspace', 27).
 
 % FACT: log_template(log_template_id, port_id, entry_template, log_annotation_id).
-log_template(1, 10, '{timestamp} [{loglevel}] ACTOR<{actorname}> -> {ActorValue}:isMarine:true={isMarineValue}', 25).
-log_template(2, 13, '{timestamp} [{loglevel}] ACTOR<{actorname}> -> [isMarine]=[true]:{matchMarineValue}. Passing occurrenceID={occurrenceID}', 33).
-log_template(3, 16, '{timestamp} [{loglevel}] ACTOR<{actorname}> -> [isMarine]=[true]:{matchMarineValue}. Passing occurrenceID={occurrenceID}', 41).
-log_template(4, 20, '{timestamp} [{loglevel}] ACTOR<{actorname}> -> Looking Up: {scientificName}:{scientificNameAuthorship}', 50).
-log_template(5, 20, '{timestamp} [{loglevel}] ACTOR<{actorname}> -> Found GUID: {LookupValue}', 51).
-log_template(6, 23, '{timestamp} [{loglevel}] ACTOR<{actorname}> -> Looking Up: {scientificName}:{scientificNameAuthorship}', 59).
-log_template(7, 23, '{timestamp} [{loglevel}] ACTOR<{actorname}> -> Found GUID: {LookupValue}', 60).
+log_template(1, 8, '{timestamp} [{loglevel}] ACTOR<{actorname}> -> {ActorValue}:isMarine:true={isMarineValue}', 22).
+log_template(2, 11, '{timestamp} [{loglevel}] ACTOR<{actorname}> -> [isMarine]=[true]:{matchMarineValue}. Passing occurrenceID={occurrenceID}', 30).
+log_template(3, 14, '{timestamp} [{loglevel}] ACTOR<{actorname}> -> [isMarine]=[true]:{matchMarineValue}. Passing occurrenceID={occurrenceID}', 38).
+log_template(4, 18, '{timestamp} [{loglevel}] ACTOR<{actorname}> -> Looking Up: {scientificName}:{scientificNameAuthorship}', 47).
+log_template(5, 18, '{timestamp} [{loglevel}] ACTOR<{actorname}> -> Found GUID: {LookupValue}', 48).
+log_template(6, 21, '{timestamp} [{loglevel}] ACTOR<{actorname}> -> Looking Up: {scientificName}:{scientificNameAuthorship}', 56).
+log_template(7, 21, '{timestamp} [{loglevel}] ACTOR<{actorname}> -> Found GUID: {LookupValue}', 57).
 
 % FACT: log_template_variable(log_variable_id, variable_name, log_template_id).
 log_template_variable(1, 'timestamp', 1).

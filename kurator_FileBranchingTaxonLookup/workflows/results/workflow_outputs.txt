@@ -1,2 +1,2 @@
 q('LogFile').
-q('UpdatedDarwinCoreFile').
+q('UpdatedOccurrenceFile').

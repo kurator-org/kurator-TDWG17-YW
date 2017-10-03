@@ -2,11 +2,11 @@
 digraph yw_data_view {
 rankdir=TB
 fontname=Courier; fontsize=18; labelloc=t
-label="FileBranchingTaxonLookupWorkflow"
+label="DwCA_Taxon_Lookup"
 subgraph cluster_workflow { label=""; color=black; penwidth=2
 subgraph cluster_workflow_inner { label=""; color=white
 node[shape=box style="filled" fillcolor="#CCFFCC" peripheries=1 fontname=Courier]
-FilterExcludingMarine
+FilterToNonMarine
 FilterToJustMarine
 StreamMerge
 CsvFileWriter
@@ -23,7 +23,7 @@ notMarineDataRecord
 WoRMSUpdatedRecord
 GBIFUpdatedRecord
 MergedStream
-UpdatedDarwinCoreFile
+UpdatedOccurrenceFile
 node[shape=box style="rounded,filled" fillcolor="#FFFFFF" peripheries=1 fontname=Helvetica]
 }}
 subgraph cluster_inflows { label=""; color=white; penwidth=2
@@ -34,29 +34,29 @@ subgraph cluster_outflows { label=""; color=white; penwidth=2
 subgraph cluster_outflows_inner { label=""; color=white
 node[shape=circle fillcolor="#FFFFFF" peripheries=1 width=0.2]
 LogFile_outflow [label=""]
-UpdatedDarwinCoreFile_outflow [label=""]
+UpdatedOccurrenceFile_outflow [label=""]
 }}
-CsvFileWriter -> UpdatedDarwinCoreFile
+CsvFileWriter -> UpdatedOccurrenceFile
 StreamMerge -> MergedStream
 GBIFLookup -> GBIFUpdatedRecord
 WoRMSLookup -> WoRMSUpdatedRecord
-FilterExcludingMarine -> notMarineDataRecord
+FilterToNonMarine -> notMarineDataRecord
 FilterToJustMarine -> MarineDataRecord
 EnvironmentTagger -> TaggedDataRecord
 GBIFLookup -> LogFile
 WoRMSLookup -> LogFile
-FilterExcludingMarine -> LogFile
+FilterToNonMarine -> LogFile
 FilterToJustMarine -> LogFile
 EnvironmentTagger -> LogFile
 DataRecord -> EnvironmentTagger
 TaggedDataRecord -> FilterToJustMarine
-TaggedDataRecord -> FilterExcludingMarine
+TaggedDataRecord -> FilterToNonMarine
 MarineDataRecord -> WoRMSLookup
 notMarineDataRecord -> GBIFLookup
 WoRMSUpdatedRecord -> StreamMerge
 GBIFUpdatedRecord -> StreamMerge
 MergedStream -> CsvFileWriter
 LogFile -> LogFile_outflow
-UpdatedDarwinCoreFile -> UpdatedDarwinCoreFile_outflow
+UpdatedOccurrenceFile -> UpdatedOccurrenceFile_outflow
 }
 

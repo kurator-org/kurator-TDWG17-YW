@@ -2,7 +2,7 @@
 digraph yw_data_view {
 rankdir=TB
 fontname=Courier; fontsize=18; labelloc=t
-label="FileBranchingTaxonLookupWorkflow"
+label="DwCA_Taxon_Lookup"
 subgraph cluster_workflow { label=""; color=black; penwidth=2
 subgraph cluster_workflow_inner { label=""; color=white
 node[shape=box style="filled" fillcolor="#CCFFCC" peripheries=1 fontname=Courier]
@@ -10,12 +10,12 @@ FileToDataStream
 Setup
 GBIFLookup
 WoRMSLookup
-FilterExcludingMarine
+FilterToNonMarine
 FilterToJustMarine
 EnvironmentTagger
 node[shape=box style="filled" fillcolor="#CCFFCC" peripheries=1 fontname=Courier]
 node[shape=box style="rounded,filled" fillcolor="#FFFFCC" peripheries=1 fontname=Helvetica]
-DarwinCoreFile
+DarwinCoreArchive
 OccurrenceFile
 DataRecord
 LogFile
@@ -23,13 +23,11 @@ TaggedDataRecord
 MarineDataRecord
 notMarineDataRecord
 node[shape=box style="rounded,filled" fillcolor="#FFFFFF" peripheries=1 fontname=Helvetica]
-InputFilePath
 }}
 subgraph cluster_inflows { label=""; color=white; penwidth=2
 subgraph cluster_inflows_inner { label=""; color=white
 node[shape=circle fillcolor="#FFFFFF" peripheries=1 width=0.2]
-DarwinCoreFile_inflow [label=""]
-InputFilePath_inflow [label=""]
+DarwinCoreArchive_inflow [label=""]
 }}
 subgraph cluster_outflows { label=""; color=white; penwidth=2
 subgraph cluster_outflows_inner { label=""; color=white
@@ -38,24 +36,22 @@ LogFile_outflow [label=""]
 }}
 notMarineDataRecord -> GBIFLookup
 MarineDataRecord -> WoRMSLookup
-TaggedDataRecord -> FilterExcludingMarine
+TaggedDataRecord -> FilterToNonMarine
 TaggedDataRecord -> FilterToJustMarine
 DataRecord -> EnvironmentTagger
 OccurrenceFile -> FileToDataStream
-DarwinCoreFile -> Setup
-InputFilePath -> Setup
+DarwinCoreArchive -> Setup
 Setup -> OccurrenceFile
 FileToDataStream -> DataRecord
 EnvironmentTagger -> LogFile
 EnvironmentTagger -> TaggedDataRecord
 FilterToJustMarine -> LogFile
 FilterToJustMarine -> MarineDataRecord
-FilterExcludingMarine -> LogFile
-FilterExcludingMarine -> notMarineDataRecord
+FilterToNonMarine -> LogFile
+FilterToNonMarine -> notMarineDataRecord
 WoRMSLookup -> LogFile
 GBIFLookup -> LogFile
-DarwinCoreFile_inflow -> DarwinCoreFile
-InputFilePath_inflow -> InputFilePath
+DarwinCoreArchive_inflow -> DarwinCoreArchive
 LogFile -> LogFile_outflow
 }
 

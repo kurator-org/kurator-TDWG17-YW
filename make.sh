@@ -30,9 +30,9 @@ $YW_CMD recon
 #   Q1_pro   #
 ##############
 
-# draw worfklow graph upstream of UpdatedDarwinCoreFile
-productName=UpdatedDarwinCoreFile
-$QUERIES_DIR/render_wf_graph_upstream_of_data_q1UpdatedRecord.sh \'$productName\' > $RESULTS_DIR/wf_upstream_of_$productName.gv
+# draw worfklow graph upstream of UpdatedOccurrenceFile
+productName=UpdatedOccurrenceFile
+$QUERIES_DIR/render_wf_graph_upstream_of_data_q1.sh \'$productName\' > $RESULTS_DIR/wf_upstream_of_$productName.gv
 dot -Tpdf $RESULTS_DIR/wf_upstream_of_$productName.gv > $RESULTS_DIR/wf_upstream_of_$productName.pdf
 dot -Tsvg $RESULTS_DIR/wf_upstream_of_$productName.gv > $RESULTS_DIR/wf_upstream_of_$productName.svg
 
@@ -59,8 +59,8 @@ dot -Tsvg $RESULTS_DIR/wf_upstream_of_$productName.gv > $RESULTS_DIR/wf_upstream
 #   Q2_pro   #
 ##############
 
-# list workflow inputs upstream of output data UpdatedDarwinCoreFile
-$QUERIES_DIR/list_inputs_upstream_of_data_q2.sh \'UpdatedDarwinCoreFile\' UpdatedDarwinCoreFile > $RESULTS_DIR/inputs_upstream_of_UpdatedDarwinCoreFile.txt
+# list workflow inputs upstream of output data UpdatedOccurrenceFile
+$QUERIES_DIR/list_inputs_upstream_of_data_q2.sh \'UpdatedOccurrenceFile\' UpdatedOccurrenceFile > $RESULTS_DIR/inputs_upstream_of_UpdatedOccurrenceFile.txt
 
 # list workflow inputs upstream of intermediate data MergedStream
 $QUERIES_DIR/list_inputs_upstream_of_data_q2.sh \'MergedStream\' MergedStream > $RESULTS_DIR/inputs_upstream_of_MergedStream.txt
@@ -94,8 +94,8 @@ $QUERIES_DIR/list_outputs_downstream_of_data_q4.sh \'Workspace\' Workspace > $RE
 #   Q5_pro   #
 ##############
 
-# draw recon worfklow graph upstream of UpdatedDarwinCoreFile
-productName="UpdatedDarwinCoreFile"
+# draw recon worfklow graph upstream of UpdatedOccurrenceFile
+productName="UpdatedOccurrenceFile"
 $QUERIES_DIR/render_wf_recon_graph_upstream_of_data_q5.sh \'$productName\' > $RESULTS_DIR/wf_recon_upstream_of_$productName.gv
 dot -Tpdf $RESULTS_DIR/wf_recon_upstream_of_$productName.gv > $RESULTS_DIR/wf_recon_upstream_of_$productName.pdf
 dot -Tsvg $RESULTS_DIR/wf_recon_upstream_of_$productName.gv > $RESULTS_DIR/wf_recon_upstream_of_$productName.svg

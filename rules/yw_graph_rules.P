@@ -75,7 +75,7 @@ gv_nodes__unuseddata(OccurrenceID, UnusedDataName) :-
 
 % explicit empty/unused box/step candidates: gv_nodes__atomic_steps_unusedstep_candidates(UnusedStepName, TaggedDataRecordValue) for gv_nodestyle__atomic_unusedstep 
 gv_nodes__atomic_steps_unusedstep_candidates('FilterToJustMarine', 'NonMarine').
-gv_nodes__atomic_steps_unusedstep_candidates('FilterExcludingMarine', 'Marine').
+gv_nodes__atomic_steps_unusedstep_candidates('FilterToNonMarine', 'Marine').
 gv_nodes__atomic_steps_unusedstep_candidates('WoRMSLookup', 'NonMarine').
 gv_nodes__atomic_steps_unusedstep_candidates('GBIFLookup', 'Marine').
 
@@ -593,6 +593,12 @@ aggregatedata_twocounts_value('WoRMSUpdatedRecord', MarineMatchCount, MarineNoMa
 aggregatedata_twocounts_value('GBIFUpdatedRecord', NonMarineMatchCount, NonMarineNoMatchCount) :-
 	log_nonmarine_match_count(NonMarineMatchCount),
 	log_nonmarine_nomatch_count(NonMarineNoMatchCount).
+
+gv_aggregatedata_node_onecount(DN, Count) :-
+	print_aggregatedata_onecount(DN, Count).
+
+gv_aggregatedata_node_twocounts(DN, MatchCount, NoMatchCount) :-
+	print_aggregatedata_twocounts(DN, MatchCount, NoMatchCount).
 
 gv_nodes__recon_not_input_not_output_aggregatedata_onecount :-
 	aggregatedata_onecount_value(DN, Count),

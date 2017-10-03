@@ -100,17 +100,15 @@ components:
         # of the format parameter given on the command line.
         actor: !ref Darwinize
         parameter: namespace
-# @BEGIN FileBranchingTaxonLookupWorkflow
-# @PARAM InputFilePath
-# @IN DarwinCoreFile @URI file:packages/kurator_branching_generic/data/kurator_sample_data_v2.txt
+# @BEGIN DwCA_Taxon_Lookup
+# @IN DarwinCoreArchive
 
 # Inline python actor to make a workspace on the fly to use for writing temporary 
 # if one is not supplied in the workflow-defined parameters. It creates a unique
 # workspace if a workspace location is not explicitly provided, or if the provided
 # one does not exist.
 # @BEGIN Setup @desc Create a unique workspace and transform the input file to a file\n with chosen format and field names standardized to Darwin Core
-# @PARAM InputFilePath
-# @IN DarwinCoreFile @URI file:packages/kurator_branching_generic/data/kurator_sample_data_v2.txt
+# @IN DarwinCoreArchive @URI file:packages/kurator_FileBranchingTaxonLookup/data/kurator_sample_data_v2.txt
 - id: MakeWorkspace
   type: PythonActor
   properties:
@@ -214,7 +212,7 @@ components:
 # @END FileToDataStream      
       
 # Tag each record in the stream that appears to be marine with isMarine=true      
-# @BEGIN EnvironmentTagger @desc Tag each record in the stream that appears to be marine with isMarine=true and nonmarine with isMarine=false
+# @BEGIN EnvironmentTagger @desc Tag each record that appears to be marine with isMarine=TRUE, else with isMarine=FALSE
 # @IN DataRecord
 - id: EnvironmentTaggerA
   type: EnvironmentTagger
@@ -227,7 +225,7 @@ components:
 # @END EnvironmentTagger      
       
 # Pass only records tagged with isMarine=true      
-# @BEGIN FilterToJustMarine @desc Pass only records tagged with isMarine=true
+# @BEGIN FilterToJustMarine @desc Pass only records where isMarine=TRUE
 # @IN TaggedDataRecord
 - id: FilterJustMarine
   type: SingleTermStreamFilter
@@ -244,7 +242,7 @@ components:
 # @End FilterToJustMarine
 
 # Pass only records not tagged with isMarine=true
-# @BEGIN FilterExcludingMarine @desc Pass only records not tagged with isMarine=true
+# @BEGIN FilterToNonMarine @desc Pass only records where isMarine=FALSE
 # @IN TaggedDataRecord
 - id: FilterExcludeMarine      
   type: SingleTermStreamFilter
@@ -258,7 +256,7 @@ components:
 # @OUT LogFile @URI file:runlog.log       
 #    @LOG {timestamp} [{loglevel}] ACTOR<{actorname}> -> [isMarine]=[true]:{matchMarineValue}. Passing occurrenceID={occurrenceID}    
 # @OUT notMarineDataRecord
-# @END FilterExcludingMarine
+# @END FilterToNonMarine
 
 # Lookup GUIDs for names in WoRMS
 # @BEGIN WoRMSLookup @desc Lookup GUIDs for names in WoRMS
@@ -289,7 +287,7 @@ components:
 # @END GBIFLookup
 
 # Merge the streams
-# @BEGIN StreamMerge @desc Merge the streams
+# @BEGIN StreamMerge @desc Merge the streams of records
 # @IN GBIFUpdatedRecord
 # @IN WoRMSUpdatedRecord
 - id: StreamMergeA      
@@ -303,7 +301,7 @@ components:
 # @OUT MergedStream      
 # @END StreamMerge
 
-# @BEGIN CsvFileWriter @desc Write to a csv file and wrapup by finishing the workflow 
+# @BEGIN CsvFileWriter @desc Write to a csv file and wrap-up by finishing the workflow 
 # @IN Workspace
 # @IN MergedStream
 # Write to a csv file
@@ -316,7 +314,7 @@ components:
     parameters:
       filePath: mergedoutputfile.csv 
       numberOfInputs: 2
-# @OUT UpdatedDarwinCoreFile @URI file:{workspace}/mergedoutputfile.csv    
+# @OUT UpdatedOccurrenceFile @URI file:{workspace}/mergedoutputfile.csv    
 # @END CsvFileWriter
 
 # Inline python actor to take care of any unfinished business and finish the workflow.
@@ -349,6 +347,6 @@ components:
     # The "upstream" actor from which to receive a message.
     listensTo:
       - !ref FileWriter
-# @OUT UpdatedDarwinCoreFile
+# @OUT UpdatedOccurrenceFile
 # @OUT LogFile      
-# @END FileBranchingTaxonLookupWorkflow
+# @END DwCA_Taxon_Lookup

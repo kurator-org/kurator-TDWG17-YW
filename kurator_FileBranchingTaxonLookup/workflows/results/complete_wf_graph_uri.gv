@@ -5,7 +5,7 @@ rankdir=TB
 
 /* Title for graph */
 fontname=Helvetica; fontsize=18; labelloc=t
-label=FileBranchingTaxonLookupWorkflow
+label=DwCA_Taxon_Lookup
 
 /* Start of double cluster for drawing box around nodes in workflow */
 subgraph cluster_workflow_box_outer { label=""; color=black; penwidth=2
@@ -17,19 +17,19 @@ node[shape=box style=filled fillcolor="#CCFFCC" peripheries=1 fontname=Helvetica
 /* Nodes representing atomic programs in workflow */
 Setup [shape=record rankdir=LR label="{<f0> Setup |<f1> Create a unique workspace and transform the input file to a file\n with chosen format and field names standardized to Darwin Core}"];
 FileToDataStream [shape=record rankdir=LR label="{<f0> FileToDataStream |<f1> Take the darwinized occurrence file and stream records from it}"];
-EnvironmentTagger [shape=record rankdir=LR label="{<f0> EnvironmentTagger |<f1> Tag each record in the stream that appears to be marine with isMarine=true and nonmarine with isMarine=false}"];
-FilterToJustMarine [shape=record rankdir=LR label="{<f0> FilterToJustMarine |<f1> Pass only records tagged with isMarine=true}"];
-FilterExcludingMarine [shape=record rankdir=LR label="{<f0> FilterExcludingMarine |<f1> Pass only records not tagged with isMarine=true}"];
+EnvironmentTagger [shape=record rankdir=LR label="{<f0> EnvironmentTagger |<f1> Tag each record that appears to be marine with isMarine=TRUE, else with isMarine=FALSE}"];
+FilterToJustMarine [shape=record rankdir=LR label="{<f0> FilterToJustMarine |<f1> Pass only records where isMarine=TRUE}"];
+FilterToNonMarine [shape=record rankdir=LR label="{<f0> FilterToNonMarine |<f1> Pass only records where isMarine=FALSE}"];
 WoRMSLookup [shape=record rankdir=LR label="{<f0> WoRMSLookup |<f1> Lookup GUIDs for names in WoRMS}"];
 GBIFLookup [shape=record rankdir=LR label="{<f0> GBIFLookup |<f1> Lookup GUIDs for names in GBIF}"];
-StreamMerge [shape=record rankdir=LR label="{<f0> StreamMerge |<f1> Merge the streams}"];
-CsvFileWriter [shape=record rankdir=LR label="{<f0> CsvFileWriter |<f1> Write to a csv file and wrapup by finishing the workflow}"];
+StreamMerge [shape=record rankdir=LR label="{<f0> StreamMerge |<f1> Merge the streams of records}"];
+CsvFileWriter [shape=record rankdir=LR label="{<f0> CsvFileWriter |<f1> Write to a csv file and wrap-up by finishing the workflow}"];
 
 /* Style for nodes representing non-parameter data channels in workflow */
 node[shape=box style="rounded,filled" fillcolor="#FFFFCC" peripheries=1 fontname=Helvetica]
 
 /* Nodes for non-parameter data channels in workflow */
-DarwinCoreFile [shape=record rankdir=LR label="{<f0> DarwinCoreFile |<f1> file\:packages/kurator_branching_generic/data/kurator_sample_data_v2.txt}"];
+DarwinCoreArchive
 OccurrenceFile [shape=record rankdir=LR label="{<f0> OccurrenceFile |<f1> file\:\{workspace\}/darwinized_file.txt}"];
 DataRecord
 TaggedDataRecord
@@ -39,20 +39,18 @@ GBIFUpdatedRecord
 WoRMSUpdatedRecord
 Workspace
 MergedStream
-UpdatedDarwinCoreFile [shape=record rankdir=LR label="{<f0> UpdatedDarwinCoreFile |<f1> file\:\{workspace\}/mergedoutputfile.csv}"];
+UpdatedOccurrenceFile [shape=record rankdir=LR label="{<f0> UpdatedOccurrenceFile |<f1> file\:\{workspace\}/mergedoutputfile.csv}"];
 LogFile [shape=record rankdir=LR label="{<f0> LogFile |<f1> file\:runlog.log}"];
 
 /* Style for nodes representing parameter channels in workflow */
 node[shape=box style="rounded,filled" fillcolor="#FCFCFC" peripheries=1 fontname=Helvetica]
 
 /* Nodes representing parameter channels in workflow */
-InputFilePath
 
 /* Edges representing connections between programs and channels */
 Setup -> Workspace
 Setup -> OccurrenceFile
-InputFilePath -> Setup
-DarwinCoreFile -> Setup
+DarwinCoreArchive -> Setup
 FileToDataStream -> DataRecord
 OccurrenceFile -> FileToDataStream
 EnvironmentTagger -> LogFile
@@ -61,9 +59,9 @@ DataRecord -> EnvironmentTagger
 FilterToJustMarine -> LogFile
 FilterToJustMarine -> MarineDataRecord
 TaggedDataRecord -> FilterToJustMarine
-FilterExcludingMarine -> LogFile
-FilterExcludingMarine -> notMarineDataRecord
-TaggedDataRecord -> FilterExcludingMarine
+FilterToNonMarine -> LogFile
+FilterToNonMarine -> notMarineDataRecord
+TaggedDataRecord -> FilterToNonMarine
 WoRMSLookup -> WoRMSUpdatedRecord
 WoRMSLookup -> LogFile
 MarineDataRecord -> WoRMSLookup
@@ -73,7 +71,7 @@ notMarineDataRecord -> GBIFLookup
 StreamMerge -> MergedStream
 GBIFUpdatedRecord -> StreamMerge
 WoRMSUpdatedRecord -> StreamMerge
-CsvFileWriter -> UpdatedDarwinCoreFile
+CsvFileWriter -> UpdatedOccurrenceFile
 Workspace -> CsvFileWriter
 MergedStream -> CsvFileWriter
 
@@ -88,8 +86,7 @@ subgraph cluster_input_ports_group_inner { label=""; penwidth=0
 node[shape=circle style="rounded,filled" fillcolor="#FFFFFF" peripheries=1 fontname=Helvetica width=0.2]
 
 /* Nodes representing workflow input ports */
-InputFilePath_input_port [label=""]
-DarwinCoreFile_input_port [label=""]
+DarwinCoreArchive_input_port [label=""]
 
 /* End of double-cluster for grouping workflow input ports */
 }}
@@ -102,18 +99,17 @@ subgraph cluster_output_ports_group_inner { label=""; penwidth=0
 node[shape=circle style="rounded,filled" fillcolor="#FFFFFF" peripheries=1 fontname=Helvetica width=0.2]
 
 /* Nodes representing workflow output ports */
-UpdatedDarwinCoreFile_output_port [label=""]
+UpdatedOccurrenceFile_output_port [label=""]
 LogFile_output_port [label=""]
 
 /* End of double-cluster for grouping workflow output ports */
 }}
 
 /* Edges from input ports to channels */
-InputFilePath_input_port -> InputFilePath
-DarwinCoreFile_input_port -> DarwinCoreFile
+DarwinCoreArchive_input_port -> DarwinCoreArchive
 
 /* Edges from channels to output ports */
-UpdatedDarwinCoreFile -> UpdatedDarwinCoreFile_output_port
+UpdatedOccurrenceFile -> UpdatedOccurrenceFile_output_port
 LogFile -> LogFile_output_port
 
 /* End of top-level graph */
