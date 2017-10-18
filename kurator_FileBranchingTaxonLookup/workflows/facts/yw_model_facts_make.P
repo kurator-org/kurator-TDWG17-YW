@@ -1,0 +1,565 @@
+% FACT: program(program_id, program_name, qualified_program_name, begin_annotation_id, end_annotation_id).
+program(1, 'Make', 'Make', 1, 204).
+program(2, 'SetVariables', 'Make/SetVariables', 5, 11).
+program(3, 'GenerateProspectiveProvenance', 'Make/GenerateProspectiveProvenance', 12, 24).
+program(4, 'MaterializeViewsOfYWFacts', 'Make/MaterializeViewsOfYWFacts', 25, 35).
+program(5, 'ListWorkflowOutputs', 'Make/ListWorkflowOutputs', 36, 44).
+program(6, 'RunTheWorkflow', 'Make/RunTheWorkflow', 45, 54).
+program(7, 'GenerateReconfacts', 'Make/GenerateReconfacts', 55, 66).
+program(8, 'RunQ1ProspectiveProvenanceUpstreamSubgraphQueries', 'Make/RunQ1ProspectiveProvenanceUpstreamSubgraphQueries', 67, 76).
+program(9, 'RunQ2ProspectiveProvenanceUpstreamListQueries', 'Make/RunQ2ProspectiveProvenanceUpstreamListQueries', 77, 86).
+program(10, 'RunQ3ProspectiveProvenanceDownstreamSubgraphQueries', 'Make/RunQ3ProspectiveProvenanceDownstreamSubgraphQueries', 87, 96).
+program(11, 'RunQ4ProspectiveProvenanceDownstreamListQueries', 'Make/RunQ4ProspectiveProvenanceDownstreamListQueries', 97, 106).
+program(12, 'RunQ5RetrospectiveProvenanceUpstreamSubgraphQueries', 'Make/RunQ5RetrospectiveProvenanceUpstreamSubgraphQueries', 107, 118).
+program(13, 'RunQ6HybridProvenanceFileLevelGraphQueries', 'Make/RunQ6HybridProvenanceFileLevelGraphQueries', 119, 129).
+program(14, 'RunQ7HybridProvenanceRecordLevelGraphQueries', 'Make/RunQ7HybridProvenanceRecordLevelGraphQueries', 130, 145).
+program(15, 'RunQ8RunOtherLogQueries', 'Make/RunQ8RunOtherLogQueries', 146, 162).
+program(16, 'RunQ9HybridProvenanceAggregateLevelGraphQueries', 'Make/RunQ9HybridProvenanceAggregateLevelGraphQueries', 163, 177).
+
+% FACT: workflow(program_id).
+workflow(1).
+
+% FACT: function(program_id).
+
+% FACT: has_subprogram(program_id, subprogram_id).
+has_subprogram(1, 2).
+has_subprogram(1, 3).
+has_subprogram(1, 4).
+has_subprogram(1, 5).
+has_subprogram(1, 6).
+has_subprogram(1, 7).
+has_subprogram(1, 8).
+has_subprogram(1, 9).
+has_subprogram(1, 10).
+has_subprogram(1, 11).
+has_subprogram(1, 12).
+has_subprogram(1, 13).
+has_subprogram(1, 14).
+has_subprogram(1, 15).
+has_subprogram(1, 16).
+
+% FACT: port(port_id, port_type, port_name, qualified_port_name, port_annotation_id, data_id).
+port(1, 'PARAM', 'settings.sh', 'Make<-settings.sh', 2, 1).
+port(2, 'IN', 'SourceScript', 'Make<-SourceScript', 3, 2).
+port(75, 'OUT', 'complete_wf_graph_uri.gv', 'Make->complete_wf_graph_uri.gv', 178, 40).
+port(76, 'OUT', 'workflow_outputs.txt', 'Make->workflow_outputs.txt', 180, 41).
+port(77, 'OUT', 'ScriptOutput', 'Make->ScriptOutput', 182, 42).
+port(78, 'OUT', 'LogFile', 'Make->LogFile', 184, 43).
+port(79, 'OUT', 'wf_upstream_of_{productName}.gv', 'Make->wf_upstream_of_{productName}.gv', 186, 44).
+port(80, 'OUT', 'inputs_upstream_of_{productName}.txt', 'Make->inputs_upstream_of_{productName}.txt', 188, 45).
+port(81, 'OUT', 'wf_downstream_of_{productName}.gv', 'Make->wf_downstream_of_{productName}.gv', 190, 46).
+port(82, 'OUT', 'outputs_downstream_of_{productName}.txt', 'Make->outputs_downstream_of_{productName}.txt', 192, 47).
+port(83, 'OUT', 'wf_recon_upstream_of_{productName}.gv', 'Make->wf_recon_upstream_of_{productName}.gv', 194, 48).
+port(84, 'OUT', 'wf_recon_complete_graph_all_observables.gv', 'Make->wf_recon_complete_graph_all_observables.gv', 196, 49).
+port(85, 'OUT', 'wf_recon_complete_graph_of_{occurrenceID}.gv', 'Make->wf_recon_complete_graph_of_{occurrenceID}.gv', 198, 50).
+port(86, 'OUT', 'run_log_queries_output.txt', 'Make->run_log_queries_output.txt', 200, 51).
+port(87, 'OUT', 'wf_recon_complete_graph_of_aggregate_level.gv', 'Make->wf_recon_complete_graph_of_aggregate_level.gv', 202, 52).
+port(3, 'PARAM', 'settings.sh', 'Make/SetVariables<-settings.sh', 7, 3).
+port(4, 'OUT', 'FACTS_DIR', 'Make/SetVariables->FACTS_DIR', 8, 4).
+port(5, 'OUT', 'VIEWS_DIR', 'Make/SetVariables->VIEWS_DIR', 9, 5).
+port(6, 'OUT', 'RESULTS_DIR', 'Make/SetVariables->RESULTS_DIR', 10, 6).
+port(7, 'IN', 'SourceScript', 'Make/GenerateProspectiveProvenance<-SourceScript', 14, 7).
+port(8, 'PARAM', 'FACTS_DIR', 'Make/GenerateProspectiveProvenance<-FACTS_DIR', 16, 4).
+port(9, 'PARAM', 'RESULTS_DIR', 'Make/GenerateProspectiveProvenance<-RESULTS_DIR', 17, 6).
+port(10, 'OUT', 'yw_extract_facts.P', 'Make/GenerateProspectiveProvenance->yw_extract_facts.P', 18, 8).
+port(11, 'OUT', 'yw_model_facts.P', 'Make/GenerateProspectiveProvenance->yw_model_facts.P', 20, 9).
+port(12, 'OUT', 'complete_wf_graph_uri.gv', 'Make/GenerateProspectiveProvenance->complete_wf_graph_uri.gv', 22, 10).
+port(13, 'IN', 'yw_extract_facts.P', 'Make/MaterializeViewsOfYWFacts<-yw_extract_facts.P', 26, 8).
+port(14, 'IN', 'yw_model_facts.P', 'Make/MaterializeViewsOfYWFacts<-yw_model_facts.P', 28, 9).
+port(15, 'PARAM', 'VIEWS_DIR', 'Make/MaterializeViewsOfYWFacts<-VIEWS_DIR', 30, 5).
+port(16, 'IN', 'materialize_yw_views.sh', 'Make/MaterializeViewsOfYWFacts<-materialize_yw_views.sh', 31, 11).
+port(17, 'OUT', 'yw_views.P', 'Make/MaterializeViewsOfYWFacts->yw_views.P', 33, 12).
+port(18, 'IN', 'list_workflow_outputs.sh', 'Make/ListWorkflowOutputs<-list_workflow_outputs.sh', 38, 13).
+port(19, 'IN', 'yw_views.P', 'Make/ListWorkflowOutputs<-yw_views.P', 40, 12).
+port(20, 'OUT', 'workflow_outputs.txt', 'Make/ListWorkflowOutputs->workflow_outputs.txt', 42, 14).
+port(21, 'IN', 'SourceScript', 'Make/RunTheWorkflow<-SourceScript', 46, 7).
+port(22, 'PARAM', 'DarwinCoreArchive', 'Make/RunTheWorkflow<-DarwinCoreArchive', 48, 15).
+port(23, 'OUT', 'ScriptOutput', 'Make/RunTheWorkflow->ScriptOutput', 50, 16).
+port(24, 'OUT', 'LogFile', 'Make/RunTheWorkflow->LogFile', 52, 17).
+port(25, 'PARAM', 'DarwinCoreArchive', 'Make/GenerateReconfacts<-DarwinCoreArchive', 56, 15).
+port(26, 'IN', 'ScriptOutput', 'Make/GenerateReconfacts<-ScriptOutput', 58, 16).
+port(27, 'IN', 'LogFile', 'Make/GenerateReconfacts<-LogFile', 60, 17).
+port(28, 'IN', 'yw_model_facts.P', 'Make/GenerateReconfacts<-yw_model_facts.P', 62, 9).
+port(29, 'OUT', 'reconfacts.P', 'Make/GenerateReconfacts->reconfacts.P', 64, 18).
+port(30, 'IN', 'productName', 'Make/RunQ1ProspectiveProvenanceUpstreamSubgraphQueries<-productName', 69, 19).
+port(31, 'IN', 'render_wf_graph_upstream_of_data_q1.sh', 'Make/RunQ1ProspectiveProvenanceUpstreamSubgraphQueries<-render_wf_graph_upstream_of_data_q1.sh', 70, 20).
+port(32, 'IN', 'yw_views.P', 'Make/RunQ1ProspectiveProvenanceUpstreamSubgraphQueries<-yw_views.P', 72, 12).
+port(33, 'OUT', 'wf_upstream_of_{productName}.gv', 'Make/RunQ1ProspectiveProvenanceUpstreamSubgraphQueries->wf_upstream_of_{productName}.gv', 74, 21).
+port(34, 'IN', 'productName', 'Make/RunQ2ProspectiveProvenanceUpstreamListQueries<-productName', 79, 19).
+port(35, 'IN', 'list_inputs_upstream_of_data_q2.sh', 'Make/RunQ2ProspectiveProvenanceUpstreamListQueries<-list_inputs_upstream_of_data_q2.sh', 80, 22).
+port(36, 'IN', 'yw_views.P', 'Make/RunQ2ProspectiveProvenanceUpstreamListQueries<-yw_views.P', 82, 12).
+port(37, 'OUT', 'inputs_upstream_of_{productName}.txt', 'Make/RunQ2ProspectiveProvenanceUpstreamListQueries->inputs_upstream_of_{productName}.txt', 84, 23).
+port(38, 'IN', 'productName', 'Make/RunQ3ProspectiveProvenanceDownstreamSubgraphQueries<-productName', 89, 19).
+port(39, 'IN', 'render_wf_graph_downstream_of_data_q3.sh', 'Make/RunQ3ProspectiveProvenanceDownstreamSubgraphQueries<-render_wf_graph_downstream_of_data_q3.sh', 90, 24).
+port(40, 'IN', 'yw_views.P', 'Make/RunQ3ProspectiveProvenanceDownstreamSubgraphQueries<-yw_views.P', 92, 12).
+port(41, 'OUT', 'wf_downstream_of_{productName}.gv', 'Make/RunQ3ProspectiveProvenanceDownstreamSubgraphQueries->wf_downstream_of_{productName}.gv', 94, 25).
+port(42, 'IN', 'productName', 'Make/RunQ4ProspectiveProvenanceDownstreamListQueries<-productName', 99, 19).
+port(43, 'IN', 'list_outputs_downstream_of_data_q4.sh', 'Make/RunQ4ProspectiveProvenanceDownstreamListQueries<-list_outputs_downstream_of_data_q4.sh', 100, 26).
+port(44, 'IN', 'yw_views.P', 'Make/RunQ4ProspectiveProvenanceDownstreamListQueries<-yw_views.P', 102, 12).
+port(45, 'OUT', 'outputs_downstream_of_{productName}.txt', 'Make/RunQ4ProspectiveProvenanceDownstreamListQueries->outputs_downstream_of_{productName}.txt', 104, 27).
+port(46, 'IN', 'productName', 'Make/RunQ5RetrospectiveProvenanceUpstreamSubgraphQueries<-productName', 109, 19).
+port(47, 'IN', 'render_wf_recon_graph_upstream_of_data_q5.sh', 'Make/RunQ5RetrospectiveProvenanceUpstreamSubgraphQueries<-render_wf_recon_graph_upstream_of_data_q5.sh', 110, 28).
+port(48, 'IN', 'yw_views.P', 'Make/RunQ5RetrospectiveProvenanceUpstreamSubgraphQueries<-yw_views.P', 112, 12).
+port(49, 'IN', 'reconfacts.P', 'Make/RunQ5RetrospectiveProvenanceUpstreamSubgraphQueries<-reconfacts.P', 114, 18).
+port(50, 'OUT', 'wf_recon_upstream_of_{productName}.gv', 'Make/RunQ5RetrospectiveProvenanceUpstreamSubgraphQueries->wf_recon_upstream_of_{productName}.gv', 116, 29).
+port(51, 'IN', 'render_recon_complete_wf_graph_q6.sh', 'Make/RunQ6HybridProvenanceFileLevelGraphQueries<-render_recon_complete_wf_graph_q6.sh', 121, 30).
+port(52, 'IN', 'yw_views.P', 'Make/RunQ6HybridProvenanceFileLevelGraphQueries<-yw_views.P', 123, 12).
+port(53, 'IN', 'reconfacts.P', 'Make/RunQ6HybridProvenanceFileLevelGraphQueries<-reconfacts.P', 125, 18).
+port(54, 'OUT', 'wf_recon_complete_graph_all_observables.gv', 'Make/RunQ6HybridProvenanceFileLevelGraphQueries->wf_recon_complete_graph_all_observables.gv', 127, 31).
+port(55, 'IN', 'occurrenceID', 'Make/RunQ7HybridProvenanceRecordLevelGraphQueries<-occurrenceID', 132, 32).
+port(56, 'IN', 'render_recon_complete_wf_graph_record_level_q7.sh', 'Make/RunQ7HybridProvenanceRecordLevelGraphQueries<-render_recon_complete_wf_graph_record_level_q7.sh', 133, 33).
+port(57, 'IN', 'yw_views.P', 'Make/RunQ7HybridProvenanceRecordLevelGraphQueries<-yw_views.P', 135, 12).
+port(58, 'IN', 'reconfacts.P', 'Make/RunQ7HybridProvenanceRecordLevelGraphQueries<-reconfacts.P', 137, 18).
+port(59, 'IN', 'LogFile', 'Make/RunQ7HybridProvenanceRecordLevelGraphQueries<-LogFile', 139, 17).
+port(60, 'IN', 'yw_model_facts.P', 'Make/RunQ7HybridProvenanceRecordLevelGraphQueries<-yw_model_facts.P', 141, 9).
+port(61, 'OUT', 'wf_recon_complete_graph_of_{occurrenceID}.gv', 'Make/RunQ7HybridProvenanceRecordLevelGraphQueries->wf_recon_complete_graph_of_{occurrenceID}.gv', 143, 34).
+port(62, 'IN', 'run_log_queries.sh', 'Make/RunQ8RunOtherLogQueries<-run_log_queries.sh', 148, 35).
+port(63, 'IN', 'reconfacts.P', 'Make/RunQ8RunOtherLogQueries<-reconfacts.P', 150, 18).
+port(64, 'IN', 'LogFile', 'Make/RunQ8RunOtherLogQueries<-LogFile', 152, 17).
+port(65, 'IN', 'log_queries.P', 'Make/RunQ8RunOtherLogQueries<-log_queries.P', 154, 36).
+port(66, 'IN', 'yw_model_facts.P', 'Make/RunQ8RunOtherLogQueries<-yw_model_facts.P', 156, 9).
+port(67, 'IN', 'yw_extract_facts.P', 'Make/RunQ8RunOtherLogQueries<-yw_extract_facts.P', 158, 8).
+port(68, 'OUT', 'run_log_queries_output.txt', 'Make/RunQ8RunOtherLogQueries->run_log_queries_output.txt', 160, 37).
+port(69, 'IN', 'render_recon_complete_wf_aggregate_level_q9.sh', 'Make/RunQ9HybridProvenanceAggregateLevelGraphQueries<-render_recon_complete_wf_aggregate_level_q9.sh', 165, 38).
+port(70, 'IN', 'yw_views.P', 'Make/RunQ9HybridProvenanceAggregateLevelGraphQueries<-yw_views.P', 167, 12).
+port(71, 'IN', 'reconfacts.P', 'Make/RunQ9HybridProvenanceAggregateLevelGraphQueries<-reconfacts.P', 169, 18).
+port(72, 'IN', 'LogFile', 'Make/RunQ9HybridProvenanceAggregateLevelGraphQueries<-LogFile', 171, 17).
+port(73, 'IN', 'yw_model_facts.P', 'Make/RunQ9HybridProvenanceAggregateLevelGraphQueries<-yw_model_facts.P', 173, 9).
+port(74, 'OUT', 'wf_recon_complete_graph_of_aggregate_level.gv', 'Make/RunQ9HybridProvenanceAggregateLevelGraphQueries->wf_recon_complete_graph_of_aggregate_level.gv', 175, 39).
+
+% FACT: port_alias(port_id, alias).
+
+% FACT: port_uri_template(port_id, uri).
+port_uri_template(2, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/file_branching_taxon_lookup.yaml').
+port_uri_template(75, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/complete_wf_graph_uri_make.gv').
+port_uri_template(76, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/workflow_outputs.txt').
+port_uri_template(77, 'file:{workspace}/mergedoutputfile.csv').
+port_uri_template(78, 'file:runlog.log').
+port_uri_template(79, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_upstream_of_{productName}.gv').
+port_uri_template(80, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/inputs_upstream_of_{productName}.txt').
+port_uri_template(81, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_downstream_of_{productName}.gv').
+port_uri_template(82, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/outputs_downstream_of_{productName}.txt').
+port_uri_template(83, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_recon_upstream_of_{productName}.gv').
+port_uri_template(84, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_recon_complete_graph_all_observables.gv').
+port_uri_template(85, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_recon_complete_graph_of_{occurrenceID}.gv').
+port_uri_template(86, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/run_log_queries_output.txt').
+port_uri_template(87, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_recon_complete_graph_of_aggregate_level.gv').
+port_uri_template(7, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/file_branching_taxon_lookup.yaml').
+port_uri_template(10, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/yw_extract_facts.P').
+port_uri_template(11, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/yw_model_facts.P').
+port_uri_template(12, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/complete_wf_graph_uri_make.gv').
+port_uri_template(13, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/yw_extract_facts.P').
+port_uri_template(14, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/yw_model_facts.P').
+port_uri_template(16, 'file:queries/materialize_yw_views.sh').
+port_uri_template(17, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/views/yw_views.P').
+port_uri_template(18, 'file:queries/list_workflow_outputs.sh').
+port_uri_template(19, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/views/yw_views.P').
+port_uri_template(20, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/workflow_outputs.txt').
+port_uri_template(21, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/file_branching_taxon_lookup.yaml').
+port_uri_template(22, 'file:packages/kurator_FileBranchingTaxonLookup/data/kurator_sample_data_v2.txt').
+port_uri_template(23, 'file:{workspace}/mergedoutputfile.csv').
+port_uri_template(24, 'file:runlog.log').
+port_uri_template(25, 'file:packages/kurator_FileBranchingTaxonLookup/data/kurator_sample_data_v2.txt').
+port_uri_template(26, 'file:{workspace}/mergedoutputfile.csv').
+port_uri_template(27, 'file:runlog.log').
+port_uri_template(28, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/yw_model_facts.P').
+port_uri_template(29, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/reconfacts.P').
+port_uri_template(31, 'file:queries/render_wf_graph_upstream_of_data_q1.sh').
+port_uri_template(32, 'file:').
+port_uri_template(33, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_upstream_of_{productName}.gv').
+port_uri_template(35, 'file:queries/list_inputs_upstream_of_data_q2.sh').
+port_uri_template(36, 'file:').
+port_uri_template(37, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/inputs_upstream_of_{productName}.txt').
+port_uri_template(39, 'file:queries/render_wf_graph_downstream_of_data_q3.sh').
+port_uri_template(40, 'file:').
+port_uri_template(41, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_downstream_of_{productName}.gv').
+port_uri_template(43, 'file:queries/list_outputs_downstream_of_data_q4.sh').
+port_uri_template(44, 'file:').
+port_uri_template(45, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/outputs_downstream_of_{productName}.txt').
+port_uri_template(47, 'file:queries/render_wf_recon_graph_upstream_of_data_q5.sh').
+port_uri_template(48, 'file:').
+port_uri_template(49, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/reconfacts.P').
+port_uri_template(50, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_recon_upstream_of_{productName}.gv').
+port_uri_template(51, 'file:queries/render_recon_complete_wf_graph_q6.sh').
+port_uri_template(52, 'file:').
+port_uri_template(53, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/reconfacts.P').
+port_uri_template(54, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_recon_complete_graph_all_observables.gv').
+port_uri_template(56, 'file:queries/render_recon_complete_wf_graph_record_level_q7.sh').
+port_uri_template(57, 'file:').
+port_uri_template(58, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/reconfacts.P').
+port_uri_template(59, 'file:runlog.log').
+port_uri_template(60, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/yw_model_facts.P').
+port_uri_template(61, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_recon_complete_graph_of_{occurrenceID}.gv').
+port_uri_template(62, 'file:queries/run_log_queries.sh').
+port_uri_template(63, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/reconfacts.P').
+port_uri_template(64, 'file:runlog.log').
+port_uri_template(65, 'file:queries/log_queries.P').
+port_uri_template(66, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/yw_model_facts.P').
+port_uri_template(67, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/yw_extract_facts.P').
+port_uri_template(68, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/run_log_queries_output.txt').
+port_uri_template(69, 'file:queries/render_recon_complete_wf_aggregate_level_q9.sh').
+port_uri_template(70, 'file:').
+port_uri_template(71, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/reconfacts.P').
+port_uri_template(72, 'file:runlog.log').
+port_uri_template(73, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/yw_model_facts.P').
+port_uri_template(74, 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_recon_complete_graph_of_aggregate_level.gv').
+
+% FACT: has_in_port(block_id, port_id).
+has_in_port(1, 1).
+has_in_port(1, 2).
+has_in_port(2, 3).
+has_in_port(3, 7).
+has_in_port(3, 8).
+has_in_port(3, 9).
+has_in_port(4, 13).
+has_in_port(4, 14).
+has_in_port(4, 15).
+has_in_port(4, 16).
+has_in_port(5, 18).
+has_in_port(5, 19).
+has_in_port(6, 21).
+has_in_port(6, 22).
+has_in_port(7, 25).
+has_in_port(7, 26).
+has_in_port(7, 27).
+has_in_port(7, 28).
+has_in_port(8, 30).
+has_in_port(8, 31).
+has_in_port(8, 32).
+has_in_port(9, 34).
+has_in_port(9, 35).
+has_in_port(9, 36).
+has_in_port(10, 38).
+has_in_port(10, 39).
+has_in_port(10, 40).
+has_in_port(11, 42).
+has_in_port(11, 43).
+has_in_port(11, 44).
+has_in_port(12, 46).
+has_in_port(12, 47).
+has_in_port(12, 48).
+has_in_port(12, 49).
+has_in_port(13, 51).
+has_in_port(13, 52).
+has_in_port(13, 53).
+has_in_port(14, 55).
+has_in_port(14, 56).
+has_in_port(14, 57).
+has_in_port(14, 58).
+has_in_port(14, 59).
+has_in_port(14, 60).
+has_in_port(15, 62).
+has_in_port(15, 63).
+has_in_port(15, 64).
+has_in_port(15, 65).
+has_in_port(15, 66).
+has_in_port(15, 67).
+has_in_port(16, 69).
+has_in_port(16, 70).
+has_in_port(16, 71).
+has_in_port(16, 72).
+has_in_port(16, 73).
+
+% FACT: has_out_port(block_id, port_id).
+has_out_port(1, 75).
+has_out_port(1, 76).
+has_out_port(1, 77).
+has_out_port(1, 78).
+has_out_port(1, 79).
+has_out_port(1, 80).
+has_out_port(1, 81).
+has_out_port(1, 82).
+has_out_port(1, 83).
+has_out_port(1, 84).
+has_out_port(1, 85).
+has_out_port(1, 86).
+has_out_port(1, 87).
+has_out_port(2, 4).
+has_out_port(2, 5).
+has_out_port(2, 6).
+has_out_port(3, 10).
+has_out_port(3, 11).
+has_out_port(3, 12).
+has_out_port(4, 17).
+has_out_port(5, 20).
+has_out_port(6, 23).
+has_out_port(6, 24).
+has_out_port(7, 29).
+has_out_port(8, 33).
+has_out_port(9, 37).
+has_out_port(10, 41).
+has_out_port(11, 45).
+has_out_port(12, 50).
+has_out_port(13, 54).
+has_out_port(14, 61).
+has_out_port(15, 68).
+has_out_port(16, 74).
+
+% FACT: data(data_id, data_name, qualified_data_name).
+data(1, 'settings.sh', 'settings.sh').
+data(2, 'SourceScript', 'SourceScript').
+data(40, 'complete_wf_graph_uri.gv', 'complete_wf_graph_uri.gv').
+data(41, 'workflow_outputs.txt', 'workflow_outputs.txt').
+data(42, 'ScriptOutput', 'ScriptOutput').
+data(43, 'LogFile', 'LogFile').
+data(44, 'wf_upstream_of_{productName}.gv', 'wf_upstream_of_{productName}.gv').
+data(45, 'inputs_upstream_of_{productName}.txt', 'inputs_upstream_of_{productName}.txt').
+data(46, 'wf_downstream_of_{productName}.gv', 'wf_downstream_of_{productName}.gv').
+data(47, 'outputs_downstream_of_{productName}.txt', 'outputs_downstream_of_{productName}.txt').
+data(48, 'wf_recon_upstream_of_{productName}.gv', 'wf_recon_upstream_of_{productName}.gv').
+data(49, 'wf_recon_complete_graph_all_observables.gv', 'wf_recon_complete_graph_all_observables.gv').
+data(50, 'wf_recon_complete_graph_of_{occurrenceID}.gv', 'wf_recon_complete_graph_of_{occurrenceID}.gv').
+data(51, 'run_log_queries_output.txt', 'run_log_queries_output.txt').
+data(52, 'wf_recon_complete_graph_of_aggregate_level.gv', 'wf_recon_complete_graph_of_aggregate_level.gv').
+data(3, 'settings.sh', 'Make.settings.sh').
+data(4, 'FACTS_DIR', 'Make.FACTS_DIR').
+data(5, 'VIEWS_DIR', 'Make.VIEWS_DIR').
+data(6, 'RESULTS_DIR', 'Make.RESULTS_DIR').
+data(7, 'SourceScript', 'Make.SourceScript').
+data(8, 'yw_extract_facts.P', 'Make.yw_extract_facts.P').
+data(9, 'yw_model_facts.P', 'Make.yw_model_facts.P').
+data(10, 'complete_wf_graph_uri.gv', 'Make.complete_wf_graph_uri.gv').
+data(11, 'materialize_yw_views.sh', 'Make.materialize_yw_views.sh').
+data(12, 'yw_views.P', 'Make.yw_views.P').
+data(13, 'list_workflow_outputs.sh', 'Make.list_workflow_outputs.sh').
+data(14, 'workflow_outputs.txt', 'Make.workflow_outputs.txt').
+data(15, 'DarwinCoreArchive', 'Make.DarwinCoreArchive').
+data(16, 'ScriptOutput', 'Make.ScriptOutput').
+data(17, 'LogFile', 'Make.LogFile').
+data(18, 'reconfacts.P', 'Make.reconfacts.P').
+data(19, 'productName', 'Make.productName').
+data(20, 'render_wf_graph_upstream_of_data_q1.sh', 'Make.render_wf_graph_upstream_of_data_q1.sh').
+data(21, 'wf_upstream_of_{productName}.gv', 'Make.wf_upstream_of_{productName}.gv').
+data(22, 'list_inputs_upstream_of_data_q2.sh', 'Make.list_inputs_upstream_of_data_q2.sh').
+data(23, 'inputs_upstream_of_{productName}.txt', 'Make.inputs_upstream_of_{productName}.txt').
+data(24, 'render_wf_graph_downstream_of_data_q3.sh', 'Make.render_wf_graph_downstream_of_data_q3.sh').
+data(25, 'wf_downstream_of_{productName}.gv', 'Make.wf_downstream_of_{productName}.gv').
+data(26, 'list_outputs_downstream_of_data_q4.sh', 'Make.list_outputs_downstream_of_data_q4.sh').
+data(27, 'outputs_downstream_of_{productName}.txt', 'Make.outputs_downstream_of_{productName}.txt').
+data(28, 'render_wf_recon_graph_upstream_of_data_q5.sh', 'Make.render_wf_recon_graph_upstream_of_data_q5.sh').
+data(29, 'wf_recon_upstream_of_{productName}.gv', 'Make.wf_recon_upstream_of_{productName}.gv').
+data(30, 'render_recon_complete_wf_graph_q6.sh', 'Make.render_recon_complete_wf_graph_q6.sh').
+data(31, 'wf_recon_complete_graph_all_observables.gv', 'Make.wf_recon_complete_graph_all_observables.gv').
+data(32, 'occurrenceID', 'Make.occurrenceID').
+data(33, 'render_recon_complete_wf_graph_record_level_q7.sh', 'Make.render_recon_complete_wf_graph_record_level_q7.sh').
+data(34, 'wf_recon_complete_graph_of_{occurrenceID}.gv', 'Make.wf_recon_complete_graph_of_{occurrenceID}.gv').
+data(35, 'run_log_queries.sh', 'Make.run_log_queries.sh').
+data(36, 'log_queries.P', 'Make.log_queries.P').
+data(37, 'run_log_queries_output.txt', 'Make.run_log_queries_output.txt').
+data(38, 'render_recon_complete_wf_aggregate_level_q9.sh', 'Make.render_recon_complete_wf_aggregate_level_q9.sh').
+data(39, 'wf_recon_complete_graph_of_aggregate_level.gv', 'Make.wf_recon_complete_graph_of_aggregate_level.gv').
+
+% FACT: channel(channel_id, data_id).
+channel(1, 3).
+channel(2, 7).
+channel(3, 7).
+channel(4, 4).
+channel(5, 6).
+channel(6, 8).
+channel(7, 8).
+channel(8, 9).
+channel(9, 9).
+channel(10, 9).
+channel(11, 9).
+channel(12, 9).
+channel(13, 5).
+channel(14, 12).
+channel(15, 12).
+channel(16, 12).
+channel(17, 12).
+channel(18, 12).
+channel(19, 12).
+channel(20, 12).
+channel(21, 12).
+channel(22, 12).
+channel(23, 16).
+channel(24, 42).
+channel(25, 17).
+channel(26, 17).
+channel(27, 17).
+channel(28, 17).
+channel(29, 43).
+channel(30, 18).
+channel(31, 18).
+channel(32, 18).
+channel(33, 18).
+channel(34, 18).
+channel(35, 40).
+channel(36, 41).
+channel(37, 44).
+channel(38, 45).
+channel(39, 46).
+channel(40, 47).
+channel(41, 48).
+channel(42, 49).
+channel(43, 50).
+channel(44, 51).
+channel(45, 52).
+channel(46, 1).
+channel(47, 2).
+channel(48, 2).
+channel(49, 10).
+channel(50, 14).
+channel(51, 16).
+channel(52, 17).
+channel(53, 21).
+channel(54, 23).
+channel(55, 25).
+channel(56, 27).
+channel(57, 29).
+channel(58, 31).
+channel(59, 34).
+channel(60, 37).
+channel(61, 39).
+
+% FACT: port_connects_to_channel(port_id, channel_id).
+port_connects_to_channel(3, 1).
+port_connects_to_channel(7, 2).
+port_connects_to_channel(21, 3).
+port_connects_to_channel(4, 4).
+port_connects_to_channel(8, 4).
+port_connects_to_channel(6, 5).
+port_connects_to_channel(9, 5).
+port_connects_to_channel(10, 6).
+port_connects_to_channel(13, 6).
+port_connects_to_channel(10, 7).
+port_connects_to_channel(67, 7).
+port_connects_to_channel(11, 8).
+port_connects_to_channel(14, 8).
+port_connects_to_channel(11, 9).
+port_connects_to_channel(28, 9).
+port_connects_to_channel(11, 10).
+port_connects_to_channel(60, 10).
+port_connects_to_channel(11, 11).
+port_connects_to_channel(66, 11).
+port_connects_to_channel(11, 12).
+port_connects_to_channel(73, 12).
+port_connects_to_channel(5, 13).
+port_connects_to_channel(15, 13).
+port_connects_to_channel(17, 14).
+port_connects_to_channel(19, 14).
+port_connects_to_channel(17, 15).
+port_connects_to_channel(32, 15).
+port_connects_to_channel(17, 16).
+port_connects_to_channel(36, 16).
+port_connects_to_channel(17, 17).
+port_connects_to_channel(40, 17).
+port_connects_to_channel(17, 18).
+port_connects_to_channel(44, 18).
+port_connects_to_channel(17, 19).
+port_connects_to_channel(48, 19).
+port_connects_to_channel(17, 20).
+port_connects_to_channel(52, 20).
+port_connects_to_channel(17, 21).
+port_connects_to_channel(57, 21).
+port_connects_to_channel(17, 22).
+port_connects_to_channel(70, 22).
+port_connects_to_channel(23, 23).
+port_connects_to_channel(26, 23).
+port_connects_to_channel(23, 24).
+port_connects_to_channel(24, 25).
+port_connects_to_channel(27, 25).
+port_connects_to_channel(24, 26).
+port_connects_to_channel(59, 26).
+port_connects_to_channel(24, 27).
+port_connects_to_channel(64, 27).
+port_connects_to_channel(24, 28).
+port_connects_to_channel(72, 28).
+port_connects_to_channel(24, 29).
+port_connects_to_channel(29, 30).
+port_connects_to_channel(49, 30).
+port_connects_to_channel(29, 31).
+port_connects_to_channel(53, 31).
+port_connects_to_channel(29, 32).
+port_connects_to_channel(58, 32).
+port_connects_to_channel(29, 33).
+port_connects_to_channel(63, 33).
+port_connects_to_channel(29, 34).
+port_connects_to_channel(71, 34).
+port_connects_to_channel(12, 35).
+port_connects_to_channel(20, 36).
+port_connects_to_channel(33, 37).
+port_connects_to_channel(37, 38).
+port_connects_to_channel(41, 39).
+port_connects_to_channel(45, 40).
+port_connects_to_channel(50, 41).
+port_connects_to_channel(54, 42).
+port_connects_to_channel(61, 43).
+port_connects_to_channel(68, 44).
+port_connects_to_channel(74, 45).
+port_connects_to_channel(3, 46).
+port_connects_to_channel(7, 47).
+port_connects_to_channel(21, 48).
+port_connects_to_channel(12, 49).
+port_connects_to_channel(20, 50).
+port_connects_to_channel(23, 51).
+port_connects_to_channel(24, 52).
+port_connects_to_channel(33, 53).
+port_connects_to_channel(37, 54).
+port_connects_to_channel(41, 55).
+port_connects_to_channel(45, 56).
+port_connects_to_channel(50, 57).
+port_connects_to_channel(54, 58).
+port_connects_to_channel(61, 59).
+port_connects_to_channel(68, 60).
+port_connects_to_channel(74, 61).
+
+% FACT: inflow_connects_to_channel(port_id, channel_id).
+inflow_connects_to_channel(1, 1).
+inflow_connects_to_channel(2, 2).
+inflow_connects_to_channel(2, 3).
+inflow_connects_to_channel(1, 46).
+inflow_connects_to_channel(2, 47).
+inflow_connects_to_channel(2, 48).
+
+% FACT: outflow_connects_to_channel(port_id, channel_id).
+outflow_connects_to_channel(77, 24).
+outflow_connects_to_channel(78, 29).
+outflow_connects_to_channel(75, 35).
+outflow_connects_to_channel(76, 36).
+outflow_connects_to_channel(79, 37).
+outflow_connects_to_channel(80, 38).
+outflow_connects_to_channel(81, 39).
+outflow_connects_to_channel(82, 40).
+outflow_connects_to_channel(83, 41).
+outflow_connects_to_channel(84, 42).
+outflow_connects_to_channel(85, 43).
+outflow_connects_to_channel(86, 44).
+outflow_connects_to_channel(87, 45).
+outflow_connects_to_channel(75, 49).
+outflow_connects_to_channel(76, 50).
+outflow_connects_to_channel(77, 51).
+outflow_connects_to_channel(78, 52).
+outflow_connects_to_channel(79, 53).
+outflow_connects_to_channel(80, 54).
+outflow_connects_to_channel(81, 55).
+outflow_connects_to_channel(82, 56).
+outflow_connects_to_channel(83, 57).
+outflow_connects_to_channel(84, 58).
+outflow_connects_to_channel(85, 59).
+outflow_connects_to_channel(86, 60).
+outflow_connects_to_channel(87, 61).
+
+% FACT: uri_variable(uri_variable_id, variable_name, port_id).
+uri_variable(9, 'workspace', 77).
+uri_variable(10, 'productName', 79).
+uri_variable(11, 'productName', 80).
+uri_variable(12, 'productName', 81).
+uri_variable(13, 'productName', 82).
+uri_variable(14, 'productName', 83).
+uri_variable(15, 'occurrenceID', 85).
+uri_variable(1, 'workspace', 23).
+uri_variable(2, 'workspace', 26).
+uri_variable(3, 'productName', 33).
+uri_variable(4, 'productName', 37).
+uri_variable(5, 'productName', 41).
+uri_variable(6, 'productName', 45).
+uri_variable(7, 'productName', 50).
+uri_variable(8, 'occurrenceID', 61).
+
+% FACT: log_template(log_template_id, port_id, entry_template, log_annotation_id).
+
+% FACT: log_template_variable(log_variable_id, variable_name, log_template_id).
+
+% FACT: assert(program_id, subject_id, predicate, object_id).
+

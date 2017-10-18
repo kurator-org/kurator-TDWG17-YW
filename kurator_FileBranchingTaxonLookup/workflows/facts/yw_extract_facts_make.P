@@ -1,0 +1,293 @@
+% FACT: extract_source(source_id, source_path).
+extract_source(1, 'make.sh').
+% FACT: annotation(annotation_id, source_id, line_number, tag, keyword, value).
+annotation(1, 1, 3, 'begin', '@BEGIN', 'Make').
+annotation(2, 1, 4, 'param', '@PARAM', 'settings.sh').
+annotation(3, 1, 5, 'in', '@IN', 'SourceScript').
+annotation(4, 1, 5, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/file_branching_taxon_lookup.yaml').
+annotation(5, 1, 8, 'begin', '@BEGIN', 'SetVariables').
+annotation(6, 1, 8, 'desc', '@desc', 'Set variables and create output directories').
+annotation(7, 1, 9, 'param', '@PARAM', 'settings.sh').
+annotation(8, 1, 10, 'out', '@OUT', 'FACTS_DIR').
+annotation(9, 1, 11, 'out', '@OUT', 'VIEWS_DIR').
+annotation(10, 1, 12, 'out', '@OUT', 'RESULTS_DIR').
+annotation(11, 1, 20, 'end', '@END', 'SetVariables').
+annotation(12, 1, 22, 'begin', '@BEGIN', 'GenerateProspectiveProvenance').
+annotation(13, 1, 22, 'desc', '@desc', 'Export YW model and extract facts, and draw complete workflow graph with URI template').
+annotation(14, 1, 23, 'in', '@IN', 'SourceScript').
+annotation(15, 1, 23, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/file_branching_taxon_lookup.yaml').
+annotation(16, 1, 24, 'param', '@PARAM', 'FACTS_DIR').
+annotation(17, 1, 25, 'param', '@PARAM', 'RESULTS_DIR').
+annotation(18, 1, 26, 'out', '@OUT', 'yw_extract_facts.P').
+annotation(19, 1, 26, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/yw_extract_facts.P').
+annotation(20, 1, 27, 'out', '@OUT', 'yw_model_facts.P').
+annotation(21, 1, 27, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/yw_model_facts.P').
+annotation(22, 1, 28, 'out', '@OUT', 'complete_wf_graph_uri.gv').
+annotation(23, 1, 28, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/complete_wf_graph_uri_make.gv').
+annotation(24, 1, 33, 'end', '@END', 'GenerateProspectiveProvenance').
+annotation(25, 1, 35, 'begin', '@BEGIN', 'MaterializeViewsOfYWFacts').
+annotation(26, 1, 36, 'in', '@IN', 'yw_extract_facts.P').
+annotation(27, 1, 36, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/yw_extract_facts.P').
+annotation(28, 1, 37, 'in', '@IN', 'yw_model_facts.P').
+annotation(29, 1, 37, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/yw_model_facts.P').
+annotation(30, 1, 38, 'param', '@PARAM', 'VIEWS_DIR').
+annotation(31, 1, 39, 'in', '@IN', 'materialize_yw_views.sh').
+annotation(32, 1, 39, 'uri', '@URI', 'file:queries/materialize_yw_views.sh').
+annotation(33, 1, 40, 'out', '@OUT', 'yw_views.P').
+annotation(34, 1, 40, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/views/yw_views.P').
+annotation(35, 1, 43, 'end', '@END', 'MaterializeViewsOfYWFacts').
+annotation(36, 1, 45, 'begin', '@BEGIN', 'ListWorkflowOutputs').
+annotation(37, 1, 45, 'desc', '@desc', 'list workflow outputs').
+annotation(38, 1, 46, 'in', '@IN', 'list_workflow_outputs.sh').
+annotation(39, 1, 46, 'uri', '@URI', 'file:queries/list_workflow_outputs.sh').
+annotation(40, 1, 47, 'in', '@IN', 'yw_views.P').
+annotation(41, 1, 47, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/views/yw_views.P').
+annotation(42, 1, 48, 'out', '@OUT', 'workflow_outputs.txt').
+annotation(43, 1, 48, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/workflow_outputs.txt').
+annotation(44, 1, 51, 'end', '@END', 'ListWorkflowOutputs').
+annotation(45, 1, 53, 'begin', '@BEGIN', 'RunTheWorkflow').
+annotation(46, 1, 54, 'in', '@IN', 'SourceScript').
+annotation(47, 1, 54, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/file_branching_taxon_lookup.yaml').
+annotation(48, 1, 55, 'param', '@PARAM', 'DarwinCoreArchive').
+annotation(49, 1, 55, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/data/kurator_sample_data_v2.txt').
+annotation(50, 1, 56, 'out', '@OUT', 'ScriptOutput').
+annotation(51, 1, 56, 'uri', '@URI', 'file:{workspace}/mergedoutputfile.csv').
+annotation(52, 1, 57, 'out', '@OUT', 'LogFile').
+annotation(53, 1, 57, 'uri', '@URI', 'file:runlog.log').
+annotation(54, 1, 61, 'end', '@END', 'RunTheWorkflow').
+annotation(55, 1, 63, 'begin', '@BEGIN', 'GenerateReconfacts').
+annotation(56, 1, 64, 'param', '@PARAM', 'DarwinCoreArchive').
+annotation(57, 1, 64, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/data/kurator_sample_data_v2.txt').
+annotation(58, 1, 65, 'in', '@IN', 'ScriptOutput').
+annotation(59, 1, 65, 'uri', '@URI', 'file:{workspace}/mergedoutputfile.csv').
+annotation(60, 1, 66, 'in', '@IN', 'LogFile').
+annotation(61, 1, 66, 'uri', '@URI', 'file:runlog.log').
+annotation(62, 1, 67, 'in', '@IN', 'yw_model_facts.P').
+annotation(63, 1, 67, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/yw_model_facts.P').
+annotation(64, 1, 68, 'out', '@OUT', 'reconfacts.P').
+annotation(65, 1, 68, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/reconfacts.P').
+annotation(66, 1, 71, 'end', '@END', 'GenerateReconfacts').
+annotation(67, 1, 74, 'begin', '@BEGIN', 'RunQ1ProspectiveProvenanceUpstreamSubgraphQueries').
+annotation(68, 1, 74, 'desc', '@desc', 'Draw worfklow graph upstream of a productName').
+annotation(69, 1, 75, 'in', '@IN', 'productName').
+annotation(70, 1, 76, 'in', '@IN', 'render_wf_graph_upstream_of_data_q1.sh').
+annotation(71, 1, 76, 'uri', '@URI', 'file:queries/render_wf_graph_upstream_of_data_q1.sh').
+annotation(72, 1, 77, 'in', '@IN', 'yw_views.P').
+annotation(73, 1, 77, 'uri', '@URI', 'file:').
+annotation(74, 1, 78, 'out', '@OUT', 'wf_upstream_of_{productName}.gv').
+annotation(75, 1, 78, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_upstream_of_{productName}.gv').
+annotation(76, 1, 106, 'end', '@END', 'RunQ1ProspectiveProvenanceUpstreamSubgraphQueries').
+annotation(77, 1, 108, 'begin', '@BEGIN', 'RunQ2ProspectiveProvenanceUpstreamListQueries').
+annotation(78, 1, 108, 'desc', '@desc', 'List workflow inputs upstream of a productName').
+annotation(79, 1, 109, 'in', '@IN', 'productName').
+annotation(80, 1, 110, 'in', '@IN', 'list_inputs_upstream_of_data_q2.sh').
+annotation(81, 1, 110, 'uri', '@URI', 'file:queries/list_inputs_upstream_of_data_q2.sh').
+annotation(82, 1, 111, 'in', '@IN', 'yw_views.P').
+annotation(83, 1, 111, 'uri', '@URI', 'file:').
+annotation(84, 1, 112, 'out', '@OUT', 'inputs_upstream_of_{productName}.txt').
+annotation(85, 1, 112, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/inputs_upstream_of_{productName}.txt').
+annotation(86, 1, 122, 'end', '@END', 'RunQ2ProspectiveProvenanceUpstreamListQueries').
+annotation(87, 1, 125, 'begin', '@BEGIN', 'RunQ3ProspectiveProvenanceDownstreamSubgraphQueries').
+annotation(88, 1, 125, 'desc', '@desc', 'Draw workflow graph downstream of a productName').
+annotation(89, 1, 126, 'in', '@IN', 'productName').
+annotation(90, 1, 127, 'in', '@IN', 'render_wf_graph_downstream_of_data_q3.sh').
+annotation(91, 1, 127, 'uri', '@URI', 'file:queries/render_wf_graph_downstream_of_data_q3.sh').
+annotation(92, 1, 128, 'in', '@IN', 'yw_views.P').
+annotation(93, 1, 128, 'uri', '@URI', 'file:').
+annotation(94, 1, 129, 'out', '@OUT', 'wf_downstream_of_{productName}.gv').
+annotation(95, 1, 129, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_downstream_of_{productName}.gv').
+annotation(96, 1, 143, 'end', '@END', 'RunQ3ProspectiveProvenanceDownstreamSubgraphQueries').
+annotation(97, 1, 145, 'begin', '@BEGIN', 'RunQ4ProspectiveProvenanceDownstreamListQueries').
+annotation(98, 1, 145, 'desc', '@desc', 'List workflow outputs downstream of a productName').
+annotation(99, 1, 146, 'in', '@IN', 'productName').
+annotation(100, 1, 147, 'in', '@IN', 'list_outputs_downstream_of_data_q4.sh').
+annotation(101, 1, 147, 'uri', '@URI', 'file:queries/list_outputs_downstream_of_data_q4.sh').
+annotation(102, 1, 148, 'in', '@IN', 'yw_views.P').
+annotation(103, 1, 148, 'uri', '@URI', 'file:').
+annotation(104, 1, 149, 'out', '@OUT', 'outputs_downstream_of_{productName}.txt').
+annotation(105, 1, 149, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/outputs_downstream_of_{productName}.txt').
+annotation(106, 1, 159, 'end', '@END', 'RunQ4ProspectiveProvenanceDownstreamListQueries').
+annotation(107, 1, 161, 'begin', '@BEGIN', 'RunQ5RetrospectiveProvenanceUpstreamSubgraphQueries').
+annotation(108, 1, 161, 'desc', '@desc', 'Draw recon worfklow graph upstream of a productName').
+annotation(109, 1, 162, 'in', '@IN', 'productName').
+annotation(110, 1, 163, 'in', '@IN', 'render_wf_recon_graph_upstream_of_data_q5.sh').
+annotation(111, 1, 163, 'uri', '@URI', 'file:queries/render_wf_recon_graph_upstream_of_data_q5.sh').
+annotation(112, 1, 164, 'in', '@IN', 'yw_views.P').
+annotation(113, 1, 164, 'uri', '@URI', 'file:').
+annotation(114, 1, 165, 'in', '@IN', 'reconfacts.P').
+annotation(115, 1, 165, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/reconfacts.P').
+annotation(116, 1, 166, 'out', '@OUT', 'wf_recon_upstream_of_{productName}.gv').
+annotation(117, 1, 166, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_recon_upstream_of_{productName}.gv').
+annotation(118, 1, 182, 'end', '@END', 'RunQ5RetrospectiveProvenanceUpstreamSubgraphQueries').
+annotation(119, 1, 185, 'begin', '@BEGIN', 'RunQ6HybridProvenanceFileLevelGraphQueries').
+annotation(120, 1, 185, 'desc', '@desc', 'Draw recon workflow graph with all (file-level) runtime observables').
+annotation(121, 1, 186, 'in', '@IN', 'render_recon_complete_wf_graph_q6.sh').
+annotation(122, 1, 186, 'uri', '@URI', 'file:queries/render_recon_complete_wf_graph_q6.sh').
+annotation(123, 1, 187, 'in', '@IN', 'yw_views.P').
+annotation(124, 1, 187, 'uri', '@URI', 'file:').
+annotation(125, 1, 188, 'in', '@IN', 'reconfacts.P').
+annotation(126, 1, 188, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/reconfacts.P').
+annotation(127, 1, 189, 'out', '@OUT', 'wf_recon_complete_graph_all_observables.gv').
+annotation(128, 1, 189, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_recon_complete_graph_all_observables.gv').
+annotation(129, 1, 198, 'end', '@END', 'RunQ6HybridProvenanceFileLevelGraphQueries').
+annotation(130, 1, 200, 'begin', '@BEGIN', 'RunQ7HybridProvenanceRecordLevelGraphQueries').
+annotation(131, 1, 200, 'desc', '@desc', 'Given an occurrenceID, draw hybrid complete provenance graph with record-level runtime observables').
+annotation(132, 1, 201, 'in', '@IN', 'occurrenceID').
+annotation(133, 1, 202, 'in', '@IN', 'render_recon_complete_wf_graph_record_level_q7.sh').
+annotation(134, 1, 202, 'uri', '@URI', 'file:queries/render_recon_complete_wf_graph_record_level_q7.sh').
+annotation(135, 1, 203, 'in', '@IN', 'yw_views.P').
+annotation(136, 1, 203, 'uri', '@URI', 'file:').
+annotation(137, 1, 204, 'in', '@IN', 'reconfacts.P').
+annotation(138, 1, 204, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/reconfacts.P').
+annotation(139, 1, 205, 'in', '@IN', 'LogFile').
+annotation(140, 1, 205, 'uri', '@URI', 'file:runlog.log').
+annotation(141, 1, 206, 'in', '@IN', 'yw_model_facts.P').
+annotation(142, 1, 206, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/yw_model_facts.P').
+annotation(143, 1, 207, 'out', '@OUT', 'wf_recon_complete_graph_of_{occurrenceID}.gv').
+annotation(144, 1, 207, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_recon_complete_graph_of_{occurrenceID}.gv').
+annotation(145, 1, 229, 'end', '@END', 'RunQ7HybridProvenanceRecordLevelGraphQueries').
+annotation(146, 1, 231, 'begin', '@BEGIN', 'RunQ8RunOtherLogQueries').
+annotation(147, 1, 231, 'desc', '@desc', 'LQ1: Given an occurrenceID=MCZ:Orn:149849, confirm if the record is Marine or not?\nLQ2: How many records are Marine (noMarine)?\nLQ3: Which records are Marine?\nLQ4: Given an occurrenceID, is a match found (GUID:not null=Match; GUID:null=Unable to validate)?\n What data sources (validation services) were used (GBIFLookup or WoRMSLookup)?\nLQ5: How many Marine(noMarine) records found a match?\nLQ6: Which records found a match?\nLQ7: How many records could not find a match?').
+annotation(148, 1, 232, 'in', '@IN', 'run_log_queries.sh').
+annotation(149, 1, 232, 'uri', '@URI', 'file:queries/run_log_queries.sh').
+annotation(150, 1, 233, 'in', '@IN', 'reconfacts.P').
+annotation(151, 1, 233, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/reconfacts.P').
+annotation(152, 1, 234, 'in', '@IN', 'LogFile').
+annotation(153, 1, 234, 'uri', '@URI', 'file:runlog.log').
+annotation(154, 1, 235, 'in', '@IN', 'log_queries.P').
+annotation(155, 1, 235, 'uri', '@URI', 'file:queries/log_queries.P').
+annotation(156, 1, 236, 'in', '@IN', 'yw_model_facts.P').
+annotation(157, 1, 236, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/yw_model_facts.P').
+annotation(158, 1, 237, 'in', '@IN', 'yw_extract_facts.P').
+annotation(159, 1, 237, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/yw_extract_facts.P').
+annotation(160, 1, 238, 'out', '@OUT', 'run_log_queries_output.txt').
+annotation(161, 1, 238, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/run_log_queries_output.txt').
+annotation(162, 1, 252, 'end', '@END', 'RunQ8RunOtherLogQueries').
+annotation(163, 1, 254, 'begin', '@BEGIN', 'RunQ9HybridProvenanceAggregateLevelGraphQueries').
+annotation(164, 1, 254, 'desc', '@desc', 'Draw hybrid complete provenance graph with aggregate statistics').
+annotation(165, 1, 255, 'in', '@IN', 'render_recon_complete_wf_aggregate_level_q9.sh').
+annotation(166, 1, 255, 'uri', '@URI', 'file:queries/render_recon_complete_wf_aggregate_level_q9.sh').
+annotation(167, 1, 256, 'in', '@IN', 'yw_views.P').
+annotation(168, 1, 256, 'uri', '@URI', 'file:').
+annotation(169, 1, 257, 'in', '@IN', 'reconfacts.P').
+annotation(170, 1, 257, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/reconfacts.P').
+annotation(171, 1, 258, 'in', '@IN', 'LogFile').
+annotation(172, 1, 258, 'uri', '@URI', 'file:runlog.log').
+annotation(173, 1, 259, 'in', '@IN', 'yw_model_facts.P').
+annotation(174, 1, 259, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/yw_model_facts.P').
+annotation(175, 1, 260, 'out', '@OUT', 'wf_recon_complete_graph_of_aggregate_level.gv').
+annotation(176, 1, 260, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_recon_complete_graph_of_aggregate_level.gv').
+annotation(177, 1, 268, 'end', '@END', 'RunQ9HybridProvenanceAggregateLevelGraphQueries').
+annotation(178, 1, 270, 'out', '@OUT', 'complete_wf_graph_uri.gv').
+annotation(179, 1, 270, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/complete_wf_graph_uri_make.gv').
+annotation(180, 1, 271, 'out', '@OUT', 'workflow_outputs.txt').
+annotation(181, 1, 271, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/workflow_outputs.txt').
+annotation(182, 1, 272, 'out', '@OUT', 'ScriptOutput').
+annotation(183, 1, 272, 'uri', '@URI', 'file:{workspace}/mergedoutputfile.csv').
+annotation(184, 1, 273, 'out', '@OUT', 'LogFile').
+annotation(185, 1, 273, 'uri', '@URI', 'file:runlog.log').
+annotation(186, 1, 274, 'out', '@OUT', 'wf_upstream_of_{productName}.gv').
+annotation(187, 1, 274, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_upstream_of_{productName}.gv').
+annotation(188, 1, 275, 'out', '@OUT', 'inputs_upstream_of_{productName}.txt').
+annotation(189, 1, 275, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/inputs_upstream_of_{productName}.txt').
+annotation(190, 1, 276, 'out', '@OUT', 'wf_downstream_of_{productName}.gv').
+annotation(191, 1, 276, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_downstream_of_{productName}.gv').
+annotation(192, 1, 277, 'out', '@OUT', 'outputs_downstream_of_{productName}.txt').
+annotation(193, 1, 277, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/outputs_downstream_of_{productName}.txt').
+annotation(194, 1, 278, 'out', '@OUT', 'wf_recon_upstream_of_{productName}.gv').
+annotation(195, 1, 278, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_recon_upstream_of_{productName}.gv').
+annotation(196, 1, 279, 'out', '@OUT', 'wf_recon_complete_graph_all_observables.gv').
+annotation(197, 1, 279, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_recon_complete_graph_all_observables.gv').
+annotation(198, 1, 280, 'out', '@OUT', 'wf_recon_complete_graph_of_{occurrenceID}.gv').
+annotation(199, 1, 280, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_recon_complete_graph_of_{occurrenceID}.gv').
+annotation(200, 1, 281, 'out', '@OUT', 'run_log_queries_output.txt').
+annotation(201, 1, 281, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/run_log_queries_output.txt').
+annotation(202, 1, 282, 'out', '@OUT', 'wf_recon_complete_graph_of_aggregate_level.gv').
+annotation(203, 1, 282, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_recon_complete_graph_of_aggregate_level.gv').
+annotation(204, 1, 283, 'end', '@END', 'Make').
+% FACT: annotation_qualifies(qualifying_annotation_id, primary_annotation_id).
+annotation_qualifies(4, 3).
+annotation_qualifies(6, 5).
+annotation_qualifies(13, 12).
+annotation_qualifies(15, 14).
+annotation_qualifies(19, 18).
+annotation_qualifies(21, 20).
+annotation_qualifies(23, 22).
+annotation_qualifies(27, 26).
+annotation_qualifies(29, 28).
+annotation_qualifies(32, 31).
+annotation_qualifies(34, 33).
+annotation_qualifies(37, 36).
+annotation_qualifies(39, 38).
+annotation_qualifies(41, 40).
+annotation_qualifies(43, 42).
+annotation_qualifies(47, 46).
+annotation_qualifies(49, 48).
+annotation_qualifies(51, 50).
+annotation_qualifies(53, 52).
+annotation_qualifies(57, 56).
+annotation_qualifies(59, 58).
+annotation_qualifies(61, 60).
+annotation_qualifies(63, 62).
+annotation_qualifies(65, 64).
+annotation_qualifies(68, 67).
+annotation_qualifies(71, 70).
+annotation_qualifies(73, 72).
+annotation_qualifies(75, 74).
+annotation_qualifies(78, 77).
+annotation_qualifies(81, 80).
+annotation_qualifies(83, 82).
+annotation_qualifies(85, 84).
+annotation_qualifies(88, 87).
+annotation_qualifies(91, 90).
+annotation_qualifies(93, 92).
+annotation_qualifies(95, 94).
+annotation_qualifies(98, 97).
+annotation_qualifies(101, 100).
+annotation_qualifies(103, 102).
+annotation_qualifies(105, 104).
+annotation_qualifies(108, 107).
+annotation_qualifies(111, 110).
+annotation_qualifies(113, 112).
+annotation_qualifies(115, 114).
+annotation_qualifies(117, 116).
+annotation_qualifies(120, 119).
+annotation_qualifies(122, 121).
+annotation_qualifies(124, 123).
+annotation_qualifies(126, 125).
+annotation_qualifies(128, 127).
+annotation_qualifies(131, 130).
+annotation_qualifies(134, 133).
+annotation_qualifies(136, 135).
+annotation_qualifies(138, 137).
+annotation_qualifies(140, 139).
+annotation_qualifies(142, 141).
+annotation_qualifies(144, 143).
+annotation_qualifies(147, 146).
+annotation_qualifies(149, 148).
+annotation_qualifies(151, 150).
+annotation_qualifies(153, 152).
+annotation_qualifies(155, 154).
+annotation_qualifies(157, 156).
+annotation_qualifies(159, 158).
+annotation_qualifies(161, 160).
+annotation_qualifies(164, 163).
+annotation_qualifies(166, 165).
+annotation_qualifies(168, 167).
+annotation_qualifies(170, 169).
+annotation_qualifies(172, 171).
+annotation_qualifies(174, 173).
+annotation_qualifies(176, 175).
+annotation_qualifies(179, 178).
+annotation_qualifies(181, 180).
+annotation_qualifies(183, 182).
+annotation_qualifies(185, 184).
+annotation_qualifies(187, 186).
+annotation_qualifies(189, 188).
+annotation_qualifies(191, 190).
+annotation_qualifies(193, 192).
+annotation_qualifies(195, 194).
+annotation_qualifies(197, 196).
+annotation_qualifies(199, 198).
+annotation_qualifies(201, 200).
+annotation_qualifies(203, 202).

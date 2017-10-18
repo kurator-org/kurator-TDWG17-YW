@@ -1,0 +1,202 @@
+
+/* Start of top-level graph */
+digraph Workflow {
+rankdir=LR
+
+/* Title for graph */
+fontname=Helvetica; fontsize=18; labelloc=t
+label=Make
+
+/* Start of double cluster for drawing box around nodes in workflow */
+subgraph cluster_workflow_box_outer { label=""; color=black; penwidth=2
+subgraph cluster_workflow_box_inner { label=""; penwidth=0
+
+/* Style for nodes representing atomic programs in workflow */
+node[shape=box style=filled fillcolor="#CCFFCC" peripheries=1 fontname=Helvetica]
+
+/* Nodes representing atomic programs in workflow */
+SetVariables [shape=record rankdir=LR label="{{<f0> SetVariables |<f1> Set variables and create output directories}}"];
+GenerateProspectiveProvenance [shape=record rankdir=LR label="{{<f0> GenerateProspectiveProvenance |<f1> Export YW model and extract facts, and draw complete workflow graph with URI template}}"];
+MaterializeViewsOfYWFacts
+ListWorkflowOutputs [shape=record rankdir=LR label="{{<f0> ListWorkflowOutputs |<f1> list workflow outputs}}"];
+RunTheWorkflow
+GenerateReconfacts
+RunQ1ProspectiveProvenanceUpstreamSubgraphQueries [shape=record rankdir=LR label="{{<f0> RunQ1ProspectiveProvenanceUpstreamSubgraphQueries |<f1> Draw worfklow graph upstream of a productName}}"];
+RunQ2ProspectiveProvenanceUpstreamListQueries [shape=record rankdir=LR label="{{<f0> RunQ2ProspectiveProvenanceUpstreamListQueries |<f1> List workflow inputs upstream of a productName}}"];
+RunQ3ProspectiveProvenanceDownstreamSubgraphQueries [shape=record rankdir=LR label="{{<f0> RunQ3ProspectiveProvenanceDownstreamSubgraphQueries |<f1> Draw workflow graph downstream of a productName}}"];
+RunQ4ProspectiveProvenanceDownstreamListQueries [shape=record rankdir=LR label="{{<f0> RunQ4ProspectiveProvenanceDownstreamListQueries |<f1> List workflow outputs downstream of a productName}}"];
+RunQ5RetrospectiveProvenanceUpstreamSubgraphQueries [shape=record rankdir=LR label="{{<f0> RunQ5RetrospectiveProvenanceUpstreamSubgraphQueries |<f1> Draw recon worfklow graph upstream of a productName}}"];
+RunQ6HybridProvenanceFileLevelGraphQueries [shape=record rankdir=LR label="{{<f0> RunQ6HybridProvenanceFileLevelGraphQueries |<f1> Draw recon workflow graph with all (file-level) runtime observables}}"];
+RunQ7HybridProvenanceRecordLevelGraphQueries [shape=record rankdir=LR label="{{<f0> RunQ7HybridProvenanceRecordLevelGraphQueries |<f1> Given an occurrenceID, draw hybrid complete provenance graph with record-level runtime observables}}"];
+RunQ8RunOtherLogQueries [shape=record rankdir=LR label="{{<f0> RunQ8RunOtherLogQueries |<f1> LQ1\: Given an occurrenceID=MCZ\:Orn\:149849, confirm if the record is Marine or not?\nLQ2\: How many records are Marine (noMarine)?\nLQ3\: Which records are Marine?\nLQ4\: Given an occurrenceID, is a match found (GUID\:not null=Match; GUID\:null=Unable to validate)?\n What data sources (validation services) were used (GBIFLookup or WoRMSLookup)?\nLQ5\: How many Marine(noMarine) records found a match?\nLQ6\: Which records found a match?\nLQ7\: How many records could not find a match?}}"];
+RunQ9HybridProvenanceAggregateLevelGraphQueries [shape=record rankdir=LR label="{{<f0> RunQ9HybridProvenanceAggregateLevelGraphQueries |<f1> Draw hybrid complete provenance graph with aggregate statistics}}"];
+
+/* Style for nodes representing non-parameter data channels in workflow */
+node[shape=box style="rounded,filled" fillcolor="#FFFFCC" peripheries=1 fontname=Helvetica]
+
+/* Nodes for non-parameter data channels in workflow */
+SourceScript [shape=record rankdir=LR label="{{<f0> SourceScript |<f1> file\:packages/kurator_FileBranchingTaxonLookup/workflows/file_branching_taxon_lookup.yaml}}"];
+"yw_extract_facts.P" [shape=record rankdir=LR label="{{<f0> yw_extract_facts.P |<f1> file\:packages/kurator_FileBranchingTaxonLookup/workflows/facts/yw_extract_facts.P}}"];
+"yw_model_facts.P" [shape=record rankdir=LR label="{{<f0> yw_model_facts.P |<f1> file\:packages/kurator_FileBranchingTaxonLookup/workflows/facts/yw_model_facts.P}}"];
+"yw_views.P" [shape=record rankdir=LR label="{{<f0> yw_views.P |<f1> file\:packages/kurator_FileBranchingTaxonLookup/workflows/views/yw_views.P}}"];
+ScriptOutput [shape=record rankdir=LR label="{{<f0> ScriptOutput |<f1> file\:\{workspace\}/mergedoutputfile.csv}}"];
+LogFile [shape=record rankdir=LR label="{{<f0> LogFile |<f1> file\:runlog.log}}"];
+"reconfacts.P" [shape=record rankdir=LR label="{{<f0> reconfacts.P |<f1> file\:packages/kurator_FileBranchingTaxonLookup/workflows/facts/reconfacts.P}}"];
+"complete_wf_graph_uri.gv" [shape=record rankdir=LR label="{{<f0> complete_wf_graph_uri.gv |<f1> file\:packages/kurator_FileBranchingTaxonLookup/workflows/results/complete_wf_graph_uri_make.gv}}"];
+"workflow_outputs.txt" [shape=record rankdir=LR label="{{<f0> workflow_outputs.txt |<f1> file\:packages/kurator_FileBranchingTaxonLookup/workflows/results/workflow_outputs.txt}}"];
+"wf_upstream_of_{productName}.gv" [shape=record rankdir=LR label="{{<f0> wf_upstream_of_\{productName\}.gv |<f1> file\:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_upstream_of_\{productName\}.gv}}"];
+"inputs_upstream_of_{productName}.txt" [shape=record rankdir=LR label="{{<f0> inputs_upstream_of_\{productName\}.txt |<f1> file\:packages/kurator_FileBranchingTaxonLookup/workflows/results/inputs_upstream_of_\{productName\}.txt}}"];
+"wf_downstream_of_{productName}.gv" [shape=record rankdir=LR label="{{<f0> wf_downstream_of_\{productName\}.gv |<f1> file\:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_downstream_of_\{productName\}.gv}}"];
+"outputs_downstream_of_{productName}.txt" [shape=record rankdir=LR label="{{<f0> outputs_downstream_of_\{productName\}.txt |<f1> file\:packages/kurator_FileBranchingTaxonLookup/workflows/results/outputs_downstream_of_\{productName\}.txt}}"];
+"wf_recon_upstream_of_{productName}.gv" [shape=record rankdir=LR label="{{<f0> wf_recon_upstream_of_\{productName\}.gv |<f1> file\:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_recon_upstream_of_\{productName\}.gv}}"];
+"wf_recon_complete_graph_all_observables.gv" [shape=record rankdir=LR label="{{<f0> wf_recon_complete_graph_all_observables.gv |<f1> file\:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_recon_complete_graph_all_observables.gv}}"];
+"wf_recon_complete_graph_of_{occurrenceID}.gv" [shape=record rankdir=LR label="{{<f0> wf_recon_complete_graph_of_\{occurrenceID\}.gv |<f1> file\:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_recon_complete_graph_of_\{occurrenceID\}.gv}}"];
+"run_log_queries_output.txt" [shape=record rankdir=LR label="{{<f0> run_log_queries_output.txt |<f1> file\:packages/kurator_FileBranchingTaxonLookup/workflows/results/run_log_queries_output.txt}}"];
+"wf_recon_complete_graph_of_aggregate_level.gv" [shape=record rankdir=LR label="{{<f0> wf_recon_complete_graph_of_aggregate_level.gv |<f1> file\:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_recon_complete_graph_of_aggregate_level.gv}}"];
+
+/* Style for nodes representing parameter channels in workflow */
+node[shape=box style="rounded,filled" fillcolor="#FCFCFC" peripheries=1 fontname=Helvetica]
+
+/* Nodes representing parameter channels in workflow */
+"settings.sh"
+FACTS_DIR
+RESULTS_DIR
+VIEWS_DIR
+
+/* Edges representing connections between programs and channels */
+SetVariables -> FACTS_DIR
+SetVariables -> VIEWS_DIR
+SetVariables -> RESULTS_DIR
+"settings.sh" -> SetVariables
+GenerateProspectiveProvenance -> "yw_extract_facts.P"
+GenerateProspectiveProvenance -> "yw_model_facts.P"
+GenerateProspectiveProvenance -> "complete_wf_graph_uri.gv"
+SourceScript -> GenerateProspectiveProvenance
+FACTS_DIR -> GenerateProspectiveProvenance
+RESULTS_DIR -> GenerateProspectiveProvenance
+MaterializeViewsOfYWFacts -> "yw_views.P"
+"yw_extract_facts.P" -> MaterializeViewsOfYWFacts
+"yw_model_facts.P" -> MaterializeViewsOfYWFacts
+VIEWS_DIR -> MaterializeViewsOfYWFacts
+"materialize_yw_views.sh" -> MaterializeViewsOfYWFacts
+ListWorkflowOutputs -> "workflow_outputs.txt"
+"list_workflow_outputs.sh" -> ListWorkflowOutputs
+"yw_views.P" -> ListWorkflowOutputs
+RunTheWorkflow -> ScriptOutput
+RunTheWorkflow -> LogFile
+SourceScript -> RunTheWorkflow
+DarwinCoreArchive -> RunTheWorkflow
+GenerateReconfacts -> "reconfacts.P"
+DarwinCoreArchive -> GenerateReconfacts
+ScriptOutput -> GenerateReconfacts
+LogFile -> GenerateReconfacts
+"yw_model_facts.P" -> GenerateReconfacts
+RunQ1ProspectiveProvenanceUpstreamSubgraphQueries -> "wf_upstream_of_{productName}.gv"
+productName -> RunQ1ProspectiveProvenanceUpstreamSubgraphQueries
+"render_wf_graph_upstream_of_data_q1.sh" -> RunQ1ProspectiveProvenanceUpstreamSubgraphQueries
+"yw_views.P" -> RunQ1ProspectiveProvenanceUpstreamSubgraphQueries
+RunQ2ProspectiveProvenanceUpstreamListQueries -> "inputs_upstream_of_{productName}.txt"
+productName -> RunQ2ProspectiveProvenanceUpstreamListQueries
+"list_inputs_upstream_of_data_q2.sh" -> RunQ2ProspectiveProvenanceUpstreamListQueries
+"yw_views.P" -> RunQ2ProspectiveProvenanceUpstreamListQueries
+RunQ3ProspectiveProvenanceDownstreamSubgraphQueries -> "wf_downstream_of_{productName}.gv"
+productName -> RunQ3ProspectiveProvenanceDownstreamSubgraphQueries
+"render_wf_graph_downstream_of_data_q3.sh" -> RunQ3ProspectiveProvenanceDownstreamSubgraphQueries
+"yw_views.P" -> RunQ3ProspectiveProvenanceDownstreamSubgraphQueries
+RunQ4ProspectiveProvenanceDownstreamListQueries -> "outputs_downstream_of_{productName}.txt"
+productName -> RunQ4ProspectiveProvenanceDownstreamListQueries
+"list_outputs_downstream_of_data_q4.sh" -> RunQ4ProspectiveProvenanceDownstreamListQueries
+"yw_views.P" -> RunQ4ProspectiveProvenanceDownstreamListQueries
+RunQ5RetrospectiveProvenanceUpstreamSubgraphQueries -> "wf_recon_upstream_of_{productName}.gv"
+productName -> RunQ5RetrospectiveProvenanceUpstreamSubgraphQueries
+"render_wf_recon_graph_upstream_of_data_q5.sh" -> RunQ5RetrospectiveProvenanceUpstreamSubgraphQueries
+"yw_views.P" -> RunQ5RetrospectiveProvenanceUpstreamSubgraphQueries
+"reconfacts.P" -> RunQ5RetrospectiveProvenanceUpstreamSubgraphQueries
+RunQ6HybridProvenanceFileLevelGraphQueries -> "wf_recon_complete_graph_all_observables.gv"
+"render_recon_complete_wf_graph_q6.sh" -> RunQ6HybridProvenanceFileLevelGraphQueries
+"yw_views.P" -> RunQ6HybridProvenanceFileLevelGraphQueries
+"reconfacts.P" -> RunQ6HybridProvenanceFileLevelGraphQueries
+RunQ7HybridProvenanceRecordLevelGraphQueries -> "wf_recon_complete_graph_of_{occurrenceID}.gv"
+occurrenceID -> RunQ7HybridProvenanceRecordLevelGraphQueries
+"render_recon_complete_wf_graph_record_level_q7.sh" -> RunQ7HybridProvenanceRecordLevelGraphQueries
+"yw_views.P" -> RunQ7HybridProvenanceRecordLevelGraphQueries
+"reconfacts.P" -> RunQ7HybridProvenanceRecordLevelGraphQueries
+LogFile -> RunQ7HybridProvenanceRecordLevelGraphQueries
+"yw_model_facts.P" -> RunQ7HybridProvenanceRecordLevelGraphQueries
+RunQ8RunOtherLogQueries -> "run_log_queries_output.txt"
+"run_log_queries.sh" -> RunQ8RunOtherLogQueries
+"reconfacts.P" -> RunQ8RunOtherLogQueries
+LogFile -> RunQ8RunOtherLogQueries
+"log_queries.P" -> RunQ8RunOtherLogQueries
+"yw_model_facts.P" -> RunQ8RunOtherLogQueries
+"yw_extract_facts.P" -> RunQ8RunOtherLogQueries
+RunQ9HybridProvenanceAggregateLevelGraphQueries -> "wf_recon_complete_graph_of_aggregate_level.gv"
+"render_recon_complete_wf_aggregate_level_q9.sh" -> RunQ9HybridProvenanceAggregateLevelGraphQueries
+"yw_views.P" -> RunQ9HybridProvenanceAggregateLevelGraphQueries
+"reconfacts.P" -> RunQ9HybridProvenanceAggregateLevelGraphQueries
+LogFile -> RunQ9HybridProvenanceAggregateLevelGraphQueries
+"yw_model_facts.P" -> RunQ9HybridProvenanceAggregateLevelGraphQueries
+
+/* End of double cluster for drawing box around nodes in workflow */
+}}
+
+/* Hidden double-cluster for grouping workflow input ports */
+subgraph cluster_input_ports_group_outer { label=""; penwidth=0
+subgraph cluster_input_ports_group_inner { label=""; penwidth=0
+
+/* Style for nodes representing workflow input ports */
+node[shape=circle style="rounded,filled" fillcolor="#FFFFFF" peripheries=1 fontname=Helvetica width=0.2]
+
+/* Nodes representing workflow input ports */
+"settings.sh_input_port" [label=""]
+SourceScript_input_port [label=""]
+
+/* End of double-cluster for grouping workflow input ports */
+}}
+
+/* Hidden double-cluster for grouping workflow output ports */
+subgraph cluster_output_ports_group_outer { label=""; penwidth=0
+subgraph cluster_output_ports_group_inner { label=""; penwidth=0
+
+/* Style for nodes representing workflow output ports */
+node[shape=circle style="rounded,filled" fillcolor="#FFFFFF" peripheries=1 fontname=Helvetica width=0.2]
+
+/* Nodes representing workflow output ports */
+"complete_wf_graph_uri.gv_output_port" [label=""]
+"workflow_outputs.txt_output_port" [label=""]
+ScriptOutput_output_port [label=""]
+LogFile_output_port [label=""]
+"wf_upstream_of_{productName}.gv_output_port" [label=""]
+"inputs_upstream_of_{productName}.txt_output_port" [label=""]
+"wf_downstream_of_{productName}.gv_output_port" [label=""]
+"outputs_downstream_of_{productName}.txt_output_port" [label=""]
+"wf_recon_upstream_of_{productName}.gv_output_port" [label=""]
+"wf_recon_complete_graph_all_observables.gv_output_port" [label=""]
+"wf_recon_complete_graph_of_{occurrenceID}.gv_output_port" [label=""]
+"run_log_queries_output.txt_output_port" [label=""]
+"wf_recon_complete_graph_of_aggregate_level.gv_output_port" [label=""]
+
+/* End of double-cluster for grouping workflow output ports */
+}}
+
+/* Edges from input ports to channels */
+"settings.sh_input_port" -> "settings.sh"
+SourceScript_input_port -> SourceScript
+
+/* Edges from channels to output ports */
+"complete_wf_graph_uri.gv" -> "complete_wf_graph_uri.gv_output_port"
+"workflow_outputs.txt" -> "workflow_outputs.txt_output_port"
+ScriptOutput -> ScriptOutput_output_port
+LogFile -> LogFile_output_port
+"wf_upstream_of_{productName}.gv" -> "wf_upstream_of_{productName}.gv_output_port"
+"inputs_upstream_of_{productName}.txt" -> "inputs_upstream_of_{productName}.txt_output_port"
+"wf_downstream_of_{productName}.gv" -> "wf_downstream_of_{productName}.gv_output_port"
+"outputs_downstream_of_{productName}.txt" -> "outputs_downstream_of_{productName}.txt_output_port"
+"wf_recon_upstream_of_{productName}.gv" -> "wf_recon_upstream_of_{productName}.gv_output_port"
+"wf_recon_complete_graph_all_observables.gv" -> "wf_recon_complete_graph_all_observables.gv_output_port"
+"wf_recon_complete_graph_of_{occurrenceID}.gv" -> "wf_recon_complete_graph_of_{occurrenceID}.gv_output_port"
+"run_log_queries_output.txt" -> "run_log_queries_output.txt_output_port"
+"wf_recon_complete_graph_of_aggregate_level.gv" -> "wf_recon_complete_graph_of_aggregate_level.gv_output_port"
+
+/* End of top-level graph */
+}
