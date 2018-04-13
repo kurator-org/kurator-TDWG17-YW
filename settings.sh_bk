@@ -8,7 +8,7 @@ export DATA_DIR=${BRANCHING_DIR}/data
 
 
 # define lcoation of YesWorkflow jar file
-export YW_JAR="${PROJECT_ROOT}/yw_jar/yesworkflow-0.2.1.2-jar-with-dependencies.jar"
+export YW_JAR="${PROJECT_ROOT}/yw_jar/yesworkflow-0.2.2.0-alpha-jar-with-dependencies.jar"
 
 # define command for running YesWorkflow
 export YW_CMD="java -jar $YW_JAR"
