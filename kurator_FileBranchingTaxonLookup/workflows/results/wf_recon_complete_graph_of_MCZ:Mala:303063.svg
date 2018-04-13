@@ -210,7 +210,7 @@
 <path fill="#ffe4b5" stroke="black" d="M72,-79C72,-79 426,-79 426,-79 432,-79 438,-85 438,-91 438,-91 438,-103 438,-103 438,-109 432,-115 426,-115 426,-115 72,-115 72,-115 66,-115 60,-109 60,-103 60,-103 60,-91 60,-91 60,-85 66,-79 72,-79"/>
 <text text-anchor="middle" x="249" y="-103.8" font-family="Courier,monospace" font-weight="bold" font-size="9.00">UpdatedOccurrenceFile</text>
 <polyline fill="none" stroke="black" points="60,-97 438,-97 "/>
-<text text-anchor="middle" x="249" y="-85.8" font-family="Courier,monospace" font-weight="bold" font-size="9.00">workspace_6b2122c0&#45;a83b&#45;11e7&#45;aad3&#45;acbc3296f741/mergedoutputfile.csv</text>
+<text text-anchor="middle" x="249" y="-85.8" font-family="Courier,monospace" font-weight="bold" font-size="9.00">workspace_6661c68f&#45;3f44&#45;11e8&#45;bd5d&#45;4a0002b0edf0/mergedoutputfile.csv</text>
 </g>
 <!-- CsvFileWriter&#45;&gt;UpdatedOccurrenceFile -->
 <g id="edge26" class="edge"><title>CsvFileWriter&#45;&gt;UpdatedOccurrenceFile</title>
@@ -254,10 +254,10 @@
 </g>
 <!-- DarwinCoreArchive -->
 <g id="node16" class="node"><title>DarwinCoreArchive</title>
-<path fill="#ffe4b5" stroke="black" d="M106.5,-1117C106.5,-1117 455.5,-1117 455.5,-1117 461.5,-1117 467.5,-1123 467.5,-1129 467.5,-1129 467.5,-1141 467.5,-1141 467.5,-1147 461.5,-1153 455.5,-1153 455.5,-1153 106.5,-1153 106.5,-1153 100.5,-1153 94.5,-1147 94.5,-1141 94.5,-1141 94.5,-1129 94.5,-1129 94.5,-1123 100.5,-1117 106.5,-1117"/>
+<path fill="#ffe4b5" stroke="black" d="M87.5,-1117C87.5,-1117 474.5,-1117 474.5,-1117 480.5,-1117 486.5,-1123 486.5,-1129 486.5,-1129 486.5,-1141 486.5,-1141 486.5,-1147 480.5,-1153 474.5,-1153 474.5,-1153 87.5,-1153 87.5,-1153 81.5,-1153 75.5,-1147 75.5,-1141 75.5,-1141 75.5,-1129 75.5,-1129 75.5,-1123 81.5,-1117 87.5,-1117"/>
 <text text-anchor="middle" x="281" y="-1141.8" font-family="Courier,monospace" font-weight="bold" font-size="9.00">DarwinCoreArchive</text>
-<polyline fill="none" stroke="black" points="94.5,-1135 467.5,-1135 "/>
-<text text-anchor="middle" x="281" y="-1123.8" font-family="Courier,monospace" font-weight="bold" font-size="9.00">packages/kurator_branching_generic/data/kurator_sample_data_v2.txt</text>
+<polyline fill="none" stroke="black" points="75.5,-1135 486.5,-1135 "/>
+<text text-anchor="middle" x="281" y="-1123.8" font-family="Courier,monospace" font-weight="bold" font-size="9.00">packages/kurator_FileBranchingTaxonLookup/data/kurator_sample_data_v2.txt</text>
 </g>
 <!-- DarwinCoreArchive&#45;&gt;Setup -->
 <g id="edge1" class="edge"><title>DarwinCoreArchive&#45;&gt;Setup</title>

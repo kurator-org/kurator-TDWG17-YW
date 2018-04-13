@@ -40,6 +40,9 @@ subgraph cluster_outflows_inner { label=""; color=white
 node[shape=circle fillcolor="#FFFFFF" peripheries=1 width=0.2]
 UpdatedOccurrenceFile_outflow [label=""]
 }}
+Workspace -> CsvFileWriter
+notMarineDataRecord -> GBIFLookup
+OccurrenceFile -> FileToDataStream
 WoRMSUpdatedRecord -> StreamMerge
 DataRecord -> EnvironmentTagger
 GBIFUpdatedRecord -> StreamMerge
@@ -48,9 +51,6 @@ TaggedDataRecord -> FilterToNonMarine
 TaggedDataRecord -> FilterToJustMarine
 DarwinCoreArchive -> Setup
 MarineDataRecord -> WoRMSLookup
-Workspace -> CsvFileWriter
-notMarineDataRecord -> GBIFLookup
-OccurrenceFile -> FileToDataStream
 Setup -> Workspace
 Setup -> OccurrenceFile
 FileToDataStream -> DataRecord

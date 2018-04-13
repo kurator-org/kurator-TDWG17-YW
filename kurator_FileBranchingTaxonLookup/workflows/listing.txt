@@ -94,6 +94,7 @@ Get the message from the options dictionary of the previous step
 A list of parameters to get from the parameters defined at the workflow level or
 to set explicitly from values given in this section.
 Set the output file to a specific file name.
+format: 'csv'
 Show the name of the upstream actor.
 The "upstream" actor from which to receive a message.
 @OUT workspace @as Workspace

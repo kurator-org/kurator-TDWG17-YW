@@ -59,7 +59,7 @@ $QUERIES_DIR/list_workflow_outputs.sh > $RESULTS_DIR/workflow_outputs.txt
 # @OUT LogFile @URI file:runlog.log
 
 # run the workflow
-java -jar target/kurator-validation-1.0.1-SNAPSHOT-jar-with-dependencies.jar -f packages/kurator_FileBranchingTaxonLookup/workflows/file_branching_taxon_lookup.yaml -p inputfile=packages/kurator_FileBranchingTaxonLookup/data/kurator_sample_data_v2.txt -l ALL > runlog.log 2>&1
+java -jar target/kurator-validation-1.0.2-SNAPSHOT-jar-with-dependencies.jar -f packages/kurator_FileBranchingTaxonLookup/workflows/file_branching_taxon_lookup.yaml -p inputfile=packages/kurator_FileBranchingTaxonLookup/data/kurator_sample_data_v2.txt -l ALL > runlog.log 2>&1
 # @END RunTheWorkflow
 
 # @BEGIN GenerateReconfacts
@@ -160,44 +160,44 @@ $QUERIES_DIR/list_outputs_downstream_of_data_q4.sh \'DataRecord\' DataRecord > $
 $QUERIES_DIR/list_outputs_downstream_of_data_q4.sh \'Workspace\' Workspace > $RESULTS_DIR/outputs_downstream_of_Workspace.txt
 # @END RunQ4ProspectiveProvenanceDownstreamListQueries
 
-# @BEGIN RunQ5RetrospectiveProvenanceUpstreamSubgraphQueries @desc Draw recon worfklow graph upstream of a productName
-# @IN productName
-# @IN render_wf_recon_graph_upstream_of_data_q5.sh @URI file:queries/render_wf_recon_graph_upstream_of_data_q5.sh
+# @BEGIN RunQ5HybridProvenanceFileLevelGraphQueries @desc Draw recon workflow graph with all (file-level) runtime observables
+# @IN render_recon_complete_wf_graph_q5.sh @URI file:queries/render_recon_complete_wf_graph_q5.sh
 # @IN yw_views.P @URI file: packages/kurator_FileBranchingTaxonLookup/workflows/views/yw_views.P
 # @IN reconfacts.P @URI file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/reconfacts.P
-# @OUT wf_recon_upstream_of_{productName}.gv @URI file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_recon_upstream_of_{productName}.gv
+# @OUT wf_recon_complete_graph_all_observables.gv @URI file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_recon_complete_graph_all_observables.gv
 ##############
 #   Q5_pro   #
 ##############
 
+# draw recon workflow graph with all (file-level) runtime observables
+$QUERIES_DIR/render_recon_complete_wf_graph_q5.sh > $RESULTS_DIR/wf_recon_complete_graph_all_observables.gv
+dot -Tpdf $RESULTS_DIR/wf_recon_complete_graph_all_observables.gv > $RESULTS_DIR/wf_recon_complete_graph_all_observables.pdf
+dot -Tsvg $RESULTS_DIR/wf_recon_complete_graph_all_observables.gv > $RESULTS_DIR/wf_recon_complete_graph_all_observables.svg
+# @END RunQ5HybridProvenanceFileLevelGraphQueries
+
+
+# @BEGIN RunQ6RetrospectiveProvenanceUpstreamSubgraphQueries @desc Draw recon worfklow graph upstream of a productName
+# @IN productName
+# @IN render_wf_recon_graph_upstream_of_data_q6.sh @URI file:queries/render_wf_recon_graph_upstream_of_data_q6.sh
+# @IN yw_views.P @URI file: packages/kurator_FileBranchingTaxonLookup/workflows/views/yw_views.P
+# @IN reconfacts.P @URI file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/reconfacts.P
+# @OUT wf_recon_upstream_of_{productName}.gv @URI file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_recon_upstream_of_{productName}.gv
+##############
+#   Q6_pro   #
+##############
+
 # draw recon worfklow graph upstream of UpdatedOccurrenceFile
 productName="UpdatedOccurrenceFile"
-$QUERIES_DIR/render_wf_recon_graph_upstream_of_data_q5.sh \'$productName\' > $RESULTS_DIR/wf_recon_upstream_of_$productName.gv
+$QUERIES_DIR/render_wf_recon_graph_upstream_of_data_q6.sh \'$productName\' > $RESULTS_DIR/wf_recon_upstream_of_$productName.gv
 dot -Tpdf $RESULTS_DIR/wf_recon_upstream_of_$productName.gv > $RESULTS_DIR/wf_recon_upstream_of_$productName.pdf
 dot -Tsvg $RESULTS_DIR/wf_recon_upstream_of_$productName.gv > $RESULTS_DIR/wf_recon_upstream_of_$productName.svg
 
 # draw recon worfklow graph upstream of LogFile
 productName="LogFile"
-$QUERIES_DIR/render_wf_recon_graph_upstream_of_data_q5.sh \'$productName\' > $RESULTS_DIR/wf_recon_upstream_of_$productName.gv
+$QUERIES_DIR/render_wf_recon_graph_upstream_of_data_q6.sh \'$productName\' > $RESULTS_DIR/wf_recon_upstream_of_$productName.gv
 dot -Tpdf $RESULTS_DIR/wf_recon_upstream_of_$productName.gv > $RESULTS_DIR/wf_recon_upstream_of_$productName.pdf
 dot -Tsvg $RESULTS_DIR/wf_recon_upstream_of_$productName.gv > $RESULTS_DIR/wf_recon_upstream_of_$productName.svg
-# @END RunQ5RetrospectiveProvenanceUpstreamSubgraphQueries
-
-
-# @BEGIN RunQ6HybridProvenanceFileLevelGraphQueries @desc Draw recon workflow graph with all (file-level) runtime observables
-# @IN render_recon_complete_wf_graph_q6.sh @URI file:queries/render_recon_complete_wf_graph_q6.sh
-# @IN yw_views.P @URI file: packages/kurator_FileBranchingTaxonLookup/workflows/views/yw_views.P
-# @IN reconfacts.P @URI file:packages/kurator_FileBranchingTaxonLookup/workflows/facts/reconfacts.P
-# @OUT wf_recon_complete_graph_all_observables.gv @URI file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_recon_complete_graph_all_observables.gv
-##############
-#   Q6_pro   #
-##############
-
-# draw recon workflow graph with all (file-level) runtime observables
-$QUERIES_DIR/render_recon_complete_wf_graph_q6.sh > $RESULTS_DIR/wf_recon_complete_graph_all_observables.gv
-dot -Tpdf $RESULTS_DIR/wf_recon_complete_graph_all_observables.gv > $RESULTS_DIR/wf_recon_complete_graph_all_observables.pdf
-dot -Tsvg $RESULTS_DIR/wf_recon_complete_graph_all_observables.gv > $RESULTS_DIR/wf_recon_complete_graph_all_observables.svg
-# @END RunQ6HybridProvenanceFileLevelGraphQueries
+# @END RunQ6RetrospectiveProvenanceUpstreamSubgraphQueries
 
 # @BEGIN RunQ7HybridProvenanceRecordLevelGraphQueries @desc Given an occurrenceID, draw hybrid complete provenance graph with record-level runtime observables
 # @IN occurrenceID
@@ -283,3 +283,4 @@ dot -Tsvg $RESULTS_DIR/wf_recon_complete_graph_of_aggregate_level.gv > $RESULTS_
 # @OUT run_log_queries_output.txt @URI file:packages/kurator_FileBranchingTaxonLookup/workflows/results/run_log_queries_output.txt
 # @OUT wf_recon_complete_graph_of_aggregate_level.gv @URI file:packages/kurator_FileBranchingTaxonLookup/workflows/results/wf_recon_complete_graph_of_aggregate_level.gv
 # @END Make
+

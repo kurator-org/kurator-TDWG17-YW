@@ -10,17 +10,17 @@
 <title>yw_data_view</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-890 212,-890 212,4 -4,4"/>
 <text text-anchor="middle" x="104" y="-867.6" font-family="Courier,monospace" font-size="18.00">DwCA_Taxon_Lookup</text>
-<g id="clust1" class="cluster"><title>cluster_workflow</title>
-<polygon fill="none" stroke="black" stroke-width="2" points="8,-8 8,-796 200,-796 200,-8 8,-8"/>
-</g>
-<g id="clust2" class="cluster"><title>cluster_workflow_inner</title>
-<polygon fill="none" stroke="white" stroke-width="2" points="16,-16 16,-788 192,-788 192,-16 16,-16"/>
-</g>
 <g id="clust3" class="cluster"><title>cluster_inflows</title>
 <polygon fill="none" stroke="white" stroke-width="2" points="81,-804 81,-850 127,-850 127,-804 81,-804"/>
 </g>
 <g id="clust4" class="cluster"><title>cluster_inflows_inner</title>
 <polygon fill="none" stroke="white" stroke-width="2" points="89,-812 89,-842 119,-842 119,-812 89,-812"/>
+</g>
+<g id="clust1" class="cluster"><title>cluster_workflow</title>
+<polygon fill="none" stroke="black" stroke-width="2" points="8,-8 8,-796 200,-796 200,-8 8,-8"/>
+</g>
+<g id="clust2" class="cluster"><title>cluster_workflow_inner</title>
+<polygon fill="none" stroke="white" stroke-width="2" points="16,-16 16,-788 192,-788 192,-16 16,-16"/>
 </g>
 <!-- FilterToNonMarine -->
 <g id="node1" class="node"><title>FilterToNonMarine</title>

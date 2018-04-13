@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-ProvidedDataName=$1
-
 xsb --quietload --noprompt --nofeedback --nobanner << END_XSB_STDIN
 
 set_prolog_flag(unknown, fail).
@@ -12,29 +10,21 @@ set_prolog_flag(unknown, fail).
 ['$RULES_DIR/gv_rules'].
 ['$RULES_DIR/yw_graph_rules'].
 ['$RULES_DIR/recon_rules'].
-['$RULES_DIR/log_query_rules'].
 ['$FACTS_DIR/yw_model_facts'].
 
 [user].
 graph :-
+
     yw_workflow_script(W, WorkflowName, _, _),
-	log_record_data_value($ProvidedDataName, _, OccurrenceID, _, _, _, _, _,_, _, _, _, _),
-	data_record(OccurrenceID, _, _),	
-	
+
     gv_graph('yw_data_view', WorkflowName, 'TB'),
 
-        gv_cluster('workflow', 'black'),			
-            gv_nodestyle__atomic_unusedstep,
-            gv_nodes__atomic_unusedstep(OccurrenceID, _),
+        gv_cluster('workflow', 'black'),
             gv_nodestyle__atomic_step,
             gv_nodes__atomic_steps(W),
             gv_nodestyle__subworkflow,
             gv_nodes__subworkflows(W),
-            gv_nodestyle__unuseddata,
-			gv_nodes__unuseddata(OccurrenceID, _),
-            gv_nodestyle__datarecord_value,
-            gv_nodes__recon_not_input_not_output_datarecord(OccurrenceID),
-			gv_nodestyle__datafile_value,
+            gv_nodestyle__datafile_value,
             gv_nodes__input_recon_data(W),
             gv_node_style__data,
             gv_nodes__recon_not_input_not_output_data(W),

@@ -10,17 +10,17 @@
 <title>yw_data_view</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-314 216,-314 216,4 -4,4"/>
 <text text-anchor="middle" x="106" y="-291.6" font-family="Courier,monospace" font-size="18.00">DwCA_Taxon_Lookup</text>
-<g id="clust1" class="cluster"><title>cluster_workflow</title>
-<polygon fill="none" stroke="black" stroke-width="2" points="8,-62 8,-274 204,-274 204,-62 8,-62"/>
-</g>
-<g id="clust2" class="cluster"><title>cluster_workflow_inner</title>
-<polygon fill="none" stroke="white" stroke-width="2" points="16,-70 16,-266 196,-266 196,-70 16,-70"/>
-</g>
 <g id="clust5" class="cluster"><title>cluster_outflows</title>
 <polygon fill="none" stroke="white" stroke-width="2" points="83,-8 83,-54 129,-54 129,-8 83,-8"/>
 </g>
 <g id="clust6" class="cluster"><title>cluster_outflows_inner</title>
 <polygon fill="none" stroke="white" stroke-width="2" points="91,-16 91,-46 121,-46 121,-16 91,-16"/>
+</g>
+<g id="clust1" class="cluster"><title>cluster_workflow</title>
+<polygon fill="none" stroke="black" stroke-width="2" points="8,-62 8,-274 204,-274 204,-62 8,-62"/>
+</g>
+<g id="clust2" class="cluster"><title>cluster_workflow_inner</title>
+<polygon fill="none" stroke="white" stroke-width="2" points="16,-70 16,-266 196,-266 196,-70 16,-70"/>
 </g>
 <!-- CsvFileWriter -->
 <g id="node1" class="node"><title>CsvFileWriter</title>

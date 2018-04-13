@@ -92,8 +92,6 @@ yw_step_input(10,'CsvFileWriter',in,25,'Workspace',3,'Workspace').
 %---------------------------------------------------------------------------------------------------
 % FACT: yw_step_output(ProgramId, ProgramName, PortType, PortId, PortName, DataId, DataName).
 %...................................................................................................
-yw_step_output(1,'DwCA_Taxon_Lookup',out,28,'UpdatedOccurrenceFile',14,'UpdatedOccurrenceFile').
-yw_step_output(1,'DwCA_Taxon_Lookup',out,29,'LogFile',15,'LogFile').
 yw_step_output(2,'Setup',out,3,workspace,3,'Workspace').
 yw_step_output(2,'Setup',out,4,'OccurrenceFile',4,'OccurrenceFile').
 yw_step_output(3,'FileToDataStream',out,6,'DataRecord',5,'DataRecord').
@@ -109,6 +107,8 @@ yw_step_output(8,'GBIFLookup',out,20,'GBIFUpdatedRecord',11,'GBIFUpdatedRecord')
 yw_step_output(8,'GBIFLookup',out,21,'LogFile',6,'LogFile').
 yw_step_output(9,'StreamMerge',out,24,'MergedStream',12,'MergedStream').
 yw_step_output(10,'CsvFileWriter',out,27,'UpdatedOccurrenceFile',13,'UpdatedOccurrenceFile').
+yw_step_output(1,'DwCA_Taxon_Lookup',out,28,'UpdatedOccurrenceFile',14,'UpdatedOccurrenceFile').
+yw_step_output(1,'DwCA_Taxon_Lookup',out,29,'LogFile',15,'LogFile').
 
 
 %---------------------------------------------------------------------------------------------------

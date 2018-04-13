@@ -467,8 +467,7 @@ print_all_resource_uri(X) :-
      fail
      ;
      true.
-
-
+	 
 gv_nodes__inflow_recon__upstream_of_data(WorkflowId, DownstreamDataId) :-
     yw_data(DataId, DataName, WorkflowId, _),
     not yw_workflow_param(_, _, DataId, _),
@@ -638,11 +637,19 @@ gv_nodes__recon_not_input_not_output_datarecord(OccurrenceID) :-
     true.
 
 
+all_resource_uri_template(X, Y) :- 
+     port_uri_template(PortId, Y),
+	 port(PortId, _, _, _, _, X).
+	 
+
 gv_nodes__input_recon_data(WorkflowId) :-
     yw_data_used_as_in(DataId),
     yw_inflow_data(WorkflowId, _, DataId, DataName),
     %concat_atom(['[data', DataId, '] ', DataName], Top),
 	concat_atom([DataName], Top),
+        %all_resource_uri_template(DataId, URI),
+	%concat_atom([URI], Mid),
+    %gv_record_node_open(DataName, Top, Mid),
     gv_record_node_open(DataName, Top),
     gv_record_node_uri_list(DataId),
     gv_record_node_close,
@@ -656,6 +663,9 @@ gv_nodes__output_recon_data(WorkflowId) :-
     yw_outflow_data(WorkflowId, _, DataId, _),
     %concat_atom(['[data', DataId, '] ', DataName], Top),
     concat_atom([DataName], Top),
+	%all_resource_uri_template(DataId, URI),
+	%concat_atom([URI], Mid),
+	%gv_record_node_open(DataName, Top, Mid),
 	gv_record_node_open(DataName, Top),
     gv_record_node_uri_list(DataId),
     gv_record_node_close,
