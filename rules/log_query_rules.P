@@ -290,9 +290,9 @@ log_gbif_lookup_value_by_date(SortedGBIFLookupValue) :-
 % log_record_source(OccurrenceID, MarineValue, Source)
 :- table log_record_source/3.
 log_record_source(OccurrenceID, 'Marine', 'WoRMSLookup') :-
-	log_marine_record_tag(_, OccurrenceID, _).
+	log_marine_record_tag(_, OccurrenceID, 'Marine').
 log_record_source(OccurrenceID, 'NonMarine', 'GBIFLookup') :-
-	log_nonmarine_record_tag(_, OccurrenceID, _).
+	log_nonmarine_record_tag(_, OccurrenceID, 'NonMarine').
 	
 % compute first_index of element in a list: log_record_index(OccurrenceID, MarineValue, Index)
 :- table log_record_index/3.
@@ -365,7 +365,7 @@ log_marine_match_count(MarineMatchCount) :-
 :- table log_nonmarine_match/1.
 log_nonmarine_match(OccurrenceID) :- 
 	log_record_match_result(OccurrenceID, 'NonMarine', _, _, MatchFound, _),
-	MatchFound \== null.
+	MatchFound \== ''.
 log_nonmarine_match_count(NonMarineMatchCount) :-
 	count(log_nonmarine_match(_), NonMarineMatchCount).
 
@@ -380,7 +380,7 @@ log_marine_nomatch_count(MarineNoMatchCount) :-
 :- table log_nonmarine_match/1.
 log_nonmarine_nomatch(OccurrenceID) :- 
 	log_record_match_result(OccurrenceID, 'NonMarine', _, _, MatchFound, _),
-	MatchFound == null.
+	MatchFound == ''.
 log_nonmarine_nomatch_count(NonMarineNoMatchCount) :-
 	count(log_nonmarine_nomatch(_), NonMarineNoMatchCount).
 
