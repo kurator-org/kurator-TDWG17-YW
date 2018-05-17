@@ -23,7 +23,7 @@ MarineDataRecord[shape=record rankdir=LR label="{<f0> MarineDataRecord |<f1>Coun
 notMarineDataRecord[shape=record rankdir=LR label="{<f0> notMarineDataRecord |<f1>Count: 94\n}"]
 node[shape=box style="rounded,filled" fillcolor="#3ab4df" peripheries=1 fontname=Helvetica]
 WoRMSUpdatedRecord[shape=record rankdir=LR label="{<f0> WoRMSUpdatedRecord |<f1>Has Value: 37\n Null: 61\n}"]
-GBIFUpdatedRecord[shape=record rankdir=LR label="{<f0> GBIFUpdatedRecord |<f1>Has Value: 94\n Null: 0\n}"]
+GBIFUpdatedRecord[shape=record rankdir=LR label="{<f0> GBIFUpdatedRecord |<f1>Has Value: 77\n Null: 17\n}"]
 node[shape=box style="rounded,filled" fillcolor="#FFE4B5" peripheries=1 fontname="Courier-Bold" fontsize=9]
 DarwinCoreArchive[shape=record rankdir=LR label="{<f0> DarwinCoreArchive |<f1>packages/kurator_FileBranchingTaxonLookup/data/kurator_sample_data_v2.txt\n}"]
 node[shape=box style="rounded,filled" fillcolor="#FFFFCC" peripheries=1 fontname=Helvetica]
@@ -38,7 +38,7 @@ GBIFUpdatedRecord
 MergedStream
 node[shape=box style="rounded,filled" fillcolor="#FFE4B5" peripheries=1 fontname="Courier-Bold" fontsize=9]
 LogFile[shape=record rankdir=LR label="{<f0> LogFile |<f1>runlog.log\n}"]
-UpdatedOccurrenceFile[shape=record rankdir=LR label="{<f0> UpdatedOccurrenceFile |<f1>workspace_6661c68f-3f44-11e8-bd5d-4a0002b0edf0/mergedoutputfile.csv\n}"]
+UpdatedOccurrenceFile[shape=record rankdir=LR label="{<f0> UpdatedOccurrenceFile |<f1>workspace_38819680-59f0-11e8-8425-4a0002b0edf0/mergedoutputfile.csv\n}"]
 node[shape=box style="rounded,filled" fillcolor="#FFFFFF" peripheries=1 fontname=Helvetica]
 }}
 subgraph cluster_inflows { label=""; color=white; penwidth=2
