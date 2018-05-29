@@ -59,7 +59,7 @@ $QUERIES_DIR/list_workflow_outputs.sh > $RESULTS_DIR/workflow_outputs.txt
 # @OUT LogFile @URI file:runlog.log
 
 # run the workflow
-java -jar target/kurator-validation-1.0.2-SNAPSHOT-jar-with-dependencies.jar -f packages/kurator_FileBranchingTaxonLookup/workflows/file_branching_taxon_lookup.yaml -p inputfile=packages/kurator_FileBranchingTaxonLookup/data/kurator_sample_data_v2.txt -l ALL > ./packages/kurator_FileBranchingTaxonLookup/workflows/results/runlog.log 2>&1
+java -jar target/kurator-validation-1.0.2-jar-with-dependencies.jar -f packages/kurator_FileBranchingTaxonLookup/workflows/file_branching_taxon_lookup.yaml -p inputfile=packages/kurator_FileBranchingTaxonLookup/data/kurator_sample_data_v2.txt -l ALL > ./packages/kurator_FileBranchingTaxonLookup/workflows/results/runlog.log 2>&1
 # @END RunTheWorkflow
 
 cp -r packages/kurator_FileBranchingTaxonLookup/data packages/kurator_FileBranchingTaxonLookup/workflows/results/
