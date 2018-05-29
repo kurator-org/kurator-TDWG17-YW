@@ -15,8 +15,8 @@ WoRMSLookup
 EnvironmentTagger
 node[shape=box style="filled" fillcolor="#CCFFCC" peripheries=1 fontname=Courier]
 node[shape=box style="rounded,filled" fillcolor="#FFFFCC" peripheries=1 fontname=Helvetica]
-DataRecord
 LogFile
+DataRecord
 TaggedDataRecord
 MarineDataRecord
 notMarineDataRecord

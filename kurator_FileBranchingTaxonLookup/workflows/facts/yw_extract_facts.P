@@ -1,5 +1,7 @@
+
 % FACT: extract_source(source_id, source_path).
 extract_source(1, 'packages/kurator_FileBranchingTaxonLookup/workflows/file_branching_taxon_lookup.yaml').
+
 % FACT: annotation(annotation_id, source_id, line_number, tag, keyword, value).
 annotation(1, 1, 103, 'begin', '@BEGIN', 'DwCA_Taxon_Lookup').
 annotation(2, 1, 104, 'in', '@IN', 'DarwinCoreArchive').
@@ -9,95 +11,101 @@ annotation(5, 1, 111, 'in', '@IN', 'DarwinCoreArchive').
 annotation(6, 1, 111, 'uri', '@URI', 'file:packages/kurator_FileBranchingTaxonLookup/data/kurator_sample_data_v2.txt').
 annotation(7, 1, 199, 'out', '@OUT', 'workspace').
 annotation(8, 1, 199, 'as', '@as', 'Workspace').
-annotation(9, 1, 200, 'out', '@OUT', 'OccurrenceFile').
-annotation(10, 1, 200, 'uri', '@URI', 'file:{workspace}/darwinized_file.txt').
-annotation(11, 1, 201, 'end', '@END', 'Setup').
-annotation(12, 1, 204, 'begin', '@BEGIN', 'FileToDataStream').
-annotation(13, 1, 204, 'desc', '@desc', 'Take the darwinized occurrence file and stream records from it').
-annotation(14, 1, 205, 'in', '@IN', 'OccurrenceFile').
-annotation(15, 1, 211, 'out', '@OUT', 'DataRecord').
-annotation(16, 1, 212, 'end', '@END', 'FileToDataStream').
-annotation(17, 1, 215, 'begin', '@BEGIN', 'EnvironmentTagger').
-annotation(18, 1, 215, 'desc', '@desc', 'Tag each record that appears to be marine with isMarine=TRUE, else with isMarine=FALSE').
-annotation(19, 1, 216, 'in', '@IN', 'DataRecord').
-annotation(20, 1, 222, 'out', '@OUT', 'LogFile').
-annotation(21, 1, 222, 'uri', '@URI', 'file:runlog.log').
-annotation(22, 1, 223, 'log', '@LOG', '{timestamp} [{loglevel}] ACTOR<{actorname}> -> {ActorValue}:isMarine:true={isMarineValue}').
-annotation(23, 1, 224, 'out', '@OUT', 'TaggedDataRecord').
-annotation(24, 1, 225, 'end', '@END', 'EnvironmentTagger').
-annotation(25, 1, 228, 'begin', '@BEGIN', 'FilterToJustMarine').
-annotation(26, 1, 228, 'desc', '@desc', 'Pass only records where isMarine=TRUE').
-annotation(27, 1, 229, 'in', '@IN', 'TaggedDataRecord').
-annotation(28, 1, 239, 'out', '@OUT', 'LogFile').
-annotation(29, 1, 239, 'uri', '@URI', 'file:runlog.log').
-annotation(30, 1, 240, 'log', '@LOG', '{timestamp} [{loglevel}] ACTOR<{actorname}> -> [isMarine]=[true]:{matchMarineValue}. Passing occurrenceID={occurrenceID}').
-annotation(31, 1, 241, 'out', '@OUT', 'MarineDataRecord').
-annotation(32, 1, 242, 'end', '@End', 'FilterToJustMarine').
-annotation(33, 1, 245, 'begin', '@BEGIN', 'FilterToNonMarine').
-annotation(34, 1, 245, 'desc', '@desc', 'Pass only records where isMarine=FALSE').
-annotation(35, 1, 246, 'in', '@IN', 'TaggedDataRecord').
-annotation(36, 1, 256, 'out', '@OUT', 'LogFile').
-annotation(37, 1, 256, 'uri', '@URI', 'file:runlog.log').
-annotation(38, 1, 257, 'log', '@LOG', '{timestamp} [{loglevel}] ACTOR<{actorname}> -> [isMarine]=[true]:{matchMarineValue}. Passing occurrenceID={occurrenceID}').
-annotation(39, 1, 258, 'out', '@OUT', 'notMarineDataRecord').
-annotation(40, 1, 259, 'end', '@END', 'FilterToNonMarine').
-annotation(41, 1, 262, 'begin', '@BEGIN', 'WoRMSLookup').
-annotation(42, 1, 262, 'desc', '@desc', 'Lookup GUIDs for names in WoRMS').
-annotation(43, 1, 263, 'in', '@IN', 'MarineDataRecord').
-annotation(44, 1, 269, 'out', '@OUT', 'WoRMSUpdatedRecord').
-annotation(45, 1, 270, 'out', '@OUT', 'LogFile').
-annotation(46, 1, 270, 'uri', '@URI', 'file:runlog.log').
-annotation(47, 1, 271, 'log', '@LOG', '{timestamp} [{loglevel}] ACTOR<{actorname}> -> Looking Up: {scientificName}:{scientificNameAuthorship}').
-annotation(48, 1, 272, 'log', '@LOG', '{timestamp} [{loglevel}] ACTOR<{actorname}> -> Found GUID: {LookupValue}').
-annotation(49, 1, 273, 'end', '@END', 'WoRMSLookup').
-annotation(50, 1, 276, 'begin', '@BEGIN', 'GBIFLookup').
-annotation(51, 1, 276, 'desc', '@desc', 'Lookup GUIDs for names in GBIF').
-annotation(52, 1, 277, 'in', '@IN', 'notMarineDataRecord').
-annotation(53, 1, 283, 'out', '@OUT', 'GBIFUpdatedRecord').
-annotation(54, 1, 284, 'out', '@OUT', 'LogFile').
-annotation(55, 1, 284, 'uri', '@URI', 'file:runlog.log').
-annotation(56, 1, 285, 'log', '@LOG', '{timestamp} [{loglevel}] ACTOR<{actorname}> -> Looking Up: {scientificName}:{scientificNameAuthorship}').
-annotation(57, 1, 286, 'log', '@LOG', '{timestamp} [{loglevel}] ACTOR<{actorname}> -> Found GUID: {LookupValue}').
-annotation(58, 1, 287, 'end', '@END', 'GBIFLookup').
-annotation(59, 1, 290, 'begin', '@BEGIN', 'StreamMerge').
-annotation(60, 1, 290, 'desc', '@desc', 'Merge the streams of records').
-annotation(61, 1, 291, 'in', '@IN', 'GBIFUpdatedRecord').
-annotation(62, 1, 292, 'in', '@IN', 'WoRMSUpdatedRecord').
-annotation(63, 1, 301, 'out', '@OUT', 'MergedStream').
-annotation(64, 1, 302, 'end', '@END', 'StreamMerge').
-annotation(65, 1, 304, 'begin', '@BEGIN', 'CsvFileWriter').
-annotation(66, 1, 304, 'desc', '@desc', 'Write to a csv file and wrap-up by finishing the workflow').
-annotation(67, 1, 305, 'in', '@IN', 'Workspace').
-annotation(68, 1, 306, 'in', '@IN', 'MergedStream').
-annotation(69, 1, 317, 'out', '@OUT', 'UpdatedOccurrenceFile').
-annotation(70, 1, 317, 'uri', '@URI', 'file:{workspace}/mergedoutputfile.csv').
-annotation(71, 1, 318, 'end', '@END', 'CsvFileWriter').
-annotation(72, 1, 350, 'out', '@OUT', 'UpdatedOccurrenceFile').
-annotation(73, 1, 351, 'out', '@OUT', 'LogFile').
-annotation(74, 1, 352, 'end', '@END', 'DwCA_Taxon_Lookup').
+annotation(9, 1, 200, 'out', '@OUT', 'LogFile').
+annotation(10, 1, 200, 'uri', '@URI', 'file:./packages/kurator_FileBranchingTaxonLookup/workflows/results/runlog.log').
+annotation(11, 1, 201, 'log', '@LOG', '{timestamp} [{loglevel}] ACTOR<{actorname}> -> Published product: darwinized_header_file = {workspace}/darwinized_file.txt').
+annotation(12, 1, 207, 'out', '@OUT', 'OccurrenceFile').
+annotation(13, 1, 207, 'uri', '@URI', 'file:{workspace}/darwinized_file.txt').
+annotation(14, 1, 208, 'end', '@END', 'Setup').
+annotation(15, 1, 211, 'begin', '@BEGIN', 'FileToDataStream').
+annotation(16, 1, 211, 'desc', '@desc', 'Take the darwinized occurrence file and stream records from it').
+annotation(17, 1, 212, 'in', '@IN', 'OccurrenceFile').
+annotation(18, 1, 218, 'out', '@OUT', 'DataRecord').
+annotation(19, 1, 219, 'end', '@END', 'FileToDataStream').
+annotation(20, 1, 222, 'begin', '@BEGIN', 'EnvironmentTagger').
+annotation(21, 1, 222, 'desc', '@desc', 'Tag each record that appears to be marine with isMarine=TRUE, else with isMarine=FALSE').
+annotation(22, 1, 223, 'in', '@IN', 'DataRecord').
+annotation(23, 1, 229, 'out', '@OUT', 'LogFile').
+annotation(24, 1, 229, 'uri', '@URI', 'file:./packages/kurator_FileBranchingTaxonLookup/workflows/results/runlog.log').
+annotation(25, 1, 230, 'log', '@LOG', '{timestamp} [{loglevel}] ACTOR<{actorname}> -> {ActorValue}:isMarine:true={isMarineValue}').
+annotation(26, 1, 231, 'out', '@OUT', 'TaggedDataRecord').
+annotation(27, 1, 232, 'end', '@END', 'EnvironmentTagger').
+annotation(28, 1, 235, 'begin', '@BEGIN', 'FilterToJustMarine').
+annotation(29, 1, 235, 'desc', '@desc', 'Pass only records where isMarine=TRUE').
+annotation(30, 1, 236, 'in', '@IN', 'TaggedDataRecord').
+annotation(31, 1, 246, 'out', '@OUT', 'LogFile').
+annotation(32, 1, 246, 'uri', '@URI', 'file:./packages/kurator_FileBranchingTaxonLookup/workflows/results/runlog.log').
+annotation(33, 1, 247, 'log', '@LOG', '{timestamp} [{loglevel}] ACTOR<{actorname}> -> [isMarine]=[true]:{matchMarineValue}. Passing occurrenceID={occurrenceID}').
+annotation(34, 1, 248, 'out', '@OUT', 'MarineDataRecord').
+annotation(35, 1, 249, 'end', '@End', 'FilterToJustMarine').
+annotation(36, 1, 252, 'begin', '@BEGIN', 'FilterToNonMarine').
+annotation(37, 1, 252, 'desc', '@desc', 'Pass only records where isMarine=FALSE').
+annotation(38, 1, 253, 'in', '@IN', 'TaggedDataRecord').
+annotation(39, 1, 263, 'out', '@OUT', 'LogFile').
+annotation(40, 1, 263, 'uri', '@URI', 'file:./packages/kurator_FileBranchingTaxonLookup/workflows/results/runlog.log').
+annotation(41, 1, 264, 'log', '@LOG', '{timestamp} [{loglevel}] ACTOR<{actorname}> -> [isMarine]=[true]:{matchMarineValue}. Passing occurrenceID={occurrenceID}').
+annotation(42, 1, 265, 'out', '@OUT', 'notMarineDataRecord').
+annotation(43, 1, 266, 'end', '@END', 'FilterToNonMarine').
+annotation(44, 1, 269, 'begin', '@BEGIN', 'WoRMSLookup').
+annotation(45, 1, 269, 'desc', '@desc', 'Lookup GUIDs for names in WoRMS').
+annotation(46, 1, 270, 'in', '@IN', 'MarineDataRecord').
+annotation(47, 1, 276, 'out', '@OUT', 'WoRMSUpdatedRecord').
+annotation(48, 1, 277, 'out', '@OUT', 'LogFile').
+annotation(49, 1, 277, 'uri', '@URI', 'file:./packages/kurator_FileBranchingTaxonLookup/workflows/results/runlog.log').
+annotation(50, 1, 278, 'log', '@LOG', '{timestamp} [{loglevel}] ACTOR<{actorname}> -> Looking Up: {scientificName}:{scientificNameAuthorship}').
+annotation(51, 1, 279, 'log', '@LOG', '{timestamp} [{loglevel}] ACTOR<{actorname}> -> Found GUID: {LookupValue}').
+annotation(52, 1, 280, 'end', '@END', 'WoRMSLookup').
+annotation(53, 1, 283, 'begin', '@BEGIN', 'GBIFLookup').
+annotation(54, 1, 283, 'desc', '@desc', 'Lookup GUIDs for names in GBIF').
+annotation(55, 1, 284, 'in', '@IN', 'notMarineDataRecord').
+annotation(56, 1, 290, 'out', '@OUT', 'GBIFUpdatedRecord').
+annotation(57, 1, 291, 'out', '@OUT', 'LogFile').
+annotation(58, 1, 291, 'uri', '@URI', 'file:./packages/kurator_FileBranchingTaxonLookup/workflows/results/runlog.log').
+annotation(59, 1, 292, 'log', '@LOG', '{timestamp} [{loglevel}] ACTOR<{actorname}> -> Looking Up: {scientificName}:{scientificNameAuthorship}').
+annotation(60, 1, 293, 'log', '@LOG', '{timestamp} [{loglevel}] ACTOR<{actorname}> -> Found GUID: {LookupValue}').
+annotation(61, 1, 294, 'end', '@END', 'GBIFLookup').
+annotation(62, 1, 297, 'begin', '@BEGIN', 'StreamMerge').
+annotation(63, 1, 297, 'desc', '@desc', 'Merge the streams of records').
+annotation(64, 1, 298, 'in', '@IN', 'GBIFUpdatedRecord').
+annotation(65, 1, 299, 'in', '@IN', 'WoRMSUpdatedRecord').
+annotation(66, 1, 308, 'out', '@OUT', 'MergedStream').
+annotation(67, 1, 309, 'end', '@END', 'StreamMerge').
+annotation(68, 1, 311, 'begin', '@BEGIN', 'CsvFileWriter').
+annotation(69, 1, 311, 'desc', '@desc', 'Write to a csv file and wrap-up by finishing the workflow').
+annotation(70, 1, 312, 'in', '@IN', 'Workspace').
+annotation(71, 1, 313, 'in', '@IN', 'MergedStream').
+annotation(72, 1, 324, 'out', '@OUT', 'UpdatedOccurrenceFile').
+annotation(73, 1, 324, 'uri', '@URI', 'file:{workspace}/mergedoutputfile.csv').
+annotation(74, 1, 325, 'end', '@END', 'CsvFileWriter').
+annotation(75, 1, 357, 'out', '@OUT', 'UpdatedOccurrenceFile').
+annotation(76, 1, 358, 'out', '@OUT', 'LogFile').
+annotation(77, 1, 359, 'end', '@END', 'DwCA_Taxon_Lookup').
+
 % FACT: annotation_qualifies(qualifying_annotation_id, primary_annotation_id).
 annotation_qualifies(4, 3).
 annotation_qualifies(6, 5).
 annotation_qualifies(8, 7).
 annotation_qualifies(10, 9).
+annotation_qualifies(11, 9).
 annotation_qualifies(13, 12).
-annotation_qualifies(18, 17).
+annotation_qualifies(16, 15).
 annotation_qualifies(21, 20).
-annotation_qualifies(22, 20).
-annotation_qualifies(26, 25).
+annotation_qualifies(24, 23).
+annotation_qualifies(25, 23).
 annotation_qualifies(29, 28).
-annotation_qualifies(30, 28).
-annotation_qualifies(34, 33).
+annotation_qualifies(32, 31).
+annotation_qualifies(33, 31).
 annotation_qualifies(37, 36).
-annotation_qualifies(38, 36).
-annotation_qualifies(42, 41).
-annotation_qualifies(46, 45).
-annotation_qualifies(47, 45).
-annotation_qualifies(48, 45).
-annotation_qualifies(51, 50).
-annotation_qualifies(55, 54).
-annotation_qualifies(56, 54).
-annotation_qualifies(57, 54).
-annotation_qualifies(60, 59).
-annotation_qualifies(66, 65).
-annotation_qualifies(70, 69).
+annotation_qualifies(40, 39).
+annotation_qualifies(41, 39).
+annotation_qualifies(45, 44).
+annotation_qualifies(49, 48).
+annotation_qualifies(50, 48).
+annotation_qualifies(51, 48).
+annotation_qualifies(54, 53).
+annotation_qualifies(58, 57).
+annotation_qualifies(59, 57).
+annotation_qualifies(60, 57).
+annotation_qualifies(63, 62).
+annotation_qualifies(69, 68).
+annotation_qualifies(73, 72).

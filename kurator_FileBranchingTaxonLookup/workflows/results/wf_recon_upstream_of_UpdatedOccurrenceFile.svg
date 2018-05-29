@@ -10,17 +10,17 @@
 <title>yw_data_view</title>
 <polygon fill="white" stroke="none" points="-4,4 -4,-1236 464,-1236 464,4 -4,4"/>
 <text text-anchor="middle" x="230" y="-1213.6" font-family="Courier,monospace" font-size="18.00">DwCA_Taxon_Lookup</text>
-<g id="clust1" class="cluster"><title>cluster_workflow</title>
-<polygon fill="none" stroke="black" stroke-width="2" points="8,-62 8,-1142 452,-1142 452,-62 8,-62"/>
-</g>
-<g id="clust2" class="cluster"><title>cluster_workflow_inner</title>
-<polygon fill="none" stroke="white" stroke-width="2" points="16,-70 16,-1134 444,-1134 444,-70 16,-70"/>
-</g>
 <g id="clust5" class="cluster"><title>cluster_outflows</title>
 <polygon fill="none" stroke="white" stroke-width="2" points="190,-8 190,-54 236,-54 236,-8 190,-8"/>
 </g>
 <g id="clust6" class="cluster"><title>cluster_outflows_inner</title>
 <polygon fill="none" stroke="white" stroke-width="2" points="198,-16 198,-46 228,-46 228,-16 198,-16"/>
+</g>
+<g id="clust1" class="cluster"><title>cluster_workflow</title>
+<polygon fill="none" stroke="black" stroke-width="2" points="8,-62 8,-1142 452,-1142 452,-62 8,-62"/>
+</g>
+<g id="clust2" class="cluster"><title>cluster_workflow_inner</title>
+<polygon fill="none" stroke="white" stroke-width="2" points="16,-70 16,-1134 444,-1134 444,-70 16,-70"/>
 </g>
 <g id="clust3" class="cluster"><title>cluster_inflows</title>
 <polygon fill="none" stroke="white" stroke-width="2" points="207,-1150 207,-1196 253,-1196 253,-1150 207,-1150"/>
@@ -168,7 +168,7 @@
 <path fill="#ffe4b5" stroke="black" d="M36,-79C36,-79 390,-79 390,-79 396,-79 402,-85 402,-91 402,-91 402,-103 402,-103 402,-109 396,-115 390,-115 390,-115 36,-115 36,-115 30,-115 24,-109 24,-103 24,-103 24,-91 24,-91 24,-85 30,-79 36,-79"/>
 <text text-anchor="middle" x="213" y="-103.8" font-family="Courier,monospace" font-weight="bold" font-size="9.00">UpdatedOccurrenceFile</text>
 <polyline fill="none" stroke="black" points="24,-97 402,-97 "/>
-<text text-anchor="middle" x="213" y="-85.8" font-family="Courier,monospace" font-weight="bold" font-size="9.00">workspace_6661c68f&#45;3f44&#45;11e8&#45;bd5d&#45;4a0002b0edf0/mergedoutputfile.csv</text>
+<text text-anchor="middle" x="213" y="-85.8" font-family="Courier,monospace" font-weight="bold" font-size="9.00">workspace_8b7dda80&#45;634e&#45;11e8&#45;9f66&#45;4a0002b0edf0/mergedoutputfile.csv</text>
 </g>
 <!-- CsvFileWriter&#45;&gt;UpdatedOccurrenceFile -->
 <g id="edge21" class="edge"><title>CsvFileWriter&#45;&gt;UpdatedOccurrenceFile</title>
@@ -183,57 +183,57 @@
 <text text-anchor="middle" x="230" y="-1095.8" font-family="Courier,monospace" font-weight="bold" font-size="9.00">packages/kurator_FileBranchingTaxonLookup/data/kurator_sample_data_v2.txt</text>
 </g>
 <!-- DarwinCoreArchive&#45;&gt;Setup -->
-<g id="edge10" class="edge"><title>DarwinCoreArchive&#45;&gt;Setup</title>
+<g id="edge6" class="edge"><title>DarwinCoreArchive&#45;&gt;Setup</title>
 <path fill="none" stroke="black" d="M227.821,-1088.81C226.804,-1080.79 225.569,-1071.05 224.431,-1062.07"/>
 <polygon fill="black" stroke="black" points="227.888,-1061.51 223.159,-1052.03 220.944,-1062.39 227.888,-1061.51"/>
 </g>
 <!-- Workspace&#45;&gt;CsvFileWriter -->
-<g id="edge1" class="edge"><title>Workspace&#45;&gt;CsvFileWriter</title>
+<g id="edge8" class="edge"><title>Workspace&#45;&gt;CsvFileWriter</title>
 <path fill="none" stroke="black" d="M77.4195,-871.968C75.088,-845.332 71,-792.186 71,-747 71,-747 71,-747 71,-313 71,-258.156 124.604,-216.667 165.236,-193.097"/>
 <polygon fill="black" stroke="black" points="167.2,-196.008 174.204,-188.058 163.771,-189.905 167.2,-196.008"/>
 </g>
 <!-- OccurrenceFile&#45;&gt;FileToDataStream -->
-<g id="edge3" class="edge"><title>OccurrenceFile&#45;&gt;FileToDataStream</title>
+<g id="edge11" class="edge"><title>OccurrenceFile&#45;&gt;FileToDataStream</title>
 <path fill="none" stroke="black" d="M221,-943.697C221,-935.983 221,-926.712 221,-918.112"/>
 <polygon fill="black" stroke="black" points="224.5,-918.104 221,-908.104 217.5,-918.104 224.5,-918.104"/>
 </g>
 <!-- DataRecord&#45;&gt;EnvironmentTagger -->
-<g id="edge5" class="edge"><title>DataRecord&#45;&gt;EnvironmentTagger</title>
+<g id="edge2" class="edge"><title>DataRecord&#45;&gt;EnvironmentTagger</title>
 <path fill="none" stroke="black" d="M221,-799.697C221,-791.983 221,-782.712 221,-774.112"/>
 <polygon fill="black" stroke="black" points="224.5,-774.104 221,-764.104 217.5,-774.104 224.5,-774.104"/>
 </g>
 <!-- TaggedDataRecord&#45;&gt;FilterToJustMarine -->
-<g id="edge9" class="edge"><title>TaggedDataRecord&#45;&gt;FilterToJustMarine</title>
+<g id="edge5" class="edge"><title>TaggedDataRecord&#45;&gt;FilterToJustMarine</title>
 <path fill="none" stroke="black" d="M209.382,-655.697C203.861,-647.474 197.153,-637.483 191.068,-628.421"/>
 <polygon fill="black" stroke="black" points="193.965,-626.456 185.484,-620.104 188.153,-630.358 193.965,-626.456"/>
 </g>
 <!-- TaggedDataRecord&#45;&gt;FilterToNonMarine -->
-<g id="edge8" class="edge"><title>TaggedDataRecord&#45;&gt;FilterToNonMarine</title>
+<g id="edge4" class="edge"><title>TaggedDataRecord&#45;&gt;FilterToNonMarine</title>
 <path fill="none" stroke="black" d="M254.025,-655.876C272.085,-646.512 294.645,-634.814 313.951,-624.803"/>
 <polygon fill="black" stroke="black" points="315.582,-627.9 322.848,-620.19 312.36,-621.686 315.582,-627.9"/>
 </g>
 <!-- MarineDataRecord&#45;&gt;WoRMSLookup -->
-<g id="edge11" class="edge"><title>MarineDataRecord&#45;&gt;WoRMSLookup</title>
+<g id="edge7" class="edge"><title>MarineDataRecord&#45;&gt;WoRMSLookup</title>
 <path fill="none" stroke="black" d="M187.697,-511.697C189.813,-503.898 192.362,-494.509 194.718,-485.829"/>
 <polygon fill="black" stroke="black" points="198.116,-486.672 197.357,-476.104 191.36,-484.838 198.116,-486.672"/>
 </g>
 <!-- notMarineDataRecord&#45;&gt;GBIFLookup -->
-<g id="edge2" class="edge"><title>notMarineDataRecord&#45;&gt;GBIFLookup</title>
+<g id="edge9" class="edge"><title>notMarineDataRecord&#45;&gt;GBIFLookup</title>
 <path fill="none" stroke="black" d="M349.303,-511.697C347.187,-503.898 344.638,-494.509 342.282,-485.829"/>
 <polygon fill="black" stroke="black" points="345.64,-484.838 339.643,-476.104 338.884,-486.672 345.64,-484.838"/>
 </g>
 <!-- WoRMSUpdatedRecord&#45;&gt;StreamMerge -->
-<g id="edge4" class="edge"><title>WoRMSUpdatedRecord&#45;&gt;StreamMerge</title>
+<g id="edge10" class="edge"><title>WoRMSUpdatedRecord&#45;&gt;StreamMerge</title>
 <path fill="none" stroke="black" d="M207.742,-367.697C208.072,-359.983 208.469,-350.712 208.838,-342.112"/>
 <polygon fill="black" stroke="black" points="212.335,-342.245 209.267,-332.104 205.342,-341.945 212.335,-342.245"/>
 </g>
 <!-- GBIFUpdatedRecord&#45;&gt;StreamMerge -->
-<g id="edge6" class="edge"><title>GBIFUpdatedRecord&#45;&gt;StreamMerge</title>
+<g id="edge1" class="edge"><title>GBIFUpdatedRecord&#45;&gt;StreamMerge</title>
 <path fill="none" stroke="black" d="M302.911,-367.876C286.68,-358.639 266.458,-347.131 249.029,-337.212"/>
 <polygon fill="black" stroke="black" points="250.627,-334.094 240.205,-332.19 247.165,-340.178 250.627,-334.094"/>
 </g>
 <!-- MergedStream&#45;&gt;CsvFileWriter -->
-<g id="edge7" class="edge"><title>MergedStream&#45;&gt;CsvFileWriter</title>
+<g id="edge3" class="edge"><title>MergedStream&#45;&gt;CsvFileWriter</title>
 <path fill="none" stroke="black" d="M210,-223.697C210,-215.983 210,-206.712 210,-198.112"/>
 <polygon fill="black" stroke="black" points="213.5,-198.104 210,-188.104 206.5,-198.104 213.5,-198.104"/>
 </g>

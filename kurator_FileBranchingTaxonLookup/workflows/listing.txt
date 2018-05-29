@@ -66,6 +66,7 @@ Inline python code to run.
 The function to run when an on_start message is received. Accepts a dictionary
 of options.
 ## Started MakeWorkspace ###'
+note: yw cannot take '/' in uri_variable_value
 Download darwin_cloud.txt file containing field name to Darwin Core lookups.
 The location of the actor source code
 The function to invoke in the module when the actor receives an onData message.
@@ -98,6 +99,13 @@ format: 'csv'
 Show the name of the upstream actor.
 The "upstream" actor from which to receive a message.
 @OUT workspace @as Workspace
+@OUT LogFile @URI file:./packages/kurator_FileBranchingTaxonLookup/workflows/results/runlog.log
+@LOG {timestamp} [{loglevel}] ACTOR<{actorname}> -> Published product: darwinized_header_file = {workspace}/darwinized_file.txt
+2018-05-24 14:24:32.662 [VALUE] ACTOR<Darwinize> -> Published product: darwinized_header_file = ./packages/kurator_FileBranchingTaxonLookup/workflows/results/workspace_104ef0c0-5f88-11e8-a013-4a0002b0edf0/darwinized_file.txt
+2018-05-24 14:24:25.720 [VALUE] ACTOR<DownloadDarwinCloudLookup> -> Published product: downloaded_file = ./packages/kurator_FileBranchingTaxonLookup/workflows/results/workspace_104ef0c0-5f88-11e8-a013-4a0002b0edf0/lookup_darwin_cloud.txt
+2018-05-24 14:24:23.305 [DEBUG] ACTOR<FileWriter> -> OutputFile:./packages/kurator_FileBranchingTaxonLookup/workflows/results/workspace_104ef0c0-5f88-11e8-a013-4a0002b0edf0/mergedoutputfile.csv
+2018-05-24 14:24:25.720 [VALUE] ACTOR<DownloadDarwinCloudLookup> -> Published product: downloaded_file = ./packages/kurator_FileBranchingTaxonLookup/workflows/results/workspace_104ef0c0-5f88-11e8-a013-4a0002b0edf0/lookup_darwin_cloud.txt
+2018-05-24 14:24:32.663 [DEBUG] ACTOR<FileToDataStream> -> ./packages/kurator_FileBranchingTaxonLookup/workflows/results/workspace_104ef0c0-5f88-11e8-a013-4a0002b0edf0/darwinized_file.txt
 @OUT OccurrenceFile @URI file:{workspace}/darwinized_file.txt
 @END Setup
 take the darwinized occurrence file and stream records from it
@@ -108,21 +116,21 @@ take the darwinized occurrence file and stream records from it
 Tag each record in the stream that appears to be marine with isMarine=true
 @BEGIN EnvironmentTagger @desc Tag each record that appears to be marine with isMarine=TRUE, else with isMarine=FALSE
 @IN DataRecord
-@OUT LogFile @URI file:runlog.log
+@OUT LogFile @URI file:./packages/kurator_FileBranchingTaxonLookup/workflows/results/runlog.log
 @LOG {timestamp} [{loglevel}] ACTOR<{actorname}> -> {ActorValue}:isMarine:true={isMarineValue}
 @OUT TaggedDataRecord
 @END EnvironmentTagger
 Pass only records tagged with isMarine=true
 @BEGIN FilterToJustMarine @desc Pass only records where isMarine=TRUE
 @IN TaggedDataRecord
-@OUT LogFile @URI file:runlog.log
+@OUT LogFile @URI file:./packages/kurator_FileBranchingTaxonLookup/workflows/results/runlog.log
 @LOG {timestamp} [{loglevel}] ACTOR<{actorname}> -> [isMarine]=[true]:{matchMarineValue}. Passing occurrenceID={occurrenceID}
 @OUT MarineDataRecord
 @End FilterToJustMarine
 Pass only records not tagged with isMarine=true
 @BEGIN FilterToNonMarine @desc Pass only records where isMarine=FALSE
 @IN TaggedDataRecord
-@OUT LogFile @URI file:runlog.log
+@OUT LogFile @URI file:./packages/kurator_FileBranchingTaxonLookup/workflows/results/runlog.log
 @LOG {timestamp} [{loglevel}] ACTOR<{actorname}> -> [isMarine]=[true]:{matchMarineValue}. Passing occurrenceID={occurrenceID}
 @OUT notMarineDataRecord
 @END FilterToNonMarine
@@ -130,7 +138,7 @@ Lookup GUIDs for names in WoRMS
 @BEGIN WoRMSLookup @desc Lookup GUIDs for names in WoRMS
 @IN MarineDataRecord
 @OUT WoRMSUpdatedRecord
-@OUT LogFile @URI file:runlog.log
+@OUT LogFile @URI file:./packages/kurator_FileBranchingTaxonLookup/workflows/results/runlog.log
 @LOG {timestamp} [{loglevel}] ACTOR<{actorname}> -> Looking Up: {scientificName}:{scientificNameAuthorship}
 @LOG {timestamp} [{loglevel}] ACTOR<{actorname}> -> Found GUID: {LookupValue}
 @END WoRMSLookup
@@ -138,7 +146,7 @@ Lookup GUIDs for names in GBIF
 @BEGIN GBIFLookup @desc Lookup GUIDs for names in GBIF
 @IN notMarineDataRecord
 @OUT GBIFUpdatedRecord
-@OUT LogFile @URI file:runlog.log
+@OUT LogFile @URI file:./packages/kurator_FileBranchingTaxonLookup/workflows/results/runlog.log
 @LOG {timestamp} [{loglevel}] ACTOR<{actorname}> -> Looking Up: {scientificName}:{scientificNameAuthorship}
 @LOG {timestamp} [{loglevel}] ACTOR<{actorname}> -> Found GUID: {LookupValue}
 @END GBIFLookup

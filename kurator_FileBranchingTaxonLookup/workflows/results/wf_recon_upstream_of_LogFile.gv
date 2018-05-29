@@ -7,12 +7,12 @@ subgraph cluster_workflow { label=""; color=black; penwidth=2
 subgraph cluster_workflow_inner { label=""; color=white
 node[shape=box style="filled" fillcolor="#CCFFCC" peripheries=1 fontname=Courier]
 FileToDataStream
-Setup
 GBIFLookup
 WoRMSLookup
 FilterToNonMarine
 FilterToJustMarine
 EnvironmentTagger
+Setup
 node[shape=box style="filled" fillcolor="#CCFFCC" peripheries=1 fontname=Courier]
 node[shape=box style="rounded,filled" fillcolor="#FFE4B5" peripheries=1 fontname="Courier-Bold" fontsize=9]
 DarwinCoreArchive[shape=record rankdir=LR label="{<f0> DarwinCoreArchive |<f1>packages/kurator_FileBranchingTaxonLookup/data/kurator_sample_data_v2.txt\n}"]
@@ -23,7 +23,7 @@ TaggedDataRecord
 MarineDataRecord
 notMarineDataRecord
 node[shape=box style="rounded,filled" fillcolor="#FFE4B5" peripheries=1 fontname="Courier-Bold" fontsize=9]
-LogFile[shape=record rankdir=LR label="{<f0> LogFile |<f1>runlog.log\n}"]
+LogFile[shape=record rankdir=LR label="{<f0> LogFile |<f1>./packages/kurator_FileBranchingTaxonLookup/workflows/results/runlog.log\n}"]
 node[shape=box style="rounded,filled" fillcolor="#FFFFFF" peripheries=1 fontname=Helvetica]
 }}
 subgraph cluster_inflows { label=""; color=white; penwidth=2
@@ -43,6 +43,7 @@ TaggedDataRecord -> FilterToJustMarine
 DataRecord -> EnvironmentTagger
 OccurrenceFile -> FileToDataStream
 DarwinCoreArchive -> Setup
+Setup -> LogFile
 Setup -> OccurrenceFile
 FileToDataStream -> DataRecord
 EnvironmentTagger -> LogFile

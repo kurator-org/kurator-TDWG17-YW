@@ -7,18 +7,18 @@ subgraph cluster_workflow { label=""; color=black; penwidth=2
 subgraph cluster_workflow_inner { label=""; color=white
 node[shape=box style="filled" fillcolor="#CCFFCC" peripheries=1 fontname=Courier]
 FileToDataStream
-Setup
 GBIFLookup
 WoRMSLookup
 FilterToNonMarine
 FilterToJustMarine
 EnvironmentTagger
+Setup
 node[shape=box style="filled" fillcolor="#CCFFCC" peripheries=1 fontname=Courier]
 node[shape=box style="rounded,filled" fillcolor="#FFFFCC" peripheries=1 fontname=Helvetica]
 DarwinCoreArchive
+LogFile
 OccurrenceFile
 DataRecord
-LogFile
 TaggedDataRecord
 MarineDataRecord
 notMarineDataRecord
@@ -41,6 +41,7 @@ TaggedDataRecord -> FilterToJustMarine
 DataRecord -> EnvironmentTagger
 OccurrenceFile -> FileToDataStream
 DarwinCoreArchive -> Setup
+Setup -> LogFile
 Setup -> OccurrenceFile
 FileToDataStream -> DataRecord
 EnvironmentTagger -> LogFile

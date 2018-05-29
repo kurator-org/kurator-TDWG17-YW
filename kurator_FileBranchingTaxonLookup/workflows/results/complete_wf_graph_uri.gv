@@ -40,7 +40,7 @@ WoRMSUpdatedRecord
 Workspace
 MergedStream
 UpdatedOccurrenceFile [shape=record rankdir=LR label="{<f0> UpdatedOccurrenceFile |<f1> file\:\{workspace\}/mergedoutputfile.csv}"];
-LogFile [shape=record rankdir=LR label="{<f0> LogFile |<f1> file\:runlog.log}"];
+LogFile [shape=record rankdir=LR label="{<f0> LogFile |<f1> file\:./packages/kurator_FileBranchingTaxonLookup/workflows/results/runlog.log}"];
 
 /* Style for nodes representing parameter channels in workflow */
 node[shape=box style="rounded,filled" fillcolor="#FCFCFC" peripheries=1 fontname=Helvetica]
@@ -49,6 +49,7 @@ node[shape=box style="rounded,filled" fillcolor="#FCFCFC" peripheries=1 fontname
 
 /* Edges representing connections between programs and channels */
 Setup -> Workspace
+Setup -> LogFile
 Setup -> OccurrenceFile
 DarwinCoreArchive -> Setup
 FileToDataStream -> DataRecord
