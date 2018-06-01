@@ -45,10 +45,12 @@ Set up the prerequisites for a kurator workflow run (install jython, jython pip 
 
 * Run the Kurator workflow as well as yesworkflow and associated xsb scripts to generate prospective and hybrid (retrospective) graphs and queries: 
 
+'''
     source settings.sh
     sh clean.sh
     source settings.sh
     sh make.sh
+'''
 
 * In particular, to run kurator-validation on the marked-up workflow to generate a logfile for analysis: 
 
