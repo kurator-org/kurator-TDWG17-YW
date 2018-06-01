@@ -53,17 +53,17 @@ Docker image for kurator-TDWG17-YW demo.
 * Install kurator-validation
     * Checkout kurator-validation
 
-    `git clone https://github.com/kurator-org/kurator-validation.git`
+        `git clone https://github.com/kurator-org/kurator-validation.git`
 
     * Build kurator-validation 
 
 
     ```
-         mvn package -DskipTests
-         mkdir  kurator-validation/yw_jar
+        mvn package -DskipTests
+        mkdir  kurator-validation/yw_jar
     ```
 
-     You may need to checkout and build (mvn install) various other kurator projects, including kurator-akka, and ffdq-api.
+   * You may need to checkout and build (mvn install) various other kurator projects, including kurator-akka, and ffdq-api.
 
 * Install YesWorkflow jar (in `kurator-validation/yw_jar`).
 
