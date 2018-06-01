@@ -10,31 +10,31 @@ Docker image for kurator-TDWG17-YW demo.
 
     https://docs.docker.com/install/
 
-* kurator-tdwg17-yw-docker Docker Image
+* [kurator-tdwg17-yw-docker](https://github.com/kurator-org/kurator-TDWG17-YW/tree/maste    r/kurator-tdwg17-yw-docker) Docker Image
 
-    The [kurator-tdwg17-yw-docker](https://github.com/kurator-org/kurator-TDWG17-YW/tree/master/kurator-tdwg17-yw-docker) contains all the prerequisites installed in a single docker container for running the kurator-TDWG17-YW demo.
+    ** The [kurator-tdwg17-yw-docker](https://github.com/kurator-org/kurator-TDWG17-YW/tree/master/kurator-tdwg17-yw-docker) contains all the prerequisites installed in a single docker container for running the kurator-TDWG17-YW demo.
 
-    The configuration and scripts for this container are located in the [kurator-tdwg17-yw-docker](https://github.com/kurator-org/kurator-TDWG17-YW/tree/master/kurator-tdwg17-yw-docker) directory of this top level project.
+    ** The configuration and scripts for this container are located in the [kurator-tdwg17-yw-docker](https://github.com/kurator-org/kurator-TDWG17-YW/tree/master/kurator-tdwg17-yw-docker) directory of this top level project.
 
 * Usage
-    1. First clone this project via git:
+..1. First clone this project via git:
 
-`    https://github.com/kurator-org/kurator-TDWG17-YW`
+...`https://github.com/kurator-org/kurator-TDWG17-YW`
 
-    2. Next, with docker installed on your local machine, build the kurator-tdwg17-yw-docker container as root via the provided build.sh script:
+..2. Next, with docker installed on your local machine, build the kurator-tdwg17-yw-docker container as root via the provided build.sh script:
 
 ```
     cd kurator-tdwg17-yw-docker 
     sudo ./build.sh
 ```
    
-    3. Once build has succeeded, run the kurator-tdwg17-yw-docker container via the run.sh script:
+..3. Once build has succeeded, run the kurator-tdwg17-yw-docker container via the run.sh script:
 
-`    sudo ./run.sh`
+    `sudo ./run.sh`
 
-   The working directory will be `kurator-validation`. 
+...The working directory will be `kurator-validation`. 
 
-    4. Lastly, run the Kurator workflow as well as yesworkflow and associated xsb scripts to generate prospective and hybrid (retrospective) graphs and queries:
+..4. Lastly, run the Kurator workflow as well as yesworkflow and associated xsb scripts to generate prospective and hybrid (retrospective) graphs and queries:
 
  ```
      source settings.sh
@@ -42,7 +42,7 @@ Docker image for kurator-TDWG17-YW demo.
      source settings.sh
      sh make.sh
  ```
-    The data files in [results](https://github.com/kurator-org/kurator-TDWG17-YW/tree/master/kurator_FileBranchingTaxonLookup/workflows/results) folder is mounted and thus visualized from `~/Downloads/results/` on your host machine.
+ ...The data files in [results](https://github.com/kurator-org/kurator-TDWG17-YW/tree/master/kurator_FileBranchingTaxonLookup/workflows/results) folder is mounted and thus visualized from `~/Downloads/results/` on your host machine.
 
 ## Prerequisites
 
