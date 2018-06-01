@@ -44,15 +44,13 @@ Set up the prerequisites for a kurator workflow run (install jython, jython pip 
 ## To run
 
 * Run the Kurator workflow as well as yesworkflow and associated xsb scripts to generate prospective and hybrid (retrospective) graphs and queries: 
-
-    ''' source settings.sh
-     sh clean.sh
-     source settings.sh
-     sh make.sh
-     '''
+    source settings.sh
+    sh clean.sh
+    source settings.sh
+    sh make.sh
 
 * In particular, to run kurator-validation on the marked-up workflow to generate a logfile for analysis: 
 
-     'java -jar target/kurator-validation-1.0.2-jar-with-dependencies.jar -f packages/kurator_FileBranchingTaxonLookup/workflows/file_branching_taxon_lookup.yaml -p inputfile=packages/kurator_FileBranchingTaxonLookup/data/kurator_sample_data_v2.txt -l ALL > ./packages/kurator_FileBranchingTaxonLookup/workflows/results/runlog.log 2>&1'
+     java -jar target/kurator-validation-1.0.2-jar-with-dependencies.jar -f packages/kurator_FileBranchingTaxonLookup/workflows/file_branching_taxon_lookup.yaml -p inputfile=packages/kurator_FileBranchingTaxonLookup/data/kurator_sample_data_v2.txt -l ALL > ./packages/kurator_FileBranchingTaxonLookup/workflows/results/runlog.log 2>&1
 
 
