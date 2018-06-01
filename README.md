@@ -18,7 +18,7 @@ Docker image for kurator-TDWG17-YW demo.
 
 * Usage
 
-1. First clone this project via git:
+1. First, clone this project via git:
 
     https://github.com/kurator-org/kurator-TDWG17-YW
 
@@ -46,32 +46,33 @@ Docker image for kurator-TDWG17-YW demo.
 
      The data files in [results](https://github.com/kurator-org/kurator-TDWG17-YW/tree/master/kurator_FileBranchingTaxonLookup/workflows/results) folder is mounted and thus visualized from `~/Downloads/results/` on your host machine.
 
-## Prerequisites
+## Run without Dockerfile 
 
-Checkout kurator-validation
+### Prerequisites
 
-     git clone https://github.com/kurator-org/kurator-validation.git
-     mkdir  kurator-validation/yw_jar
+* Install kurator-validation
+    * Checkout kurator-validation
 
-Build kurator-validation 
+         git clone https://github.com/kurator-org/kurator-validation.git
 
-     mvn package -DskipTests
+    * Build kurator-validation 
 
-You may need to checkout and build (mvn install) various other kurator projects, including kurator-akka, and ffdq-api.
+         mvn package -DskipTests
+         mkdir  kurator-validation/yw_jar
 
-Install YesWorkflow jar (in kurator-validation/yw_jar.
+        You may need to checkout and build (mvn install) various other kurator projects, including kurator-akka, and ffdq-api.
 
-Obtain 
+* Install YesWorkflow jar (in `kurator-validation/yw_jar`).
 
-yesworkflow-0.2.2.0-SNAPSHOT-jar-with-dependencies.jar.gz
+    * Obtain `yesworkflow-0.2.1.2-jar-with-dependencies.jar` from:
 
-from https://github.com/yesworkflow-org/yw-prototypes/releases/tag/0.2.2.0-alpha
+       https://github.com/yesworkflow-org/yw-prototypes/releases/download/v0.2.1.2/yesworkflow-0.2.1.2-jar-with-dependencies.jar 
 
-Install xsb
+* Install xsb
 
-Download xsb from https://xsb.sourceforge.net/ and install it.
+    Download xsb from https://sourceforge.net/projects/xsb/files/xsb/3.8%20Three-Buck%20Chuck/XSB38.tar.gz/download and install it. 
 
-Copy .sh files and queries into kurator-validation 
+* Copy .sh files and queries into `kurator-validation` 
 
     cd kurator-TDWG17-YW
     cp *.sh ../kurator-validation
@@ -80,12 +81,12 @@ Copy .sh files and queries into kurator-validation
 
 into the kurator-validation checkout
 
-Set the path to the xsb binary in settings.sh
-e.g.  export XSB="/usr/local/bin/xsb/xsb-3.7/bin/xsb"
+* Set the path to the xsb binary in settings.sh
+    e.g.  `export XSB="~/Downloads/xsb-src/XSB/config/i386-apple-darwin17.4.0/bin/xsb"`
  
-Set up the prerequisites for a kurator workflow run (install jython, jython pip install unicodecsv, chardet)
+* Set up the prerequisites for a kurator workflow run (install jython, jython pip install unicodecsv, chardet)
 
-## To run
+### To run
 
 * Run the Kurator workflow as well as yesworkflow and associated xsb scripts to generate prospective and hybrid (retrospective) graphs and queries: 
 
